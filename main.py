@@ -73,7 +73,12 @@ def main():
             return f"{(year // 10) * 10}s"
 
         df_with_year["decade"] = df_with_year["year"].apply(map_year_to_decade)
-        decade_counts = df_with_year["decade"].value_counts().sort_index()
+        decade_counts = df_with_year["decade"].value_counts()
+
+        # Custom sort for decades to ensure '<1950' comes first
+        sorted_decades = sorted(decade_counts.index, key=lambda x: (x != '<1950', x))
+        decade_counts = decade_counts.reindex(sorted_decades)
+
         st.bar_chart(decade_counts)
 
         # Difficulty distribution
