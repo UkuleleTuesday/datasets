@@ -60,7 +60,9 @@ def main():
 
         # Difficulty distribution
         st.subheader("Difficulty Distribution")
-        st.bar_chart(df["difficulty"].value_counts().sort_index())
+        # Round difficulty to nearest integer for grouping, then count and sort.
+        difficulty_groups = df["difficulty"].dropna().round(0).astype(int)
+        st.bar_chart(difficulty_groups.value_counts().sort_index())
 
         # Gender distribution
         st.subheader("Gender Distribution")
