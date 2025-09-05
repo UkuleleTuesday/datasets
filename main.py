@@ -37,7 +37,7 @@ def main():
 
     st.markdown(
         """
-        This dashboard provides an interactive exploration of the songs tabbed for [Ukulele Tuesday](https://www.ukuleletuesday.com/), a weekly ukulele jam session.
+        This dashboard provides an interactive exploration of the songs tabbed for [Ukulele Tuesday](https://www.ukuleletuesday.ie/), a weekly ukulele jam session.
         It analyzes metadata from all song sheets, including artist information, release year, difficulty, and more.
         You can filter the data to see insights for all songs ever tabbed or just the songs in the current rotating songbook.
         For the songbooks themselves, visit [songbooks.ukuleletuesday.ie](https://songbooks.ukuleletuesday.ie/).
