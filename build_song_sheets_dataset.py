@@ -80,6 +80,10 @@ def build_dataset(output_file: str):
                 if not page_token:
                     break
 
+        output_dir = os.path.dirname(output_file)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
+
         with open(output_file, "w") as f:
             json.dump(all_files, f, indent=2)
 
