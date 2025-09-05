@@ -124,7 +124,7 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
 
         st.header("Raw Data")
-        st.dataframe(df)
+        st.dataframe(df.drop("id", axis=1))
 
 
 if __name__ == "__main__":
