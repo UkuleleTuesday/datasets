@@ -50,15 +50,12 @@ def main():
         tabber_counts = df["tabber"].value_counts().sort_values(ascending=False)
         st.bar_chart(tabber_counts)
 
-        # Songs by year of release
-        st.subheader("Song Distribution by Year of Release")
-        year_counts = (
-            df.dropna(subset=["year"])
-            .astype({"year": int})["year"]
-            .value_counts()
-            .sort_index()
-        )
-        st.bar_chart(year_counts)
+        # Songs by decade of release
+        st.subheader("Song Distribution by Decade of Release")
+        df_with_year = df.dropna(subset=["year"])
+        decade = (df_with_year["year"].astype(int) // 10) * 10
+        decade_counts = decade.value_counts().sort_index()
+        st.bar_chart(decade_counts)
 
         # Difficulty distribution
         st.subheader("Difficulty Distribution")
