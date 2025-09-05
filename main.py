@@ -25,7 +25,8 @@ def load_data(filepath):
     df["difficulty"] = pd.to_numeric(df["difficulty"], errors="coerce")
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
     df["date"] = pd.to_datetime(df["date"], format="%Y%m%d", errors="coerce")
-    df["specialbooks"] = df["specialbooks"].str.split(",")
+    # df["specialbooks"] is not used in the app, so we can remove its processing.
+    # df["specialbooks"] = df["specialbooks"].str.split(",")
 
     return df
 
@@ -61,10 +62,10 @@ def main():
         st.subheader("Difficulty Distribution")
         st.bar_chart(df["difficulty"].value_counts().sort_index())
 
-        # Special books analysis
-        st.subheader("Most Common Special Books")
-        special_books = df.explode("specialbooks")["specialbooks"].value_counts()
-        st.bar_chart(special_books)
+        # Gender distribution
+        st.subheader("Gender Distribution")
+        gender_counts = df["gender"].value_counts()
+        st.bar_chart(gender_counts)
 
         st.header("Raw Data")
         st.dataframe(df)
