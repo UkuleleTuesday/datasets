@@ -1,4 +1,5 @@
 import pandas as pd
+import plotly.express as px
 import streamlit as st
 
 
@@ -66,8 +67,12 @@ def main():
 
         # Gender distribution
         st.subheader("Gender Distribution")
-        gender_counts = df["gender"].value_counts()
-        st.bar_chart(gender_counts)
+        gender_counts = df["gender"].value_counts().reset_index()
+        gender_counts.columns = ["gender", "count"]
+        fig = px.pie(
+            gender_counts, values="count", names="gender", title="Gender Distribution"
+        )
+        st.plotly_chart(fig, use_container_width=True)
 
         st.header("Raw Data")
         st.dataframe(df)
