@@ -78,6 +78,13 @@ def main():
         tabber_counts = df["tabber"].value_counts().sort_values(ascending=False)
         st.bar_chart(tabber_counts)
 
+        # Total songs over time
+        st.subheader("Total Songs Over Time")
+        df_by_date = df.dropna(subset=["date"]).sort_values("date")
+        # Create a column for cumulative song count
+        df_by_date["cumulative_songs"] = range(1, len(df_by_date) + 1)
+        st.line_chart(df_by_date.set_index("date")["cumulative_songs"])
+
         # Songs by decade of release
         st.subheader("Song Distribution by Decade of Release")
         df_with_year = df.dropna(subset=["year"]).copy()
