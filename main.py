@@ -35,6 +35,15 @@ def main():
     st.set_page_config(page_title="Ukulele Tuesday Song Stats", layout="wide")
     st.title("Ukulele Tuesday Song Sheets Dashboard")
 
+    st.markdown(
+        """
+        This dashboard provides an interactive exploration of the songs tabbed for [Ukulele Tuesday](https://www.ukuleletuesday.com/), a weekly ukulele jam session.
+        It analyzes metadata from all song sheets, including artist information, release year, difficulty, and more.
+        You can filter the data to see insights for all songs ever tabbed or just the songs in the current rotating songbook.
+        For the songbooks themselves, visit [songbooks.ukuleletuesday.ie](https://songbooks.ukuleletuesday.ie/).
+        """
+    )
+
     df = load_data("data/song_sheets_dataset.json")
 
     if df is not None:
