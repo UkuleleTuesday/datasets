@@ -38,9 +38,25 @@ def main():
     df = load_data("data/song_sheets_dataset.json")
 
     if df is not None:
+        # Map display options to query param values
+        song_filter_options = {"All songs": "all", "Current edition": "current"}
+        options_list = list(song_filter_options.keys())
+        query_params = st.query_params
+
+        # Determine index from query param, default to 0 ('All songs')
+        current_selection_value = query_params.get("songs", "all")
+        try:
+            current_index = list(song_filter_options.values()).index(
+                current_selection_value
+            )
+        except ValueError:
+            current_index = 0
+
         song_filter = st.selectbox(
-            "Included songs", ("All songs", "Current edition")
+            "Included songs", options=options_list, index=current_index
         )
+        # Update query param based on selection
+        st.query_params["songs"] = song_filter_options[song_filter]
 
         if song_filter == "Current edition":
             df = df[
