@@ -133,7 +133,7 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
 
         st.header("Raw Data")
-        st.dataframe(df.drop("id", axis=1))
+        st.dataframe(df.drop("id", axis=1).sort_values("name"))
 
         st.markdown("---")
         st.markdown(
