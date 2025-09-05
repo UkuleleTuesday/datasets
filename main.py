@@ -64,9 +64,16 @@ def main():
 
         # Songs by decade of release
         st.subheader("Song Distribution by Decade of Release")
-        df_with_year = df.dropna(subset=["year"])
-        decade = (df_with_year["year"].astype(int) // 10) * 10
-        decade_counts = decade.value_counts().sort_index()
+        df_with_year = df.dropna(subset=["year"]).copy()
+
+        def map_year_to_decade(year):
+            year = int(year)
+            if year < 1950:
+                return "<1950"
+            return f"{(year // 10) * 10}s"
+
+        df_with_year["decade"] = df_with_year["year"].apply(map_year_to_decade)
+        decade_counts = df_with_year["decade"].value_counts().sort_index()
         st.bar_chart(decade_counts)
 
         # Difficulty distribution
