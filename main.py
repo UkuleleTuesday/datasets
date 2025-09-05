@@ -126,6 +126,12 @@ def main():
         st.header("Raw Data")
         st.dataframe(df.drop("id", axis=1))
 
+        st.markdown("---")
+        st.markdown(
+            "Found an issue or have a feature request? "
+            "[Contribute on GitHub](https://github.com/UkuleleTuesday/stats)"
+        )
+
 
 if __name__ == "__main__":
     main()
