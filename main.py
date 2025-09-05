@@ -26,8 +26,7 @@ def load_data(filepath):
     df["difficulty"] = pd.to_numeric(df["difficulty"], errors="coerce")
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
     df["date"] = pd.to_datetime(df["date"], format="%Y%m%d", errors="coerce")
-    # df["specialbooks"] is not used in the app, so we can remove its processing.
-    # df["specialbooks"] = df["specialbooks"].str.split(",")
+    df["specialbooks"] = df["specialbooks"].str.split(",")
 
     return df
 
@@ -39,6 +38,17 @@ def main():
     df = load_data("data/song_sheets_dataset.json")
 
     if df is not None:
+        song_filter = st.selectbox(
+            "Included songs", ("All songs", "Current edition")
+        )
+
+        if song_filter == "Current edition":
+            df = df[
+                df["specialbooks"].apply(
+                    lambda x: isinstance(x, list) and "regular" in x
+                )
+            ]
+
         st.header("Dataset Overview")
         col1, col2, col3 = st.columns(3)
         col1.metric("Total Songs", len(df))
