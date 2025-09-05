@@ -1,0 +1,5080 @@
+[
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "difficulty": "2.54",
+      "type": "Person",
+      "duration": "00:04:42",
+      "gender": "female",
+      "date": "20230314",
+      "specialbooks": "hooley-2025,ireland,regular,valentines,womens",
+      "language": "english",
+      "status": "APPROVED",
+      "song": "Nothing Compares 2 U",
+      "year": "1990",
+      "artist": "Sin\u00e9ad O'Connor",
+      "source": "new"
+    },
+    "id": "1NATIpjQmItfGVKBg0BnHJxPJpb59UetwQR26p3AWZ0Q",
+    "name": "Nothing Compares 2 U - Sin\u00e9ad O'Connor"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "duration": "00:02:58",
+      "artist": "Queen",
+      "type": "Group",
+      "specialbooks": "pride,uk",
+      "tabber": "Mischa",
+      "song": "I Want to Break Free",
+      "language": "english",
+      "source": "old",
+      "gender": "male",
+      "difficulty": "3.728",
+      "date": "20220301",
+      "year": "1984"
+    },
+    "id": "1TYiF0JXmchTcMXGLvyERiMaPRU4lGS-iqMjYtvgThOw",
+    "name": "I Want to Break Free - Queen"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "specialbooks": "usa",
+      "gender": "male",
+      "date": "20221101",
+      "source": "new",
+      "type": "Group",
+      "artist": "Pearl Jam",
+      "year": "1991",
+      "duration": "00:05:12",
+      "tabber": "Mischa",
+      "song": "Jeremy",
+      "difficulty": "1.537",
+      "language": "english"
+    },
+    "id": "1V2sxQOj6YGqEvInDPACC5_Lj3vk8_u26Bn-an3oX8G4",
+    "name": "Jeremy - Pearl Jam"
+  },
+  {
+    "properties": {
+      "artist": "Culture Club",
+      "source": "old",
+      "status": "APPROVED",
+      "gender": "male",
+      "type": "Group",
+      "year": "1983",
+      "duration": "00:03:52",
+      "song": "Karma Chameleon",
+      "difficulty": "3.046",
+      "language": "english",
+      "specialbooks": "ireland,pride,regular",
+      "date": "20220301",
+      "tabber": "Mischa"
+    },
+    "id": "1JsjCZRPuHWP_kZ6JjHQoxc3a8JEBEls7Jgpvd4YCrvE",
+    "name": "Karma Chameleon - Culture Club"
+  },
+  {
+    "properties": {
+      "specialbooks": "hooley-2025,ireland,regular,valentines",
+      "duration": "00:04:40",
+      "type": "Group",
+      "artist": "U2",
+      "language": "english",
+      "difficulty": "1.737",
+      "gender": "male",
+      "date": "20220308",
+      "year": "1987",
+      "status": "APPROVED",
+      "song": "With Or Without You",
+      "source": "off",
+      "tabber": "Mischa"
+    },
+    "id": "1GL22IUImzEaQ_CoVg5KC0K-LBaM1uAomEduX4ROEwsk",
+    "name": "With Or Without You - U2"
+  },
+  {
+    "properties": {
+      "gender": "female",
+      "year": "2023",
+      "tabber": "Mischa",
+      "difficulty": "2.097",
+      "artist": "Olivia Rodrigo",
+      "type": "Person",
+      "specialbooks": "halloween,hooley-2025,regular,usa,womens",
+      "song": "vampire",
+      "source": "new",
+      "duration": "00:03:38",
+      "language": "english",
+      "date": "20231031",
+      "status": "APPROVED"
+    },
+    "id": "1MhsVQ6INDLHghKJBcJIAFtqQY0VqoJXTd4Q2GFdntF8",
+    "name": "vampire - Olivia Rodrigo"
+  },
+  {
+    "properties": {
+      "song": "Shake It Off",
+      "status": "APPROVED",
+      "language": "english",
+      "gender": "female",
+      "duration": "00:03:34",
+      "date": "20240702",
+      "artist": "Taylor Swift",
+      "source": "new",
+      "tabber": "Jeremie",
+      "year": "2014",
+      "difficulty": "0.94",
+      "specialbooks": "hooley-2025,regular,usa",
+      "type": "Person"
+    },
+    "id": "1RfCOqYyHOEgdtraIaODPXiX6UjYiM82Wztb6c59AYoY",
+    "name": "Shake It Off - Taylor Swift"
+  },
+  {
+    "properties": {
+      "duration": "00:03:56",
+      "status": "APPROVED",
+      "date": "20211130",
+      "tabber": "Mischa",
+      "type": "Group",
+      "source": "old",
+      "artist": "Mumford and Sons",
+      "year": "2009",
+      "language": "english",
+      "song": "Little Lion Man",
+      "difficulty": "2.389",
+      "gender": "male",
+      "specialbooks": "hooley-2025,regular,uk"
+    },
+    "id": "1WZz6dTrF0NYKuUfKO_djw0dAIsMUnofa8KbwwTWXI6s",
+    "name": "Little Lion Man - Mumford and Sons"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "tabber": "Mischa",
+      "year": "1981",
+      "song": "Just Can't Get Enough",
+      "gender": "male",
+      "specialbooks": "hooley-2025,pride,regular,uk,valentines",
+      "status": "APPROVED",
+      "duration": "00:03:30",
+      "date": "20211123",
+      "difficulty": "2.051",
+      "language": "english",
+      "source": "new",
+      "artist": "Depeche Mode"
+    },
+    "id": "1DuDuAmiRk47JCC-Ym4gDVveCyeVTvzXvLV3RT9svIdU",
+    "name": "Just Can't Get Enough - Depeche Mode"
+  },
+  {
+    "properties": {
+      "date": "20220301",
+      "tabber": "Mischa",
+      "gender": "male",
+      "status": "APPROVED",
+      "artist": "The Pogues",
+      "source": "old",
+      "song": "Dirty Old Town",
+      "language": "english",
+      "specialbooks": "hooley-2025,ireland,regular,valentines",
+      "difficulty": "1.907",
+      "type": "Group",
+      "year": "1985",
+      "duration": "00:03:45"
+    },
+    "id": "1w5rNuTHI21coBXKzuAekG_AxR6pXR4oeWH5pFcy-ias",
+    "name": "Dirty Old Town - The Pogues"
+  },
+  {
+    "properties": {
+      "year": "1992",
+      "date": "20220222",
+      "status": "APPROVED",
+      "duration": "00:04:32",
+      "gender": "female",
+      "language": "english",
+      "difficulty": "2.371",
+      "artist": "The Cranberries",
+      "tabber": "Mischa",
+      "specialbooks": "hooley-2025,ireland,regular,valentines,womens",
+      "song": "Dreams",
+      "source": "off",
+      "type": "Group"
+    },
+    "id": "1OiriFYWd8p_FfsAHiaQjmpUXLWny6MVe_L-aiq3Dny8",
+    "name": "Dreams - The Cranberries"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "language": "english",
+      "date": "20211123",
+      "difficulty": "1.999",
+      "duration": "00:05:06",
+      "song": "Zombie",
+      "tabber": "Mischa",
+      "specialbooks": "halloween,hooley-2025,ireland,regular,womens",
+      "source": "new",
+      "artist": "The Cranberries",
+      "year": "1994",
+      "status": "APPROVED",
+      "gender": "female"
+    },
+    "id": "1VTm2qvDqlSbiTQgtXoGSN1yxdri8MGGzpjcpDQW765c",
+    "name": "Zombie - The Cranberries"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "type": "Person",
+      "duration": "00:04:10",
+      "language": "english",
+      "artist": "Carly Simon",
+      "gender": "female",
+      "tabber": "Mischa",
+      "song": "You're So Vain",
+      "difficulty": "2.041",
+      "date": "20220621",
+      "year": "1972",
+      "specialbooks": "hooley-2025,regular,usa,womens",
+      "source": "new"
+    },
+    "id": "1qc0xuU0BDcgrhRylEmsSzp-N9Rz6GxxkkGGfBhpgQ98",
+    "name": "You're So Vain - Carly Simon"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "tabber": "Bea",
+      "source": "new",
+      "gender": "female",
+      "duration": "00:04:48",
+      "type": "Group",
+      "year": "1993",
+      "specialbooks": "hooley-2025,pride,regular,usa,womens",
+      "song": "What's Up?",
+      "language": "english",
+      "artist": "4 Non Blondes",
+      "date": "20211005",
+      "difficulty": "1.778"
+    },
+    "id": "1F7ud_OYb-VX524W32G4s_EeGXf8c6qQtbuO83bb1MoI",
+    "name": "What's Up? - 4 Non Blondes"
+  },
+  {
+    "properties": {
+      "difficulty": "2.262",
+      "duration": "00:02:42",
+      "type": "Group",
+      "song": "Waterloo",
+      "source": "new",
+      "artist": "ABBA",
+      "date": "20230509",
+      "year": "1977",
+      "gender": "female",
+      "status": "APPROVED",
+      "specialbooks": "hooley-2025,pride,regular,sweden,valentines,womens",
+      "tabber": "Mischa",
+      "language": "english"
+    },
+    "id": "15hqk0ZPUT9-DPFNlzs7UHk6l0Hr0AQyIJDTWTQdJEcM",
+    "name": "Waterloo - ABBA"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "type": "Group",
+      "song": "The Lion Sleeps Tonight",
+      "year": "1961",
+      "artist": "The Tokens",
+      "specialbooks": "hooley-2025,regular,usa",
+      "date": "20210914",
+      "language": "english",
+      "source": "old",
+      "duration": "00:02:38",
+      "gender": "male",
+      "tabber": "Mischa",
+      "difficulty": "1.511"
+    },
+    "id": "12VTz-q7q921AAXO7uFlUrrpR7pCmq6D1Mw9tbHk_eT8",
+    "name": "The Lion Sleeps Tonight - The Tokens"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "specialbooks": "hooley-2025,pride,regular,usa,valentines,womens",
+      "year": "1989",
+      "artist": "Tina Turner",
+      "date": "20220913",
+      "language": "english",
+      "song": "The Best (Edit)",
+      "source": "new",
+      "duration": "00:04:00",
+      "gender": "female",
+      "type": "Person",
+      "tabber": "Mischa",
+      "difficulty": "2.433"
+    },
+    "id": "1lIAsMXmEuRwg5ZYYIhcaHSWwOrnDl56o7pPFpX_xMDw",
+    "name": "The Best (Edit) - Tina Turner"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "type": "Group",
+      "source": "old",
+      "year": "1972",
+      "specialbooks": "hooley-2025,regular,scotland,uk",
+      "date": "20220510",
+      "gender": "male",
+      "tabber": "Mischa",
+      "language": "english",
+      "duration": "00:03:20",
+      "artist": "Stealers Wheel",
+      "difficulty": "1.271",
+      "song": "Stuck in the Middle with You"
+    },
+    "id": "1OWsoW9FE8CNIasp2EdtFBBRGOTDtWunHlx8wbEMkLX8",
+    "name": "Stuck in the Middle with You - Stealers Wheel"
+  },
+  {
+    "properties": {
+      "song": "Spice Up Your Life",
+      "artist": "Spice Girls",
+      "duration": "00:02:46",
+      "difficulty": "1.043",
+      "year": "1997",
+      "date": "20220621",
+      "type": "Group",
+      "gender": "female",
+      "specialbooks": "hooley-2025,regular,uk,womens",
+      "language": "english",
+      "tabber": "Mischa",
+      "status": "APPROVED",
+      "source": "new"
+    },
+    "id": "1RsbMglQHcJMumNzXZ0T30gUcPRyB2TnbKK3d_alLZ7g",
+    "name": "Spice Up Your Life - Spice Girls"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "artist": "The Clash",
+      "date": "20210907",
+      "type": "Group",
+      "difficulty": "1.533",
+      "specialbooks": "hooley-2025,regular,uk",
+      "year": "1982",
+      "status": "APPROVED",
+      "song": "Should I Stay or Should I Go",
+      "language": "english,spanish",
+      "duration": "00:03:06",
+      "source": "old",
+      "gender": "male"
+    },
+    "id": "1R6FPxT6C3stgD2EIvc50O5p93vVhgOZI526GaTZHV_M",
+    "name": "Should I Stay or Should I Go - The Clash"
+  },
+  {
+    "properties": {
+      "year": "2023",
+      "duration": "00:03:12",
+      "song": "Red Wine Supernova",
+      "status": "APPROVED",
+      "difficulty": "1.452",
+      "artist": "Chappell Roan",
+      "source": "new",
+      "language": "english",
+      "type": "Person",
+      "gender": "female",
+      "specialbooks": "hooley-2025,pride,regular,usa",
+      "tabber": "Annalisa",
+      "date": "20240625"
+    },
+    "id": "1w0Cvs1Q5KRLhNI5fe79NJa5bkObxG9jD0EyIf4bROjg",
+    "name": "Red Wine Supernova - Chappell Roan"
+  },
+  {
+    "properties": {
+      "difficulty": "1.806",
+      "status": "APPROVED",
+      "specialbooks": "halloween,hooley-2025,regular,usa",
+      "song": "Psycho Killer",
+      "date": "20210907",
+      "language": "english,french",
+      "gender": "male",
+      "artist": "Talking Heads",
+      "source": "old",
+      "tabber": "Bastien",
+      "year": "1977",
+      "duration": "00:04:14",
+      "type": "Group"
+    },
+    "id": "1wLIMb3i21mDffBlfqk2cyy469Mxdih51zYdZ-b2h2rs",
+    "name": "Psycho Killer - Talking Heads"
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "date": "20230530",
+      "specialbooks": "hooley-2025,pride,regular,usa,womens",
+      "language": "english",
+      "difficulty": "2.043",
+      "year": "1993",
+      "gender": "female",
+      "tabber": "Mischa",
+      "source": "new",
+      "song": "Proud Mary",
+      "duration": "00:05:22",
+      "artist": "Tina Turner",
+      "status": "APPROVED"
+    },
+    "id": "17WZ8KXu9r56GtpTKCsRQ2K6ITtEzTeymoFjUsNQ4haQ",
+    "name": "Proud Mary - Tina Turner"
+  },
+  {
+    "properties": {
+      "date": "20220517",
+      "language": "english",
+      "gender": "female",
+      "status": "APPROVED",
+      "difficulty": "1.916",
+      "song": "Price Tag",
+      "tabber": "Mischa",
+      "artist": "Jessie J (feat. B.o.B)",
+      "source": "old",
+      "year": "2011",
+      "type": "Person",
+      "specialbooks": "hooley-2025,regular,uk,usa,womens",
+      "duration": "00:03:40"
+    },
+    "id": "18g64fIi74ANBDaz0vBK3LVYricqBYfOuHRZo6KneGhM",
+    "name": "Price Tag - Jessie J (feat. B.o.B)"
+  },
+  {
+    "properties": {
+      "artist": "The Cranberries",
+      "date": "20220222",
+      "difficulty": "1.874",
+      "source": "off",
+      "status": "APPROVED",
+      "gender": "female",
+      "type": "Group",
+      "tabber": "Mischa",
+      "song": "Linger",
+      "year": "1993",
+      "duration": "00:04:30",
+      "specialbooks": "hooley-2025,ireland,regular,womens",
+      "language": "english"
+    },
+    "id": "1PXGzlHx_N1EMOphL7TEBYPP-faRaTdGbkVk9sn9FWHQ",
+    "name": "Linger - The Cranberries"
+  },
+  {
+    "properties": {
+      "year": "1961",
+      "tabber": "Bastien",
+      "type": "Person",
+      "gender": "male",
+      "duration": "00:03:36",
+      "specialbooks": "hooley-2025,regular,usa",
+      "date": "20220208",
+      "source": "off",
+      "difficulty": "1.958",
+      "artist": "Harry Belafonte",
+      "language": "english",
+      "song": "Jump in the Line",
+      "status": "APPROVED"
+    },
+    "id": "1mFXA_F8lXACW2VzUflxXlG_aqrDtN6-rqCPUP_Dcd2A",
+    "name": "Jump in the Line - Harry Belafonte"
+  },
+  {
+    "properties": {
+      "year": "1978",
+      "artist": "Gloria Gaynor",
+      "difficulty": "1.945",
+      "status": "APPROVED",
+      "type": "Person",
+      "date": "20211130",
+      "language": "english",
+      "tabber": "Mischa",
+      "specialbooks": "hooley-2025,pride,regular,usa,valentines,womens",
+      "gender": "female",
+      "song": "I Will Survive",
+      "source": "old",
+      "duration": "00:03:12"
+    },
+    "id": "1X7XQtHzlbwSdbHU_bE3q8Mvdv9dBjnPQsb-UqKx2xOE",
+    "name": "I Will Survive - Gloria Gaynor"
+  },
+  {
+    "properties": {
+      "date": "20220531",
+      "language": "english",
+      "song": "Hot N Cold",
+      "gender": "female",
+      "tabber": "Annalisa",
+      "status": "APPROVED",
+      "specialbooks": "hooley-2025,regular,usa,valentines,womens",
+      "difficulty": "1.559",
+      "source": "old",
+      "year": "2007",
+      "artist": "Katy Perry",
+      "duration": "00:03:32",
+      "type": "Person"
+    },
+    "id": "1iaHWGYrgIcA8q8jjOQYi2dIQLF6nbmvAABojHdEf3R4",
+    "name": "Hot N Cold - Katy Perry"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "duration": "00:02:05",
+      "status": "APPROVED",
+      "language": "english",
+      "difficulty": "1.109",
+      "tabber": "Jeremie",
+      "date": "20220208",
+      "artist": "The White Stripes",
+      "song": "Hotel Yorba",
+      "type": "Group",
+      "specialbooks": "hooley-2025,regular,usa,valentines",
+      "year": "2001",
+      "source": "new"
+    },
+    "id": "1glKGSnh8mmyOR-k5lBz5A7vGJyB5xz_ebPubvJItL_M",
+    "name": "Hotel Yorba - The White Stripes"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "language": "english",
+      "artist": "The Lumineers",
+      "specialbooks": "hooley-2025,regular,usa,valentines",
+      "date": "20220816",
+      "song": "Ho Hey",
+      "tabber": "Jeremie",
+      "difficulty": "1.122",
+      "source": "off",
+      "gender": "male",
+      "year": "2012",
+      "duration": "00:02:43",
+      "type": "Group"
+    },
+    "id": "1gjL7TQ5ylEE18PaKCvA_D_E-8ATDmJ4Pwww5MWLbSzI",
+    "name": "Ho Hey - The Lumineers"
+  },
+  {
+    "properties": {
+      "difficulty": "0.962",
+      "source": "off",
+      "gender": "ensemble",
+      "language": "english",
+      "year": "1893",
+      "duration": "00:00:20",
+      "specialbooks": "hooley-2025,ireland,peace,pride,regular,valentines,womens,xmas",
+      "artist": "Traditional",
+      "type": "Group",
+      "tabber": "Jeremie",
+      "song": "Happy Birthday To You (in D)",
+      "date": "20220913",
+      "status": "APPROVED"
+    },
+    "id": "16m1VfSzlXokVXFfnmGJRkT0MrXvDlIuymsfzPuAQ1jU",
+    "name": "Happy Birthday To You (in D) - Traditional"
+  },
+  {
+    "properties": {
+      "source": "old",
+      "artist": "The Cure",
+      "year": "1992",
+      "date": "20211012",
+      "status": "APPROVED",
+      "specialbooks": "hooley-2025,regular,uk,valentines",
+      "gender": "male",
+      "song": "Friday I'm In Love",
+      "type": "Group",
+      "difficulty": "1.928",
+      "duration": "00:03:35",
+      "tabber": "Mischa",
+      "language": "english"
+    },
+    "id": "1cW5j7APIA2MVNucJavUFILD8-N7qjzhLpoFexckqqrY",
+    "name": "Friday I'm In Love - The Cure"
+  },
+  {
+    "properties": {
+      "date": "20211005",
+      "status": "APPROVED",
+      "year": "1955",
+      "language": "english",
+      "duration": "00:02:35",
+      "song": "Folsom Prison Blues",
+      "source": "old",
+      "artist": "Johnny Cash",
+      "difficulty": "1.382",
+      "specialbooks": "hooley-2025,regular,usa",
+      "type": "Person",
+      "tabber": "Mischa",
+      "gender": "male"
+    },
+    "id": "1EZ4zRZU6A3wkiaDnAnSdu5LF-dOpcXjiPoN_I5MRkAg",
+    "name": "Folsom Prison Blues - Johnny Cash"
+  },
+  {
+    "properties": {
+      "date": "20220906",
+      "gender": "female",
+      "specialbooks": "halloween,hooley-2025,regular,usa,womens",
+      "source": "off",
+      "status": "APPROVED",
+      "song": "Ex's & Oh's",
+      "language": "english",
+      "type": "Person",
+      "difficulty": "2.099",
+      "year": "2014",
+      "artist": "Elle King",
+      "duration": "00:03:32",
+      "tabber": "Mischa"
+    },
+    "id": "1AQZhLhmDASi1risOrQ1Wo2TVvhXKE4pxp_suBg_55Co",
+    "name": "Ex's & Oh's - Elle King"
+  },
+  {
+    "properties": {
+      "gender": "female",
+      "song": "Dog Days Are Over",
+      "status": "APPROVED",
+      "duration": "00:04:10",
+      "type": "Group",
+      "specialbooks": "hooley-2025,regular,uk,womens",
+      "year": "2008",
+      "date": "20230926",
+      "language": "english",
+      "artist": "Florence + The Machine",
+      "source": "new",
+      "difficulty": "1.838",
+      "tabber": "Annalisa"
+    },
+    "id": "1e0eyFNC1B7Qa3y5iUsPLMRT4nSmmDEhjstpVjPgS6-8",
+    "name": "Dog Days Are Over - Florence + The Machine"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "language": "english",
+      "year": "1992",
+      "type": "Group",
+      "specialbooks": "halloween,hooley-2025,regular,uk",
+      "difficulty": "1.634",
+      "source": "old",
+      "tabber": "Mischa",
+      "duration": "00:03:58",
+      "date": "20211005",
+      "artist": "Radiohead",
+      "gender": "male",
+      "song": "Creep"
+    },
+    "id": "1KXzRHLjiXNh3a9PiJPJvbs-mwhLmkRNhYTSsTkRumSw",
+    "name": "Creep - Radiohead"
+  },
+  {
+    "properties": {
+      "artist": "Aslan",
+      "date": "20230613",
+      "source": "new",
+      "status": "APPROVED",
+      "year": "1994",
+      "specialbooks": "hooley-2025,ireland,regular",
+      "tabber": "Mischa",
+      "language": "english",
+      "type": "Group",
+      "duration": "00:04:32",
+      "difficulty": "1.893",
+      "song": "Crazy World",
+      "gender": "male"
+    },
+    "id": "1i415nFB25LvQqKulER2R7OUDvjzLZD23sAAgohYMff8",
+    "name": "Crazy World - Aslan"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "duration": "00:03:24",
+      "song": "Cheap Thrills",
+      "difficulty": "2.195",
+      "specialbooks": "australia,hooley-2025,pride,regular,womens",
+      "year": "2016",
+      "artist": "Sia",
+      "gender": "female",
+      "language": "english",
+      "source": "new",
+      "type": "Person",
+      "date": "20230919",
+      "tabber": "Jeremie"
+    },
+    "id": "100rr2wYf6GevhFtYHkXmaIDspoZ3V0r6Vtd1NVxBJg4",
+    "name": "Cheap Thrills - Sia"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "language": "english",
+      "difficulty": "1.926",
+      "artist": "Carly Rae Jepsen",
+      "year": "2012",
+      "gender": "female",
+      "specialbooks": "canada,hooley-2025,pride,regular,valentines,womens",
+      "date": "20240625",
+      "tabber": "Mischa",
+      "type": "Person",
+      "song": "Call Me Maybe",
+      "duration": "00:03:06",
+      "source": "new"
+    },
+    "id": "1LhtVUpqh_5nENdp5RYYE4dO-QKJvZiiwhn79t4dpGyk",
+    "name": "Call Me Maybe - Carly Rae Jepsen"
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "duration": "00:02:00",
+      "year": "1956",
+      "language": "english",
+      "status": "APPROVED",
+      "tabber": "Mischa",
+      "date": "20210907",
+      "song": "Blue Suede Shoes",
+      "source": "old",
+      "gender": "male",
+      "specialbooks": "hooley-2025,regular,usa",
+      "artist": "Elvis Presley",
+      "difficulty": "1.605"
+    },
+    "id": "18MfjE5GHhgO3EWK-WZYEYHg82imq_HO6-dNNhv_IHTY",
+    "name": "Blue Suede Shoes - Elvis Presley"
+  },
+  {
+    "properties": {
+      "artist": "Creedence Clearwater Revival",
+      "duration": "00:02:22",
+      "year": "1969",
+      "specialbooks": "halloween,hooley-2025,regular,usa",
+      "type": "Group",
+      "date": "20211005",
+      "tabber": "Mischa",
+      "difficulty": "1.014",
+      "language": "english",
+      "gender": "male",
+      "status": "APPROVED",
+      "song": "Bad Moon Rising",
+      "source": "old"
+    },
+    "id": "1aFQvCbfGBoNRK5KNTUM6lzt5ZA0-ywrZQuogyW_3sHc",
+    "name": "Bad Moon Rising - Creedence Clearwater Revival"
+  },
+  {
+    "properties": {
+      "date": "20211026",
+      "tabber": "Bastien",
+      "difficulty": "1.301",
+      "duration": "00:02:47",
+      "status": "APPROVED",
+      "source": "off",
+      "song": "All The Small Things",
+      "specialbooks": "hooley-2025,regular,usa,valentines",
+      "language": "english",
+      "artist": "Blink-182",
+      "year": "1999",
+      "type": "Group",
+      "gender": "male"
+    },
+    "id": "16ml3o4szHnUjugY1ug3Sm_6PX9sKhLcm4Qiw-xD9g_o",
+    "name": "All The Small Things - Blink-182"
+  },
+  {
+    "properties": {
+      "date": "20220301",
+      "gender": "male",
+      "artist": "Europe",
+      "specialbooks": "sweden",
+      "song": "The Final Countdown",
+      "difficulty": "5.025",
+      "source": "old",
+      "year": "1986",
+      "status": "APPROVED",
+      "type": "Group",
+      "tabber": "Mischa",
+      "duration": "00:04:52",
+      "language": "english"
+    },
+    "id": "1RlQzjj3yycIromcFqEEbeiWNtscQvsiZzf0efK4OQSg",
+    "name": "The Final Countdown - Europe"
+  },
+  {
+    "properties": {
+      "year": "2001",
+      "language": "english",
+      "source": "off",
+      "song": "Fuck Her Gently",
+      "gender": "male",
+      "duration": "00:02:00",
+      "status": "APPROVED",
+      "tabber": "Bastien",
+      "date": "20220426",
+      "difficulty": "2.762",
+      "artist": "Tenacious D",
+      "specialbooks": "usa,valentines",
+      "type": "Group"
+    },
+    "id": "1rnMYSYuUCaXGtbmz6aiB2Ac66edw_5nFHRVafTRFuZI",
+    "name": "Fuck Her Gently - Tenacious D"
+  },
+  {
+    "properties": {
+      "specialbooks": "regular,uk,valentines,womens,pride",
+      "difficulty": "2.942",
+      "date": "20220503",
+      "source": "old",
+      "language": "english",
+      "tabber": "Annalisa",
+      "status": "APPROVED",
+      "type": "Group",
+      "year": "2009",
+      "artist": "Florence + The Machine",
+      "song": "You've Got The Love",
+      "duration": "00:02:38",
+      "gender": "female"
+    },
+    "id": "1R4ThVwggjqoYSbeEDdn66VpWlBsSbMQi8RYiiVT-mQI",
+    "name": "You've Got The Love - Florence + The Machine"
+  },
+  {
+    "properties": {
+      "song": "You're The One That I Want",
+      "duration": "00:02:42",
+      "difficulty": "2.282",
+      "artist": "John Travolta, Olivia Newton-John",
+      "source": "old",
+      "tabber": "Mischa",
+      "specialbooks": "regular,usa,valentines",
+      "year": "1978",
+      "date": "20220809",
+      "language": "english",
+      "type": "Person",
+      "status": "APPROVED",
+      "gender": "duet"
+    },
+    "id": "1HvbCcuZBtQkDiuN9sYHTRSQJk6tKdxLRLtnoVd4N47Y",
+    "name": "You're The One That I Want - John Travolta, Olivia Newton-John"
+  },
+  {
+    "properties": {
+      "difficulty": "2.568",
+      "source": "new",
+      "song": "Wrecking Ball",
+      "year": "2013",
+      "artist": "Miley Cyrus",
+      "duration": "00:03:32",
+      "date": "20220621",
+      "language": "english",
+      "type": "Person",
+      "specialbooks": "womens,usa,pride,regular",
+      "tabber": "Mischa",
+      "status": "APPROVED",
+      "gender": "female"
+    },
+    "id": "1A6FeV0AYuS3L4-9Tv6I2cBKyZvy72uuDYMfWcuXlb1A",
+    "name": "Wrecking Ball - Miley Cyrus"
+  },
+  {
+    "properties": {
+      "duration": "00:02:50",
+      "gender": "male",
+      "song": "Why Don't You Get A Job",
+      "tabber": "Mischa",
+      "status": "APPROVED",
+      "year": "1998",
+      "specialbooks": "regular,usa",
+      "type": "Group",
+      "language": "english",
+      "artist": "The Offspring",
+      "source": "new",
+      "date": "20220426",
+      "difficulty": "1.653"
+    },
+    "id": "1t7GmTpUwV4XJH0JaWGq88gKg1dOAh-LxtDqtv1B-n3I",
+    "name": "Why Don't You Get A Job - The Offspring"
+  },
+  {
+    "properties": {
+      "song": "White Flag",
+      "date": "20220524",
+      "language": "english",
+      "specialbooks": "regular,uk,valentines,womens",
+      "artist": "Dido",
+      "gender": "female",
+      "difficulty": "2.485",
+      "year": "2003",
+      "source": "new",
+      "type": "Person",
+      "tabber": "Jeremie",
+      "status": "APPROVED",
+      "duration": "00:03:58"
+    },
+    "id": "1NAqfyL_g-cjx22VoH9mcxHqzxisKaKTrBtyaztxrFG8",
+    "name": "White Flag - Dido"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "tabber": "Mischa",
+      "status": "APPROVED",
+      "difficulty": "1.679",
+      "source": "new",
+      "date": "20220215",
+      "duration": "00:04:46",
+      "type": "Group",
+      "song": "Where The Streets Have No Name (Single Edit)",
+      "specialbooks": "ireland",
+      "artist": "U2",
+      "year": "1987",
+      "gender": "male"
+    },
+    "id": "1G5hd1UNP-xBqM0wnhxMfUYdAuDAbRUm-sEWQ_zUF8Kk",
+    "name": "Where The Streets Have No Name (Single Edit) - U2"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "gender": "female",
+      "song": "Walking On Sunshine",
+      "source": "new",
+      "year": "1985",
+      "duration": "00:03:44",
+      "tabber": "Mischa",
+      "language": "english",
+      "specialbooks": "regular,uk,valentines,womens,pride",
+      "status": "APPROVED",
+      "date": "20240109",
+      "artist": "Katrina & The Waves",
+      "difficulty": "2.294"
+    },
+    "id": "1GgZ3OrimUUDnhkjorjDR4j1hW8hFd6eWIvV3cttsf4U",
+    "name": "Walking On Sunshine - Katrina & The Waves"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "type": "Group",
+      "language": "english",
+      "duration": "00:05:28",
+      "song": "Wake Up",
+      "specialbooks": "regular,canada",
+      "year": "2005",
+      "source": "off",
+      "tabber": "Jeremie",
+      "difficulty": "1.427",
+      "artist": "Arcade Fire",
+      "gender": "male",
+      "date": "20220524"
+    },
+    "id": "1UvhJde-QK4t9jwOY2OBO4FRDRHYamajplfg5XC2PbZk",
+    "name": "Wake Up - Arcade Fire"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "date": "20241126",
+      "language": "english",
+      "gender": "female",
+      "duration": "00:03:18",
+      "specialbooks": "regular,womens,uk,ireland",
+      "artist": "Bananarama",
+      "difficulty": "2.774",
+      "year": "1986",
+      "tabber": "Mischa",
+      "status": "APPROVED",
+      "song": "Venus",
+      "source": "new"
+    },
+    "id": "1jLe0fjjk5_wFETcr5P24OqGzrhIiWMYUd4rbMqpRnaY",
+    "name": "Venus - Bananarama"
+  },
+  {
+    "properties": {
+      "specialbooks": "womens,pride,regular,uk,valentines",
+      "tabber": "Mischa",
+      "language": "english",
+      "song": "Valerie (feat. Amy Winehouse) (Version Revisited)",
+      "source": "old",
+      "type": "Person",
+      "gender": "female",
+      "year": "2007",
+      "date": "20211116",
+      "difficulty": "3.343",
+      "status": "APPROVED",
+      "duration": "00:03:36",
+      "artist": "Mark Ronson"
+    },
+    "id": "1nHrDLJxNHIeSULGav8dyNk6x3yWFtO_BmEpS45CgMT4",
+    "name": "Valerie (feat. Amy Winehouse) (Version Revisited) - Mark Ronson"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "gender": "male",
+      "difficulty": "1.423",
+      "tabber": "Bastien",
+      "artist": "Savage Garden",
+      "date": "20220621",
+      "type": "Group",
+      "specialbooks": "australia,valentines,pride",
+      "status": "APPROVED",
+      "song": "Truly Madly Deeply",
+      "duration": "00:04:34",
+      "language": "english",
+      "year": "1997"
+    },
+    "id": "1FZaWs3n00t3lY92xMZghIelxLyCG_vqFzESyf3lVdFg",
+    "name": "Truly Madly Deeply - Savage Garden"
+  },
+  {
+    "properties": {
+      "date": "20220426",
+      "source": "new",
+      "tabber": "Mischa",
+      "difficulty": "3.206",
+      "duration": "00:04:44",
+      "artist": "Bee Gees",
+      "type": "Group",
+      "gender": "male",
+      "song": "Tragedy",
+      "year": "1979",
+      "specialbooks": "uk,valentines,pride",
+      "language": "english",
+      "status": "APPROVED"
+    },
+    "id": "1aobrYA7EJvVbMHYCVin3KZZrOoXtQIFlLdO-ZIxqIHs",
+    "name": "Tragedy - Bee Gees"
+  },
+  {
+    "properties": {
+      "duration": "00:03:18",
+      "type": "Person",
+      "tabber": "Mischa",
+      "song": "Toxic",
+      "gender": "female",
+      "specialbooks": "womens,pride,regular,halloween,usa,valentines",
+      "source": "old",
+      "status": "APPROVED",
+      "difficulty": "3.069",
+      "language": "english",
+      "date": "20211123",
+      "artist": "Britney Spears",
+      "year": "2004"
+    },
+    "id": "1Vz5WJ6ib6VflxVcIAAeL0HjE3IOfdtkVRs-OdlxWxSc",
+    "name": "Toxic - Britney Spears"
+  },
+  {
+    "properties": {
+      "gender": "female",
+      "status": "APPROVED",
+      "type": "Person",
+      "specialbooks": "regular,australia,womens",
+      "date": "20220510",
+      "tabber": "Mischa",
+      "duration": "00:04:08",
+      "song": "Torn",
+      "difficulty": "2.601",
+      "source": "new",
+      "language": "english",
+      "year": "1997",
+      "artist": "Natalie Imbruglia"
+    },
+    "id": "19W_lYVgcsp3kTs5mg0m8mxtk63qqqPSHyXauOWrfl6E",
+    "name": "Torn - Natalie Imbruglia"
+  },
+  {
+    "properties": {
+      "specialbooks": "regular,norway,valentines,pride",
+      "artist": "a-ha",
+      "language": "english",
+      "difficulty": "3.378",
+      "source": "old",
+      "year": "1984",
+      "song": "Take on Me",
+      "status": "APPROVED",
+      "date": "20211019",
+      "type": "Group",
+      "duration": "00:03:30",
+      "gender": "male",
+      "tabber": "Annalisa"
+    },
+    "id": "1ebtMXbjdfBswVG5zD0MQvycsMpbF1BL3_Mur1IkM6PM",
+    "name": "Take on Me - a-ha"
+  },
+  {
+    "properties": {
+      "song": "Take A Chance On Me",
+      "language": "english",
+      "source": "new",
+      "gender": "female",
+      "difficulty": "3.978",
+      "status": "APPROVED",
+      "specialbooks": "regular,sweden,valentines,womens,pride",
+      "date": "20220531",
+      "type": "Group",
+      "duration": "00:04:03",
+      "artist": "ABBA",
+      "tabber": "Annalisa",
+      "year": "1977"
+    },
+    "id": "1C1Om2hW2EN0wdKzBxKO2zvybI9avrEvDWy73UQSHxPc",
+    "name": "Take A Chance On Me - ABBA"
+  },
+  {
+    "properties": {
+      "difficulty": "2.521",
+      "specialbooks": "uk,halloween",
+      "artist": "The Rolling Stones",
+      "source": "old",
+      "type": "Group",
+      "year": "1968",
+      "language": "english",
+      "gender": "male",
+      "song": "Sympathy for the Devil",
+      "duration": "00:05:20",
+      "date": "20211102",
+      "status": "APPROVED",
+      "tabber": "Mischa"
+    },
+    "id": "10Rxtqqrb4rrjtX5IP_VvMaGENbMhGXP1rR2-eepe6mo",
+    "name": "Sympathy for the Devil - The Rolling Stones"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "language": "english",
+      "source": "new",
+      "specialbooks": "regular,uk,womens,pride,halloween",
+      "duration": "00:03:16",
+      "year": "1983",
+      "date": "20221101",
+      "gender": "female",
+      "song": "Sweet Dreams (Are Made of This)",
+      "status": "APPROVED",
+      "difficulty": "2.565",
+      "artist": "Eurythmics",
+      "type": "Group"
+    },
+    "id": "1VDTclSD3oX1F4ENV-VQqniyf_xsX3TCoKOBJSqSQJgw",
+    "name": "Sweet Dreams (Are Made of This) - Eurythmics"
+  },
+  {
+    "properties": {
+      "song": "Summer of '69",
+      "type": "Person",
+      "artist": "Bryan Adams",
+      "source": "old",
+      "year": "1985",
+      "duration": "00:03:20",
+      "status": "APPROVED",
+      "difficulty": "2.123",
+      "date": "20220621",
+      "gender": "male",
+      "tabber": "Mischa",
+      "specialbooks": "regular,canada,valentines",
+      "language": "english"
+    },
+    "id": "1iFujhvFoOyiQdhM62GHj_Ba3QZznKdBrp7J163pmE-0",
+    "name": "Summer of '69 - Bryan Adams"
+  },
+  {
+    "properties": {
+      "duration": "00:04:50",
+      "language": "english",
+      "status": "APPROVED",
+      "song": "Space Oddity",
+      "type": "Person",
+      "year": "1969",
+      "source": "off",
+      "gender": "male",
+      "artist": "David Bowie",
+      "tabber": "Jeremie",
+      "date": "20220405",
+      "specialbooks": "regular,uk,pride",
+      "difficulty": "3.829"
+    },
+    "id": "1Yh0F2Anmkx9v9z6hOKzrGQSr0YMhXmibFaoQm76uUF8",
+    "name": "Space Oddity - David Bowie"
+  },
+  {
+    "properties": {
+      "song": "So What",
+      "language": "english",
+      "duration": "00:03:35",
+      "source": "new",
+      "difficulty": "2.301",
+      "artist": "P!nk",
+      "type": "Person",
+      "specialbooks": "regular,usa,pride",
+      "date": "20240625",
+      "tabber": "Annalisa",
+      "gender": "female",
+      "status": "APPROVED",
+      "year": "2008"
+    },
+    "id": "1ZL4UvzbXTkFEXoUKotgADmQQy1shcPihWaC9UPOOiHI",
+    "name": "So What - P!nk"
+  },
+  {
+    "properties": {
+      "artist": "Kelly Clarkson",
+      "duration": "00:03:06",
+      "tabber": "Jeremie",
+      "type": "Person",
+      "language": "english",
+      "song": "Since U Been Gone",
+      "date": "20230307",
+      "year": "2004",
+      "specialbooks": "regular,usa,womens",
+      "status": "APPROVED",
+      "difficulty": "2.464",
+      "source": "new",
+      "gender": "female"
+    },
+    "id": "1z35iafBgWcr1-fYxCJWQ2Sm3AcB7ccS3pGBtih6HCf8",
+    "name": "Since U Been Gone - Kelly Clarkson"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "date": "20221101",
+      "gender": "female",
+      "language": "english",
+      "specialbooks": "colombia,halloween",
+      "tabber": "Mischa",
+      "type": "Person",
+      "difficulty": "2.031",
+      "year": "2009",
+      "artist": "Shakira",
+      "song": "She Wolf",
+      "duration": "00:03:06",
+      "status": "APPROVED"
+    },
+    "id": "1naeRa0fkaKq_1T2asHwXtqHFFzWDFDW1Ns8hcrtK-6I",
+    "name": "She Wolf - Shakira"
+  },
+  {
+    "properties": {
+      "date": "20221129",
+      "specialbooks": "regular,uk,womens",
+      "duration": "00:03:54",
+      "tabber": "Mischa",
+      "status": "APPROVED",
+      "gender": "female",
+      "song": "Set Fire to the Rain",
+      "year": "2011",
+      "difficulty": "2.38",
+      "source": "new",
+      "type": "Person",
+      "artist": "Adele",
+      "language": "english"
+    },
+    "id": "10w1IuhumxR3dOskn7xFArsJyX6RDkubMXmneLdB_izo",
+    "name": "Set Fire to the Rain - Adele"
+  },
+  {
+    "properties": {
+      "date": "20240521",
+      "language": "italian",
+      "difficulty": "3.14",
+      "duration": "00:02:57",
+      "specialbooks": "regular,valentines,italy",
+      "status": "APPROVED",
+      "tabber": "Bastien",
+      "artist": "Ricchi E Poveri",
+      "gender": "duet",
+      "type": "Group",
+      "source": "new",
+      "year": "1981",
+      "song": "Sar\u00e0 Perch\u00e9 Ti Amo"
+    },
+    "id": "1VlSVUAfglNXug2H7ZoCBLEzy2a-x5pQiVkTIuO4VVPk",
+    "name": "Sar\u00e0 Perch\u00e9 Ti Amo - Ricchi E Poveri"
+  },
+  {
+    "properties": {
+      "gender": "female",
+      "year": "2013",
+      "song": "Santa Baby",
+      "duration": "00:02:48",
+      "tabber": "Mischa",
+      "specialbooks": "usa,xmas",
+      "artist": "Ariana Grande, Liz Gillies",
+      "date": "20221206",
+      "difficulty": "1.66",
+      "type": "Person",
+      "language": "english",
+      "source": "new",
+      "status": "APPROVED"
+    },
+    "id": "1Ui1Sr_YRa7ktaOua_1z-C1eqwPbF7k-KUQLQ5xp9rIQ",
+    "name": "Santa Baby - Ariana Grande, Liz Gillies"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "difficulty": "2.534",
+      "specialbooks": "womens,usa,pride,regular",
+      "status": "APPROVED",
+      "date": "20240312",
+      "source": "new",
+      "language": "english",
+      "year": "1967",
+      "type": "Person",
+      "gender": "female",
+      "song": "Respect",
+      "artist": "Aretha Franklin",
+      "duration": "00:02:22"
+    },
+    "id": "1yR2iMtK8N9xhJHB9nqPRBf4VmqJQn7gFDKs0mhq0pMc",
+    "name": "Respect - Aretha Franklin"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "status": "APPROVED",
+      "tabber": "Mischa",
+      "year": "1966",
+      "gender": "male",
+      "song": "Paint it, Black",
+      "specialbooks": "regular,uk,halloween",
+      "duration": "00:03:22",
+      "language": "english",
+      "source": "old",
+      "date": "20211109",
+      "artist": "The Rolling Stones",
+      "difficulty": "2.245"
+    },
+    "id": "1wfadKAySkS5KE-OwyiUS-oVqdzPuCdtVO5Mj0AGQkm4",
+    "name": "Paint it, Black - The Rolling Stones"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "specialbooks": "regular,usa,halloween,valentines,womens,pride",
+      "language": "english",
+      "status": "APPROVED",
+      "year": "1979",
+      "duration": "00:03:20",
+      "gender": "female",
+      "type": "Group",
+      "artist": "Blondie",
+      "difficulty": "4.528",
+      "song": "One Way or Another",
+      "source": "new",
+      "date": "20231031"
+    },
+    "id": "1Ad0wuADcvWU3rvKzcADQAuKCe04eMUNMJlrqtjDvq1g",
+    "name": "One Way or Another - Blondie"
+  },
+  {
+    "properties": {
+      "specialbooks": "regular,uk,womens",
+      "source": "new",
+      "language": "english",
+      "type": "Person",
+      "duration": "00:03:22",
+      "year": "2009",
+      "artist": "Lily Allen",
+      "date": "20230307",
+      "status": "APPROVED",
+      "song": "Not Fair",
+      "tabber": "Annalisa",
+      "difficulty": "2.224",
+      "gender": "female"
+    },
+    "id": "1R6qKZ0_VDZ1dJQHt2AfvuQPzVw_bBe81Jivnc2xOvsI",
+    "name": "Not Fair - Lily Allen"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "song": "Nightcall",
+      "artist": "Kavinsky",
+      "duration": "00:03:52",
+      "source": "new",
+      "year": "2010",
+      "type": "Person",
+      "date": "20241015",
+      "tabber": "Mischa",
+      "gender": "male",
+      "status": "APPROVED",
+      "difficulty": "2.175",
+      "specialbooks": "halloween,france"
+    },
+    "id": "1MUqlTt8_Bqbof2OPdPacwEPrC36nFE5HIAQpNCeZCFA",
+    "name": "Nightcall - Kavinsky"
+  },
+  {
+    "properties": {
+      "difficulty": "1.586",
+      "status": "APPROVED",
+      "song": "Monster Mash",
+      "date": "20221101",
+      "year": "1962",
+      "type": "Group",
+      "tabber": "Bastien",
+      "source": "off",
+      "specialbooks": "halloween,usa",
+      "gender": "male",
+      "artist": "Bobby (Boris) Pickett and the Crypt-Kickers",
+      "language": "english",
+      "duration": "00:03:06"
+    },
+    "id": "1JLDCkYlcMlV0I-OIJec5GSRw9Fqqd8J512AbCrhEu4w",
+    "name": "Monster Mash - Bobby (Boris) Pickett and the Crypt-Kickers"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "tabber": "Mischa",
+      "difficulty": "3.261",
+      "duration": "00:03:40",
+      "artist": "Slade",
+      "gender": "male",
+      "date": "20211207",
+      "song": "Merry Xmas Everybody",
+      "year": "1973",
+      "status": "APPROVED",
+      "language": "english",
+      "specialbooks": "uk,xmas",
+      "source": "new"
+    },
+    "id": "18dd524GZQXVOQN6H93dov1HoMPe9s2yFqghqSgAtZo8",
+    "name": "Merry Xmas Everybody - Slade"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "source": "new",
+      "gender": "male",
+      "artist": "Ramones",
+      "status": "APPROVED",
+      "date": "20221206",
+      "tabber": "Mischa",
+      "song": "Merry Christmas (I Don't Want to Fight Tonight)",
+      "year": "1989",
+      "specialbooks": "xmas,usa",
+      "duration": "00:02:00",
+      "language": "english",
+      "difficulty": "1.939"
+    },
+    "id": "1k6tBLwxum6A8gONyEwoHMd4SIgMK8SmFRy6vvoHE5Ck",
+    "name": "Merry Christmas (I Don't Want to Fight Tonight) - Ramones"
+  },
+  {
+    "properties": {
+      "duration": "00:04:00",
+      "year": "1985",
+      "language": "english",
+      "tabber": "Mischa",
+      "status": "APPROVED",
+      "specialbooks": "regular,usa,womens,pride",
+      "gender": "female",
+      "song": "Material Girl",
+      "artist": "Madonna",
+      "difficulty": "2.839",
+      "source": "new",
+      "type": "Person",
+      "date": "20230221"
+    },
+    "id": "1uzLUNtA6f568917hUeB9paJfQhpIN40HE-Fu6v-rjKE",
+    "name": "Material Girl - Madonna"
+  },
+  {
+    "properties": {
+      "duration": "00:03:54",
+      "date": "20220920",
+      "status": "APPROVED",
+      "type": "Person",
+      "year": "1997",
+      "difficulty": "2.989",
+      "tabber": "Caroline",
+      "specialbooks": "canada,womens,pride,regular",
+      "source": "new",
+      "gender": "female",
+      "song": "Man! I Feel Like A Woman!",
+      "language": "english",
+      "artist": "Shania Twain"
+    },
+    "id": "1MOyRxIcUyxRKLL03lGfU7-Tv1avvTHNkNr8gLs-S4vc",
+    "name": "Man! I Feel Like A Woman! - Shania Twain"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "year": "1995",
+      "artist": "Los Del Rio",
+      "date": "20220510",
+      "gender": "duet",
+      "song": "Macarena (Bayside Boys Remix)",
+      "duration": "00:03:42",
+      "difficulty": "4.22",
+      "tabber": "Mischa",
+      "type": "Group",
+      "specialbooks": "regular,spain",
+      "language": "spanish,english",
+      "status": "APPROVED"
+    },
+    "id": "130vIYcera1jCDyequ3jnbH3Z56FWeu9FOXYOXNi6M4Q",
+    "name": "Macarena (Bayside Boys Remix) - Los Del Rio"
+  },
+  {
+    "properties": {
+      "tabber": "Caroline",
+      "status": "APPROVED",
+      "type": "Group",
+      "source": "new",
+      "language": "english",
+      "artist": "Girls Aloud",
+      "difficulty": "1.809",
+      "gender": "female",
+      "year": "2008",
+      "specialbooks": "regular,uk,valentines,womens,ireland",
+      "song": "Love Machine",
+      "date": "20240213",
+      "duration": "00:03:16"
+    },
+    "id": "1PEH2nt_x8hQ06_ZJGP8F76yRF1VbgW5B5T8oL6Qjhuo",
+    "name": "Love Machine - Girls Aloud"
+  },
+  {
+    "properties": {
+      "year": "1970",
+      "gender": "male",
+      "tabber": "Mischa",
+      "song": "Lola",
+      "specialbooks": "valentines,uk,pride",
+      "date": "20211123",
+      "difficulty": "3.624",
+      "source": "old",
+      "status": "APPROVED",
+      "duration": "00:03:40",
+      "artist": "The Kinks",
+      "language": "english",
+      "type": "Group"
+    },
+    "id": "1Y06Z9pLYM6UamlLghmjV2G7if7-QhZbO4eCJcW3cyfQ",
+    "name": "Lola - The Kinks"
+  },
+  {
+    "properties": {
+      "difficulty": "2.559",
+      "artist": "Bon Jovi",
+      "song": "Livin' on a Prayer",
+      "type": "Group",
+      "status": "APPROVED",
+      "language": "english",
+      "duration": "00:03:40",
+      "source": "old",
+      "specialbooks": "regular,usa",
+      "gender": "male",
+      "tabber": "Mischa",
+      "year": "1987",
+      "date": "20211102"
+    },
+    "id": "17AxtRMRzapqkX824r7WOFc164HJrImS4KmGGGOYNQS4",
+    "name": "Livin' on a Prayer - Bon Jovi"
+  },
+  {
+    "properties": {
+      "song": "Let it Be",
+      "difficulty": "2.034",
+      "specialbooks": "uk",
+      "language": "english",
+      "type": "Group",
+      "artist": "The Beatles",
+      "gender": "male",
+      "tabber": "Mischa",
+      "year": "1970",
+      "status": "APPROVED",
+      "source": "old",
+      "duration": "00:03:42",
+      "date": "20220201"
+    },
+    "id": "11NMHIWaPtmMG28cWHmOQTbTrH-c6fCDJ-ZA8Kqu8gT0",
+    "name": "Let it Be - The Beatles"
+  },
+  {
+    "properties": {
+      "duration": "00:03:52",
+      "date": "20220329",
+      "gender": "male",
+      "source": "new",
+      "status": "APPROVED",
+      "language": "english",
+      "difficulty": "3.009",
+      "tabber": "Mischa",
+      "specialbooks": "regular,usa",
+      "type": "Group",
+      "artist": "Foo Fighters",
+      "year": "2013",
+      "song": "Learn to Fly"
+    },
+    "id": "1-89Kd_KJKwx3pltiTO579cofcq_E7nu0TdYe9KX7j98",
+    "name": "Learn to Fly - Foo Fighters"
+  },
+  {
+    "properties": {
+      "difficulty": "1.806",
+      "language": "english",
+      "type": "Group",
+      "date": "20221206",
+      "specialbooks": "xmas,uk",
+      "tabber": "Mischa",
+      "status": "APPROVED",
+      "artist": "Wham!",
+      "year": "1984",
+      "source": "off",
+      "duration": "00:04:28",
+      "gender": "male",
+      "song": "Last Christmas"
+    },
+    "id": "1RaejjZHVJwUdda6o9eRp83KubMrnvPvCdKNWW59G-kI",
+    "name": "Last Christmas - Wham!"
+  },
+  {
+    "properties": {
+      "duration": "00:02:10",
+      "language": "english",
+      "gender": "male",
+      "song": "Lady Madonna",
+      "difficulty": "2.357",
+      "date": "20210907",
+      "status": "APPROVED",
+      "artist": "The Beatles",
+      "type": "Group",
+      "year": "1970",
+      "specialbooks": "regular,uk,nocan2025",
+      "tabber": "Bastien",
+      "source": "old"
+    },
+    "id": "1BGLEz87AT4yv-Xy5fYw_-qXPgFyPA8yCt5FQFVtD6Og",
+    "name": "Lady Madonna - The Beatles"
+  },
+  {
+    "properties": {
+      "artist": "Toto Cutugno",
+      "source": "new",
+      "gender": "male",
+      "duration": "00:03:52",
+      "language": "italian",
+      "difficulty": "3.006",
+      "date": "20221129",
+      "status": "APPROVED",
+      "tabber": "Mischa",
+      "song": "L'italiano",
+      "type": "Person",
+      "year": "1983",
+      "specialbooks": "italy"
+    },
+    "id": "1_L9v9SnedswonuKbpDGIQviVPEA6ZALJi_eJUUN6Qto",
+    "name": "L'italiano - Toto Cutugno"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "status": "APPROVED",
+      "difficulty": "3.87",
+      "duration": "00:05:30",
+      "song": "Kiss/Mustang Sally Medley",
+      "tabber": "Mischa",
+      "source": "off",
+      "type": "Group",
+      "date": "20220315",
+      "language": "english",
+      "year": "1966",
+      "artist": "Prince/The Commitments",
+      "specialbooks": "valentines,ireland,pride,regular"
+    },
+    "id": "1UU7L2cRd0FOQLSsqaBPMZEDtj-Dyg-0i3Bx6xAcke8k",
+    "name": "Kiss/Mustang Sally Medley - Prince/The Commitments"
+  },
+  {
+    "properties": {
+      "source": "old",
+      "duration": "00:03:30",
+      "difficulty": "3.039",
+      "artist": "Kim Wilde",
+      "type": "Person",
+      "specialbooks": "regular,uk,womens",
+      "language": "english",
+      "status": "APPROVED",
+      "gender": "female",
+      "tabber": "Mischa",
+      "song": "Kids in America",
+      "date": "20230307",
+      "year": "1981"
+    },
+    "id": "1c_gtufxeuRbp7G-t_qLTxP3YzZL3SZWj-PSgK4doSeg",
+    "name": "Kids in America - Kim Wilde"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "gender": "male",
+      "tabber": "Annalisa",
+      "date": "20220201",
+      "language": "english",
+      "type": "Group",
+      "song": "Kids",
+      "source": "old",
+      "duration": "00:04:50",
+      "year": "2005",
+      "artist": "MGMT",
+      "difficulty": "3.251",
+      "specialbooks": "regular,usa"
+    },
+    "id": "1NTyTbxsMUE8HzNbNsxD0sUvqFVRObac797KrU0DG_Hc",
+    "name": "Kids - MGMT"
+  },
+  {
+    "properties": {
+      "tabber": "Bastien",
+      "gender": "female",
+      "language": "english",
+      "date": "20211116",
+      "type": "Group",
+      "difficulty": "2.362",
+      "source": "off",
+      "song": "Just A Girl",
+      "year": "1995",
+      "status": "APPROVED",
+      "specialbooks": "regular,usa,womens",
+      "duration": "00:03:16",
+      "artist": "No Doubt"
+    },
+    "id": "1e9lRSPXs58rj6b0yGcI0j5IC__a4GAdz06Ut8HfiW_M",
+    "name": "Just A Girl - No Doubt"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "language": "english",
+      "tabber": "Bea",
+      "type": "Person",
+      "song": "Jolene",
+      "difficulty": "3.539",
+      "duration": "00:02:36",
+      "source": "old",
+      "date": "20211005",
+      "specialbooks": "regular,usa,valentines,womens,pride",
+      "gender": "female",
+      "artist": "Dolly Parton",
+      "year": "1973"
+    },
+    "id": "1rnSOxJf__2LkYK4ZD6TgW48OsjthVPkzIXqs4yVV_0w",
+    "name": "Jolene - Dolly Parton"
+  },
+  {
+    "properties": {
+      "year": "1969",
+      "source": "new",
+      "tabber": "Bastien",
+      "artist": "Jane Birkin & Serge Gainsbourg",
+      "date": "20230718",
+      "type": "Person",
+      "song": "Je t'aime... moi non plus",
+      "difficulty": "2.542",
+      "status": "APPROVED",
+      "language": "french",
+      "duration": "00:04:28",
+      "specialbooks": "valentines,france",
+      "gender": "male"
+    },
+    "id": "1byLUi9hf968U6QBAIq0O2_vSJtiie1EotNQUgLmTkQE",
+    "name": "Je t'aime... moi non plus - Jane Birkin & Serge Gainsbourg"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "tabber": "Bastien",
+      "year": "2001",
+      "gender": "male",
+      "difficulty": "1.689",
+      "type": "Group",
+      "status": "APPROVED",
+      "source": "new",
+      "specialbooks": "regular,usa",
+      "song": "Island In The Sun",
+      "duration": "00:03:20",
+      "artist": "Weezer",
+      "date": "20220517"
+    },
+    "id": "1-MHwrZv3_Z-kc8CbCHRH7GFS0hdFXdieocvj6oqDgm8",
+    "name": "Island In The Sun - Weezer"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "duration": "00:04:12",
+      "date": "20211130",
+      "specialbooks": "regular,usa,pride,halloween",
+      "year": "1994",
+      "type": "Group",
+      "difficulty": "3.556",
+      "language": "english",
+      "source": "new",
+      "artist": "Nirvana",
+      "gender": "male",
+      "song": "In Bloom",
+      "tabber": "Bastien"
+    },
+    "id": "1L-whwz8zviYG7sw32z9B0BdO6YpuA7L9kgSbk5YC3sk",
+    "name": "In Bloom - Nirvana"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "difficulty": "1.993",
+      "status": "APPROVED",
+      "language": "english",
+      "year": "1971",
+      "date": "20211102",
+      "source": "old",
+      "specialbooks": "regular,uk,peace",
+      "artist": "John Lennon",
+      "type": "Person",
+      "duration": "00:02:58",
+      "tabber": "Mischa",
+      "song": "Imagine"
+    },
+    "id": "1j4Vr97Y6PNym8NLM_zpdlTJWaLu7QVCoqyNUIZxLXNs",
+    "name": "Imagine - John Lennon"
+  },
+  {
+    "properties": {
+      "duration": "00:02:12",
+      "gender": "male",
+      "status": "APPROVED",
+      "date": "20211116",
+      "song": "I Think We're Alone Now",
+      "language": "english",
+      "difficulty": "2.651",
+      "year": "1966",
+      "tabber": "Bastien",
+      "source": "old",
+      "type": "Group",
+      "artist": "Tommy James & The Shondells",
+      "specialbooks": "usa,valentines,pride"
+    },
+    "id": "1VAQcvSQny_dZYKucO5YbzTDh8iuImalVH0yJNeDa2FY",
+    "name": "I Think We're Alone Now - Tommy James & The Shondells"
+  },
+  {
+    "properties": {
+      "duration": "00:02:32",
+      "specialbooks": "womens,pride,regular,usa,valentines",
+      "date": "20230307",
+      "source": "old",
+      "type": "Person",
+      "status": "APPROVED",
+      "language": "english",
+      "artist": "Dusty Springfield",
+      "year": "1963",
+      "tabber": "Mischa",
+      "gender": "female",
+      "song": "I Only Want To Be With You",
+      "difficulty": "2.091"
+    },
+    "id": "1dYpJTDn6zpDqSYCQ0JT1ovwqiSVU2QEl8VxpfHqIfI8",
+    "name": "I Only Want To Be With You - Dusty Springfield"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "tabber": "Mischa",
+      "type": "Group",
+      "language": "english",
+      "artist": "Icona Pop",
+      "difficulty": "3.648",
+      "specialbooks": "womens,pride,regular,sweden,valentines",
+      "duration": "00:02:32",
+      "gender": "female",
+      "date": "20230307",
+      "year": "2012",
+      "song": "I Love It (feat. Charli XCX)",
+      "status": "APPROVED"
+    },
+    "id": "1_oHCA9u11S1jdfcTGuY46Cjf8e_ACmeyKGlu9plsPv8",
+    "name": "I Love It (feat. Charli XCX) - Icona Pop"
+  },
+  {
+    "properties": {
+      "year": "2008",
+      "artist": "Katy Perry",
+      "difficulty": "1.297",
+      "duration": "00:02:58",
+      "song": "I Kissed A Girl",
+      "status": "APPROVED",
+      "source": "new",
+      "specialbooks": "regular,usa,valentines,womens,pride",
+      "tabber": "Mischa",
+      "date": "20230613",
+      "gender": "female",
+      "language": "english",
+      "type": "Person"
+    },
+    "id": "112_9TZZLho5vHHC-3sSohNBCBu9mWjPw6MNPLC2IAGM",
+    "name": "I Kissed A Girl - Katy Perry"
+  },
+  {
+    "properties": {
+      "difficulty": "2.825",
+      "duration": "00:04:21",
+      "tabber": "Mischa",
+      "language": "english",
+      "date": "20211012",
+      "source": "old",
+      "year": "1964",
+      "type": "Group",
+      "artist": "The Animals",
+      "status": "APPROVED",
+      "gender": "male",
+      "specialbooks": "regular,uk",
+      "song": "House of the Rising Sun"
+    },
+    "id": "1Q-NxFpqie38fZLGaVOrjMT3wzOAHgdZ6-x-97r6q72M",
+    "name": "House of the Rising Sun - The Animals"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "language": "english",
+      "song": "House Of Gold",
+      "date": "20220301",
+      "duration": "00:02:40",
+      "artist": "Twenty One Pilots",
+      "specialbooks": "regular,usa",
+      "difficulty": "1.657",
+      "type": "Group",
+      "source": "off",
+      "tabber": "Bastien",
+      "year": "2011",
+      "gender": "male"
+    },
+    "id": "1_abk9J5a9bI80Sf1wTg9hju5yxruOMbCR28X0gtQZUo",
+    "name": "House Of Gold - Twenty One Pilots"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "tabber": "Mischa",
+      "source": "old",
+      "difficulty": "2.793",
+      "song": "Hotel California",
+      "date": "20220607",
+      "duration": "00:06:05",
+      "type": "Group",
+      "year": "1977",
+      "artist": "The Eagles",
+      "gender": "male",
+      "specialbooks": "regular,halloween,usa",
+      "status": "APPROVED"
+    },
+    "id": "1z1DEv4Bq-7cNQA0yUlQOFo-gjGEqQKCLQ3zrmUb2Ekw",
+    "name": "Hotel California - The Eagles"
+  },
+  {
+    "properties": {
+      "gender": "female",
+      "tabber": "Mischa",
+      "song": "Holding Out for a Hero",
+      "date": "20220607",
+      "difficulty": "2.953",
+      "artist": "Bonnie Tyler",
+      "language": "english",
+      "status": "APPROVED",
+      "specialbooks": "regular,valentines,womens,pride,uk,wales",
+      "source": "new",
+      "duration": "00:04:18",
+      "year": "1986",
+      "type": "Person"
+    },
+    "id": "1xIXFBgajLBXQJmFWFpZ5ZSJKKp17IEITVxfDQN52IOs",
+    "name": "Holding Out for a Hero - Bonnie Tyler"
+  },
+  {
+    "properties": {
+      "artist": "AC/DC",
+      "language": "english",
+      "status": "APPROVED",
+      "difficulty": "2.42",
+      "specialbooks": "regular,halloween,australia",
+      "duration": "00:03:28",
+      "gender": "male",
+      "source": "off",
+      "year": "1979",
+      "type": "Group",
+      "date": "20221101",
+      "song": "Highway to Hell",
+      "tabber": "Mischa"
+    },
+    "id": "1-qhCprUqS5hxCZt8o52Af-Upgm3FxZt7ZGIsfXSao54",
+    "name": "Highway to Hell - AC/DC"
+  },
+  {
+    "properties": {
+      "artist": "The Beatles",
+      "type": "Group",
+      "specialbooks": "regular,uk",
+      "duration": "00:06:50",
+      "year": "1968",
+      "source": "old",
+      "gender": "male",
+      "tabber": "Mischa",
+      "song": "Hey Jude",
+      "language": "english",
+      "difficulty": "2.887",
+      "date": "20211012",
+      "status": "APPROVED"
+    },
+    "id": "1uLFOjlWwPwogWOd699w1blqWI7YXyBxL_3aO365M8ug",
+    "name": "Hey Jude - The Beatles"
+  },
+  {
+    "properties": {
+      "duration": "00:03:54",
+      "difficulty": "1.411",
+      "song": "Heroes (single version)",
+      "language": "english",
+      "tabber": "Mischa",
+      "status": "APPROVED",
+      "date": "20220426",
+      "gender": "male",
+      "source": "new",
+      "type": "Person",
+      "year": "1977",
+      "artist": "David Bowie",
+      "specialbooks": "uk,pride,regular"
+    },
+    "id": "1uTJl0a0HeDPNUWxjcAkL2c6Tye-oHtnZf-OERtR0pWQ",
+    "name": "Heroes (single version) - David Bowie"
+  },
+  {
+    "properties": {
+      "date": "20220322",
+      "difficulty": "1.727",
+      "source": "new",
+      "specialbooks": "sweden",
+      "tabber": "Jeremie",
+      "year": "2000",
+      "gender": "male",
+      "artist": "The Hives",
+      "type": "Group",
+      "duration": "00:03:21",
+      "status": "APPROVED",
+      "language": "english",
+      "song": "Hate To Say I Told You So"
+    },
+    "id": "1Oh-iwYha9c9lkIbq8HxqHghm1wGHRxOUFLpEpQoNj0w",
+    "name": "Hate To Say I Told You So - The Hives"
+  },
+  {
+    "properties": {
+      "specialbooks": "xmas,uk,japan",
+      "difficulty": "2.713",
+      "language": "english",
+      "source": "new",
+      "song": "Happy Xmas (War is Over)",
+      "artist": "John Lennon, Yoko Ono",
+      "type": "Person",
+      "year": "1971",
+      "tabber": "Mischa",
+      "gender": "duet",
+      "duration": "00:03:20",
+      "status": "APPROVED",
+      "date": "20221206"
+    },
+    "id": "1uHv7Mxhhh6VWlSBkkZxkU6y6fsXxIizJZQJomJl5tSA",
+    "name": "Happy Xmas (War is Over) - John Lennon, Yoko Ono"
+  },
+  {
+    "properties": {
+      "date": "20211102",
+      "source": "old",
+      "song": "Hand in My Pocket",
+      "artist": "Alanis Morissette",
+      "duration": "00:03:39",
+      "type": "Person",
+      "year": "1995",
+      "gender": "female",
+      "difficulty": "0.961",
+      "specialbooks": "canada,womens,pride,regular",
+      "status": "APPROVED",
+      "tabber": "Mischa",
+      "language": "english"
+    },
+    "id": "1bPRwCN9MYKBbF8AmditDFokHDVrdVzKgt88GGU2DGtk",
+    "name": "Hand in My Pocket - Alanis Morissette"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "song": "Give Peace A Chance",
+      "difficulty": "4.658",
+      "duration": "00:04:40",
+      "specialbooks": "peace,uk,japan",
+      "tabber": "Bastien",
+      "source": "new",
+      "date": "20220301",
+      "artist": "Plastic Ono Band",
+      "status": "APPROVED",
+      "year": "1969",
+      "gender": "male",
+      "type": "Group"
+    },
+    "id": "1uWNzmkAwO0YDUFBfA-Pzl27-D_5LoaAznaeHGgEl3cE",
+    "name": "Give Peace A Chance - Plastic Ono Band"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "artist": "Ray Parker Jr.",
+      "date": "20211102",
+      "type": "Person",
+      "year": "1984",
+      "tabber": "Mischa",
+      "song": "Ghostbusters",
+      "status": "APPROVED",
+      "source": "new",
+      "language": "english",
+      "duration": "00:03:58",
+      "specialbooks": "usa,halloween",
+      "difficulty": "3.894"
+    },
+    "id": "1dHnBb4uiokHfnknuJyFQso7rrHuIwRii8Bsw34reuDo",
+    "name": "Ghostbusters - Ray Parker Jr."
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "difficulty": "2.88",
+      "specialbooks": "regular,usa",
+      "language": "english",
+      "duration": "00:04:00",
+      "source": "new",
+      "artist": "Coolio, L.V.",
+      "tabber": "Mischa",
+      "date": "20221004",
+      "year": "1995",
+      "gender": "male",
+      "status": "APPROVED",
+      "song": "Gangsta's Paradise"
+    },
+    "id": "16tDktqbEB1WkMcyxDcuSTIk1-Bd7xYiVTB8pcPDfM5w",
+    "name": "Gangsta's Paradise - Coolio, L.V."
+  },
+  {
+    "properties": {
+      "song": "Fuck You",
+      "duration": "00:03:43",
+      "specialbooks": "regular,usa",
+      "status": "APPROVED",
+      "tabber": "Mischa",
+      "source": "old",
+      "difficulty": "2.421",
+      "type": "Person",
+      "date": "20230926",
+      "gender": "male",
+      "artist": "Cee Lo Green",
+      "year": "2010",
+      "language": "english"
+    },
+    "id": "1iPSZtT3OC5Br_xRAsvQOw01VEIDZwivuF99hkwMq6gg",
+    "name": "Fuck You - Cee Lo Green"
+  },
+  {
+    "properties": {
+      "specialbooks": "womens,usa,pride,regular",
+      "difficulty": "2.634",
+      "date": "20231003",
+      "duration": "00:03:16",
+      "status": "APPROVED",
+      "gender": "female",
+      "source": "new",
+      "language": "english",
+      "year": "2023",
+      "type": "Person",
+      "tabber": "Bea",
+      "artist": "Miley Cyrus",
+      "song": "Flowers"
+    },
+    "id": "1vKBP3K7IJV9dNUJ7_V0YbDldgYdT0waMaV6XSZ-82rE",
+    "name": "Flowers - Miley Cyrus"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "status": "APPROVED",
+      "duration": "00:03:00",
+      "year": "1970",
+      "specialbooks": "xmas,puerto rico",
+      "song": "Feliz Navidad",
+      "artist": "Jos\u00e9 Feliciano",
+      "date": "20221206",
+      "difficulty": "1.811",
+      "tabber": "Mischa",
+      "source": "new",
+      "type": "Person",
+      "language": "spanish,english"
+    },
+    "id": "1s8CPE-d3ZqZnct9WJDzkMxYvSrBDAwaZqsqUiKz_lr0",
+    "name": "Feliz Navidad - Jos\u00e9 Feliciano"
+  },
+  {
+    "properties": {
+      "difficulty": "3.332",
+      "specialbooks": "regular,pride,uk",
+      "duration": "00:02:28",
+      "artist": "George Michael",
+      "status": "APPROVED",
+      "type": "Person",
+      "song": "Faith",
+      "year": "1987",
+      "date": "20211005",
+      "tabber": "Mischa",
+      "language": "english",
+      "source": "old",
+      "gender": "male"
+    },
+    "id": "1ez9flwb3Mf9IyK-r20UJ4q_W5jrodx8hX7Bc9ZkTmZk",
+    "name": "Faith - George Michael"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "artist": "The Pogues",
+      "tabber": "Mischa",
+      "date": "20221206",
+      "year": "1988",
+      "type": "Group",
+      "source": "new",
+      "duration": "00:04:00",
+      "difficulty": "2.72",
+      "song": "Fairytale Of New York (feat. Kirsty MacColl)",
+      "gender": "duet",
+      "language": "english",
+      "specialbooks": "xmas,ireland"
+    },
+    "id": "1fq_yJydWRPeyJxMk-tGVOTbQNTxD972p5oJEHMg6pUM",
+    "name": "Fairytale Of New York (feat. Kirsty MacColl) - The Pogues"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "tabber": "Mischa",
+      "duration": "00:04:05",
+      "artist": "Survivor",
+      "song": "Eye of the Tiger",
+      "year": "1982",
+      "source": "old",
+      "difficulty": "4.169",
+      "date": "20210914",
+      "status": "APPROVED",
+      "language": "english",
+      "specialbooks": "regular,usa",
+      "gender": "male"
+    },
+    "id": "1rjnCWzL4myi84O4oFrBSQUNqovNqvQ7VEuYUU0vo-sI",
+    "name": "Eye of the Tiger - Survivor"
+  },
+  {
+    "properties": {
+      "artist": "Backstreet Boys",
+      "difficulty": "3.853",
+      "tabber": "Mischa",
+      "song": "Everybody (Backstreet's Back) (Radio Edit)",
+      "specialbooks": "regular,halloween,usa",
+      "language": "english",
+      "duration": "00:03:40",
+      "type": "Group",
+      "source": "new",
+      "status": "APPROVED",
+      "date": "20241015",
+      "year": "1997",
+      "gender": "male"
+    },
+    "id": "1IWCUnm3JYWgaug0Trlv8PGgjofB2GJ_jIQcPKzDbISs",
+    "name": "Everybody (Backstreet's Back) (Radio Edit) - Backstreet Boys"
+  },
+  {
+    "properties": {
+      "duration": "00:03:34",
+      "song": "Every Breath You Take",
+      "language": "english",
+      "type": "Group",
+      "status": "APPROVED",
+      "year": "1983",
+      "source": "new",
+      "artist": "The Police",
+      "date": "20221101",
+      "specialbooks": "halloween,uk",
+      "gender": "male",
+      "tabber": "Mischa",
+      "difficulty": "2.647"
+    },
+    "id": "1XA5LDrjECsii99B1YoiSCK9nui7EUs2KhGtfhT6-q04",
+    "name": "Every Breath You Take - The Police"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "date": "20220510",
+      "language": "english",
+      "source": "new",
+      "difficulty": "2.114",
+      "duration": "00:04:30",
+      "type": "Group",
+      "specialbooks": "regular,valentines,scottish",
+      "status": "APPROVED",
+      "year": "1985",
+      "song": "Don't You (Forget About Me)",
+      "artist": "Simple Minds",
+      "tabber": "Mischa"
+    },
+    "id": "1A6jnhEG6M46zmWs_u25fI9hFK5RpnQgulQNmHN3yKs0",
+    "name": "Don't You (Forget About Me) - Simple Minds"
+  },
+  {
+    "properties": {
+      "difficulty": "3.098",
+      "type": "Group",
+      "tabber": "Mischa",
+      "date": "20211005",
+      "artist": "Queen",
+      "specialbooks": "uk,pride,regular",
+      "song": "Don't Stop Me Now",
+      "source": "old",
+      "gender": "male",
+      "language": "english",
+      "status": "APPROVED",
+      "year": "1978",
+      "duration": "00:03:29"
+    },
+    "id": "1XEOkP7npgt7CoU60E1iuk4YLtAwBW-YoEeiViYcQFr4",
+    "name": "Don't Stop Me Now - Queen"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "difficulty": "2.831",
+      "date": "20211207",
+      "gender": "male",
+      "language": "english",
+      "type": "Person",
+      "duration": "00:03:46",
+      "status": "APPROVED",
+      "song": "Don't Be a Dick at Christmas",
+      "source": "off",
+      "year": "2018",
+      "artist": "Ukulele Tuesday",
+      "specialbooks": "xmas,ireland"
+    },
+    "id": "1VucWlRC6yuBe3c5ucWXI_eG6YMoZQVy-wvB_fpHyJCY",
+    "name": "Don't Be a Dick at Christmas - Ukulele Tuesday"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "artist": "Band Aid",
+      "song": "Do They Know It's Christmas?",
+      "date": "20211214",
+      "status": "APPROVED",
+      "duration": "00:03:34",
+      "tabber": "Mischa",
+      "difficulty": "2.331",
+      "specialbooks": "uk,xmas",
+      "year": "1984",
+      "language": "english",
+      "type": "Group",
+      "gender": "ensemble"
+    },
+    "id": "1msasK4Xz-C7ibWkTpj8gB8cB2_pwpKg3TkvVClKLblI",
+    "name": "Do They Know It's Christmas? - Band Aid"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "difficulty": "2.396",
+      "specialbooks": "regular,womens,canada",
+      "artist": "Avril Lavigne",
+      "gender": "female",
+      "status": "APPROVED",
+      "duration": "00:03:32",
+      "song": "Complicated",
+      "language": "english",
+      "year": "2002",
+      "type": "Person",
+      "date": "20211012",
+      "source": "old"
+    },
+    "id": "1Qk87tVtwDJtwaymMFSgKm_bFaRxbwlI0c_SSzX8rPxw",
+    "name": "Complicated - Avril Lavigne"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "artist": "Snow Patrol",
+      "difficulty": "1.372",
+      "duration": "00:04:26",
+      "tabber": "Mischa",
+      "date": "20220215",
+      "status": "APPROVED",
+      "specialbooks": "regular,valentines,ireland,scotland",
+      "song": "Chasing Cars",
+      "gender": "male",
+      "source": "new",
+      "year": "2006",
+      "type": "Group"
+    },
+    "id": "15_hzkx8TAM4-p8uBPFgMfp-2rBXljXkLPUTg6TkcKKk",
+    "name": "Chasing Cars - Snow Patrol"
+  },
+  {
+    "properties": {
+      "song": "Candy",
+      "type": "Person",
+      "artist": "Paolo Nutini",
+      "year": "2009",
+      "gender": "male",
+      "difficulty": "1.455",
+      "date": "20220621",
+      "source": "new",
+      "language": "english",
+      "specialbooks": "regular,valentines,halloween,uk,scotland",
+      "status": "APPROVED",
+      "tabber": "Mischa",
+      "duration": "00:04:58"
+    },
+    "id": "1bta7nmH6LFZeEsZboN-ssEh7brnBAz9UM2x0zVmc0ZA",
+    "name": "Candy - Paolo Nutini"
+  },
+  {
+    "properties": {
+      "gender": "female",
+      "status": "APPROVED",
+      "year": "2001",
+      "tabber": "Mischa",
+      "language": "english",
+      "date": "20230307",
+      "source": "new",
+      "difficulty": "2.282",
+      "type": "Person",
+      "artist": "Kylie Minogue",
+      "song": "Can't Get You out of My Head",
+      "duration": "00:03:51",
+      "specialbooks": "australia,womens,pride,regular,valentines"
+    },
+    "id": "1Eb82wfz6VBZpOreBwBh5oS1oouurKpDjoAz2m252_lY",
+    "name": "Can't Get You out of My Head - Kylie Minogue"
+  },
+  {
+    "properties": {
+      "duration": "00:03:18",
+      "language": "english",
+      "type": "Group",
+      "gender": "female",
+      "date": "20231114",
+      "source": "new",
+      "artist": "Blondie",
+      "status": "APPROVED",
+      "tabber": "Bastien",
+      "song": "Call Me",
+      "year": "1980",
+      "difficulty": "3.231",
+      "specialbooks": "womens,pride,regular,usa,valentines"
+    },
+    "id": "1TFL7075dVS_grVeKPa4mBrEhqYG1amBvvXDSaMmG-Xc",
+    "name": "Call Me - Blondie"
+  },
+  {
+    "properties": {
+      "year": "1998",
+      "tabber": "Mischa",
+      "difficulty": "2.804",
+      "source": "new",
+      "artist": "B*Witched",
+      "language": "english",
+      "specialbooks": "regular,valentines,ireland,womens",
+      "duration": "00:02:52",
+      "status": "APPROVED",
+      "type": "Group",
+      "gender": "female",
+      "song": "C'est la Vie",
+      "date": "20230314"
+    },
+    "id": "1MEWr3XpLQqN4LA4M6J_Oq_yc6uKFyu2b1LoGhtkZKL0",
+    "name": "C'est la Vie - B*Witched"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "type": "Group",
+      "duration": "00:02:50",
+      "year": "1968",
+      "tabber": "Mischa",
+      "language": "english",
+      "specialbooks": "valentines,uk",
+      "song": "Build Me Up Buttercup (Mono)",
+      "source": "old",
+      "artist": "The Foundations",
+      "difficulty": "3.502",
+      "date": "20211005",
+      "gender": "male"
+    },
+    "id": "1xnbvaVkco_R5NLwPSNnQtvGEebTor_NSDPl-hxm83Sk",
+    "name": "Build Me Up Buttercup (Mono) - The Foundations"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "date": "20211012",
+      "artist": "Steppenwolf",
+      "source": "old",
+      "song": "Born to be Wild",
+      "duration": "00:03:30",
+      "specialbooks": "canada,can2025",
+      "tabber": "Mischa",
+      "year": "1970",
+      "type": "Group",
+      "language": "english",
+      "status": "APPROVED",
+      "difficulty": "2.748"
+    },
+    "id": "1XauAe4xHyf1yt0kEqaXyrCXNWcXCAn1TgI2W5OgH_iY",
+    "name": "Born to be Wild - Steppenwolf"
+  },
+  {
+    "properties": {
+      "song": "Boris The Spider",
+      "artist": "The Who",
+      "gender": "male",
+      "duration": "00:02:24",
+      "language": "english",
+      "difficulty": "4.085",
+      "type": "Group",
+      "year": "1966",
+      "specialbooks": "halloween,uk",
+      "source": "new",
+      "tabber": "Jeremie",
+      "status": "APPROVED",
+      "date": "20221101"
+    },
+    "id": "1dfd8LKJZxHvShTmib30uafBcHOOuknloaaEhye9x4Bk",
+    "name": "Boris The Spider - The Who"
+  },
+  {
+    "properties": {
+      "date": "20220215",
+      "tabber": "Bastien",
+      "song": "Boom, Boom, Boom, Boom!!",
+      "source": "new",
+      "artist": "Vengaboys",
+      "difficulty": "3.517",
+      "year": "1999",
+      "specialbooks": "valentines,pride,netherlands",
+      "type": "Group",
+      "status": "APPROVED",
+      "language": "english",
+      "gender": "female",
+      "duration": "00:03:20"
+    },
+    "id": "1w5eOGIbKQP7ATGaHof1vWhXI1WzrjoWPp5247fYrpFU",
+    "name": "Boom, Boom, Boom, Boom!! - Vengaboys"
+  },
+  {
+    "properties": {
+      "duration": "00:03:31",
+      "type": "Group",
+      "specialbooks": "valentines,usa",
+      "year": "2000",
+      "artist": "The Dandy Warhols",
+      "gender": "male",
+      "source": "old",
+      "song": "Bohemian Like You",
+      "language": "english",
+      "date": "20211026",
+      "status": "APPROVED",
+      "difficulty": "2.901",
+      "tabber": "Bastien"
+    },
+    "id": "1CGClcNTuNbWZ37i_JOW9iQioHM5mMQWKS6BcJlghDv4",
+    "name": "Bohemian Like You - The Dandy Warhols"
+  },
+  {
+    "properties": {
+      "song": "Blitzkrieg Bop",
+      "tabber": "Bastien",
+      "source": "old",
+      "date": "20210914",
+      "status": "APPROVED",
+      "specialbooks": "regular,usa",
+      "type": "Group",
+      "duration": "00:02:14",
+      "difficulty": "2.396",
+      "language": "english",
+      "artist": "Ramones",
+      "gender": "male",
+      "year": "1976"
+    },
+    "id": "1kTRMNfZi89Zqf-Mgk1aK-Cz8Hk9Ntxv9wCUH8eb5AKI",
+    "name": "Blitzkrieg Bop - Ramones"
+  },
+  {
+    "properties": {
+      "status": "APPROVED",
+      "gender": "female",
+      "difficulty": "3.32",
+      "year": "1970",
+      "duration": "00:02:14",
+      "artist": "Joni Mitchell",
+      "specialbooks": "regular,canada",
+      "date": "20240507",
+      "source": "old",
+      "language": "english",
+      "type": "Person",
+      "tabber": "Mischa",
+      "song": "Big Yellow Taxi"
+    },
+    "id": "1xcFru0Z5NOC7ruHG84logVzY3k3jWBWTt177AR45UwU",
+    "name": "Big Yellow Taxi - Joni Mitchell"
+  },
+  {
+    "properties": {
+      "language": "italian",
+      "difficulty": "3.187",
+      "type": "Group",
+      "tabber": "Mischa",
+      "gender": "male",
+      "source": "new",
+      "year": "1997",
+      "specialbooks": "italy",
+      "duration": "00:02:00",
+      "status": "APPROVED",
+      "date": "20240514",
+      "song": "Bella Ciao",
+      "artist": "Fonola Band"
+    },
+    "id": "1vBOF8Cm6bAr6rTif2p-vekN9_Lnn7oRp_vd9WGjbFus",
+    "name": "Bella Ciao - Fonola Band"
+  },
+  {
+    "properties": {
+      "year": "2013",
+      "type": "Group",
+      "specialbooks": "usa,pride,regular",
+      "artist": "Green Day",
+      "source": "off",
+      "status": "APPROVED",
+      "duration": "00:03:01",
+      "date": "20230221",
+      "language": "english",
+      "difficulty": "3.489",
+      "tabber": "Bastien",
+      "gender": "male",
+      "song": "Basket Case"
+    },
+    "id": "164_butqN0mQcZcxRnrNWDfWN82facvB4SoYoMHWe3_4",
+    "name": "Basket Case - Green Day"
+  },
+  {
+    "properties": {
+      "source": "old",
+      "date": "20211005",
+      "status": "APPROVED",
+      "gender": "male",
+      "song": "Back for Good (Radio Mix)",
+      "artist": "Take That",
+      "difficulty": "3.05",
+      "language": "english",
+      "year": "1995",
+      "duration": "00:04:02",
+      "type": "Group",
+      "specialbooks": "valentines,uk",
+      "tabber": "Mischa"
+    },
+    "id": "1FMs9GfxH2U2io5TLaDWJ9ZHBUlndWaLfg1Cd2wxBKoM",
+    "name": "Back for Good (Radio Mix) - Take That"
+  },
+  {
+    "properties": {
+      "date": "20211102",
+      "tabber": "Mischa",
+      "type": "Person",
+      "language": "english",
+      "song": "Baby One More Time",
+      "duration": "00:03:31",
+      "year": "1998",
+      "difficulty": "3.957",
+      "specialbooks": "regular,valentines,womens,pride,usa",
+      "source": "old",
+      "status": "APPROVED",
+      "artist": "Britney Spears",
+      "gender": "female"
+    },
+    "id": "1rcdYDc8pb4UL0qnAG-mlaZBy-gJSNHglxfKbhMBWSBI",
+    "name": "Baby One More Time - Britney Spears"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "artist": "The Moldy Peaches",
+      "date": "20211005",
+      "status": "APPROVED",
+      "language": "english",
+      "song": "Anyone Else But You",
+      "year": "2001",
+      "tabber": "Bastien",
+      "difficulty": "0.806",
+      "gender": "duet",
+      "specialbooks": "valentines,usa,pride,regular",
+      "source": "old",
+      "duration": "00:03:00"
+    },
+    "id": "1MPN4GRkZpT9e_1MzWu8NqCZ_ZgnKJ0TLEwdPr9W-_Yo",
+    "name": "Anyone Else But You - The Moldy Peaches"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "difficulty": "3.747",
+      "gender": "male",
+      "song": "Angels",
+      "artist": "Robbie Williams",
+      "source": "old",
+      "specialbooks": "regular,valentines,uk",
+      "duration": "00:04:25",
+      "date": "20210914",
+      "type": "Person",
+      "tabber": "Mischa",
+      "status": "APPROVED",
+      "year": "1997"
+    },
+    "id": "1twN1gqRkpx9NbehTsB4BMM5krYcMkYBBSWFV3awoPWE",
+    "name": "Angels - Robbie Williams"
+  },
+  {
+    "properties": {
+      "duration": "00:03:06",
+      "specialbooks": "uk",
+      "artist": "Monty Python",
+      "language": "english",
+      "song": "Always Look on the Bright Side of Life",
+      "gender": "male",
+      "tabber": "Mischa",
+      "type": "Group",
+      "date": "20210907",
+      "status": "APPROVED",
+      "source": "old",
+      "year": "1979",
+      "difficulty": "3.021"
+    },
+    "id": "1JeOaPyQPoo3syEdu-RR1T7Etq8tCNshMJ8G9Z8Og9ZI",
+    "name": "Always Look on the Bright Side of Life - Monty Python"
+  },
+  {
+    "properties": {
+      "duration": "00:03:01",
+      "type": "Group",
+      "tabber": "Mischa",
+      "song": "Alright",
+      "difficulty": "1.903",
+      "language": "english",
+      "date": "20220201",
+      "gender": "male",
+      "specialbooks": "uk",
+      "source": "new",
+      "artist": "Supergrass",
+      "status": "APPROVED",
+      "year": "1995"
+    },
+    "id": "1d0Eakbt5wn9-xE4cW_eZ3eduD2SxNbbBJpnbCcghSAM",
+    "name": "Alright - Supergrass"
+  },
+  {
+    "properties": {
+      "year": "2004",
+      "language": "english",
+      "type": "Group",
+      "specialbooks": "regular,usa",
+      "date": "20220208",
+      "tabber": "Annalisa",
+      "difficulty": "3.846",
+      "source": "off",
+      "song": "All These Things That I've Done",
+      "status": "APPROVED",
+      "duration": "00:05:02",
+      "gender": "male",
+      "artist": "The Killers"
+    },
+    "id": "1BWKa3vHqufjQ0zCG80chv0C021r2IOfVs1GCovb72Jc",
+    "name": "All These Things That I've Done - The Killers"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "song": "All I Want For Christmas Is You",
+      "language": "english",
+      "source": "new",
+      "gender": "female",
+      "duration": "00:03:54",
+      "year": "1994",
+      "date": "20221206",
+      "difficulty": "3.288",
+      "specialbooks": "xmas,usa",
+      "artist": "Mariah Carey",
+      "type": "Person",
+      "status": "APPROVED"
+    },
+    "id": "1MBtXPBhQw3vO_TWXsu9IhDoKnSu2Kz_1jKucRnvgt1g",
+    "name": "All I Want For Christmas Is You - Mariah Carey"
+  },
+  {
+    "properties": {
+      "date": "20210914",
+      "tabber": "Mischa",
+      "type": "Group",
+      "difficulty": "2.19",
+      "artist": "Counting Crows",
+      "year": "2004",
+      "duration": "00:03:08",
+      "song": "Accidentally in Love",
+      "source": "old",
+      "gender": "male",
+      "specialbooks": "regular,valentines,usa",
+      "status": "APPROVED",
+      "language": "english"
+    },
+    "id": "1pjz-DPAwpoBhlImOBKilwsLzR2p55LnNyKZok6_UfPg",
+    "name": "Accidentally in Love - Counting Crows"
+  },
+  {
+    "properties": {
+      "tabber": "Bastien",
+      "language": "german",
+      "duration": "00:03:52",
+      "year": "1983",
+      "gender": "female",
+      "song": "99 Luftballons",
+      "source": "off",
+      "status": "APPROVED",
+      "difficulty": "3.608",
+      "specialbooks": "regular,womens,germany",
+      "type": "Person",
+      "artist": "Nena",
+      "date": "20230307"
+    },
+    "id": "1TKDHAWyuG7afo-VQUD49o29XJ9-rLk2uryF-E8b3cOI",
+    "name": "99 Luftballons - Nena"
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "duration": "00:02:42",
+      "status": "APPROVED",
+      "source": "old",
+      "difficulty": "4.115",
+      "date": "20220830",
+      "artist": "Dolly Parton",
+      "year": "1980",
+      "song": "9 to 5",
+      "language": "english",
+      "gender": "female",
+      "tabber": "Mischa",
+      "specialbooks": "regular,womens,pride,usa"
+    },
+    "id": "1oaGrnuNPc-1xZY5GNKW45KDOnL1cL--S23vjD4rxZo0",
+    "name": "9 to 5 - Dolly Parton"
+  },
+  {
+    "properties": {
+      "song": "(You're the) Devil in Disguise",
+      "specialbooks": "halloween,usa",
+      "status": "APPROVED",
+      "language": "english",
+      "artist": "Elvis Presley",
+      "gender": "male",
+      "source": "new",
+      "tabber": "Bea",
+      "difficulty": "2.008",
+      "duration": "00:02:20",
+      "year": "1964",
+      "date": "20221101",
+      "type": "Person"
+    },
+    "id": "1DNTERPG5RFB2N3uFRplgwsgOW4leaHYdjXrAFYIRikc",
+    "name": "(You're the) Devil in Disguise - Elvis Presley"
+  },
+  {
+    "properties": {
+      "specialbooks": "hooley-2025,regular"
+    },
+    "id": "1qaUIPkL__NdUq1dVOcsjsT59iD0wnMsjdlFCNG8QMHk",
+    "name": "Sammy the Seal - Alessandro Pedroni"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "specialbooks": "hooley-2025,regular"
+    },
+    "id": "1bVJ1oSplztxaQKjv9zy2SZQN6bjB9JrTb_3k8hqc068",
+    "name": "Love Me Do - The Beatles"
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "year": "2011",
+      "source": "new",
+      "song": "We Are Young",
+      "artist": "fun. (feat. Janelle Mon\u00e1e)",
+      "status": "READY_TO_PLAY",
+      "duration": "00:04:06",
+      "difficulty": "2.636",
+      "date": "20230620",
+      "gender": "male",
+      "language": "english",
+      "tabber": "Jeremie",
+      "specialbooks": "usa,pride,valentines"
+    },
+    "id": "1IntZOqDjJuRXFANhhWOtQY_oWBo3lW14-q_2hDo5sP4",
+    "name": "We Are Young - fun. (feat. Janelle Mon\u00e1e)"
+  },
+  {
+    "properties": {
+      "language": "hawaiian,english",
+      "date": "20240827",
+      "duration": "00:02:46",
+      "specialbooks": "hawaii",
+      "status": "READY_TO_PLAY",
+      "difficulty": "1.04",
+      "gender": "male",
+      "source": "new",
+      "type": "Person",
+      "year": "2013",
+      "song": "Pineapple Mango",
+      "artist": "Daniel Ho",
+      "tabber": "Mischa"
+    },
+    "id": "12bZ5dD82l-a-LqR1gBUM3s3lyWQiq_dbFnBd60XSwdg",
+    "name": "Pineapple Mango - Daniel Ho"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "song": "Brown Eyed Girl",
+      "year": "1967",
+      "type": "Person",
+      "specialbooks": "hooley-2025,ireland,regular",
+      "status": "READY_TO_PLAY",
+      "source": "old",
+      "artist": "Van Morrison",
+      "difficulty": "2.09",
+      "date": "20250318",
+      "gender": "male",
+      "duration": "00:03:04",
+      "language": "english"
+    },
+    "id": "19xCHdumkXf2WNVttDfd19MSt7mx5XSLG4KdzbuDAz9g",
+    "name": "Brown Eyed Girl - Van Morrison"
+  },
+  {
+    "properties": {
+      "artist": "OutKast",
+      "language": "english",
+      "tabber": "Annalisa",
+      "gender": "male",
+      "date": "20240702",
+      "source": "off",
+      "type": "Group",
+      "year": "2003",
+      "song": "Hey Ya",
+      "duration": "00:03:56",
+      "difficulty": "1.489",
+      "specialbooks": "usa,can2025",
+      "status": "READY_TO_PLAY"
+    },
+    "id": "1ClMcAJthi-juW2RPZUPqfaEwd-3bYEkmeyvGyS8CJ-I",
+    "name": "Hey Ya - OutKast"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "gender": "male",
+      "difficulty": "1.8",
+      "tabber": "Jeremie",
+      "specialbooks": "hooley-2025,ireland",
+      "type": "Group",
+      "song": "Where's Me Jumper?",
+      "duration": "00:03:00",
+      "year": "1993",
+      "date": "20250318",
+      "source": "new",
+      "artist": "Sultans Of Ping F.C.",
+      "status": "READY_TO_PLAY"
+    },
+    "id": "1G3h-FEj7RgHKXCNVinXNI8O5i4dfMbvV_vwDnzwyJSI",
+    "name": "Where's Me Jumper? - Sultans Of Ping F.C."
+  },
+  {
+    "properties": {
+      "song": "Whiskey in the Jar",
+      "type": "Group",
+      "artist": "Thin Lizzy",
+      "duration": "00:05:45",
+      "gender": "male",
+      "year": "1972",
+      "language": "english",
+      "specialbooks": "hooley-2025,ireland,regular",
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "difficulty": "2.142",
+      "tabber": "Mischa",
+      "date": "20230516"
+    },
+    "id": "1stnrwfxb1VpXE1ACd6nJg1gbm91hRcHF2lCtk1hLPug",
+    "name": "Whiskey in the Jar - Thin Lizzy"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "difficulty": "0.96",
+      "date": "20250624",
+      "type": "person",
+      "specialbooks": "hooley-2025,pride,regular,usa",
+      "source": "new",
+      "gender": "female",
+      "duration": "00:03:08",
+      "song": "Tree Hugger",
+      "tabber": "Bastien",
+      "year": "2007",
+      "artist": "Kimya Dawson & Antsy Pants",
+      "language": "english,french"
+    },
+    "id": "1pJ3PRT46_cWzWU70DxVsxMyXj3oWIP0UIEOXe-rUy7A",
+    "name": "Tree Hugger - Kimya Dawson & Antsy Pants"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "specialbooks": "hooley-2025,regular"
+    },
+    "id": "10oLgkGPHhdTw3cvzwHQjhW8j4QEYLHPEjNHqi5Gd-A4",
+    "name": "Don't Look Back In Anger - Oasis"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "duration": "00:03:30",
+      "song": "BIRDS OF A FEATHER",
+      "date": "20250304",
+      "type": "Person",
+      "year": "2024",
+      "status": "READY_TO_PLAY",
+      "gender": "female",
+      "language": "english",
+      "difficulty": "1.822",
+      "specialbooks": "hooley-2025,regular,usa",
+      "artist": "Billie Eilish",
+      "source": "new"
+    },
+    "id": "1ISU_SPVzbJ8Hw1wOMeTjADQO4k42JSZmCvQicEQYWn4",
+    "name": "BIRDS OF A FEATHER - Billie Eilish"
+  },
+  {
+    "properties": {
+      "duration": "00:03:10",
+      "song": "An Poc Ar Buile (The Mad Puck Goat)",
+      "year": "2000",
+      "tabber": "Mischa",
+      "difficulty": "1.558",
+      "specialbooks": "hooley-2025,ireland,regular",
+      "status": "READY_TO_PLAY",
+      "type": "Group",
+      "source": "new",
+      "date": "20250318",
+      "artist": "The Chieftains",
+      "language": "irish",
+      "gender": "male"
+    },
+    "id": "1KNIlAMS3vi8kYyxMzNdxJ2fDa4W6VbfcexYzeQcJTls",
+    "name": "An Poc Ar Buile (The Mad Puck Goat) - The Chieftains"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY"
+    },
+    "id": "1nZmmHmvJ5NXZ_XcbF3AeQWkZ6TEuUWUjvFNAhzxDWNI",
+    "name": "You Never Can Tell - Chuck Berry"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "year": "1981",
+      "song": "Les lacs du Connemara",
+      "duration": "00:05:56",
+      "specialbooks": "france",
+      "date": "20250318",
+      "status": "READY_TO_PLAY",
+      "source": "new",
+      "tabber": "Bastien",
+      "type": "Person",
+      "language": "french"
+    },
+    "id": "1zIof8N9uZrt2qTH0CyUZsUWb4D53kzXzvBg3v2K0JHs",
+    "name": "Les lacs du Connemara - Michel Sardou"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "tabber": "Annalisa",
+      "type": "Person",
+      "source": "new",
+      "specialbooks": "australia,new zealand",
+      "song": "Somebody That I Used To Know",
+      "status": "READY_TO_PLAY",
+      "year": "2011",
+      "gender": "duet",
+      "duration": "00:04:01"
+    },
+    "id": "1nGWwYX298jaEfkahj7x5txkeTar05VxJfoAX1DLsydA",
+    "name": "Somebody That I Used To Know - Gotye, Kimbra"
+  },
+  {
+    "properties": {
+      "difficulty": "1.579",
+      "gender": "female",
+      "song": "Chaise Longue",
+      "language": "english",
+      "type": "Group",
+      "specialbooks": "uk,regular",
+      "source": "new",
+      "date": "20250304",
+      "status": "READY_TO_PLAY",
+      "artist": "Wet Leg",
+      "tabber": "Caroline",
+      "duration": "00:03:16",
+      "year": "2021"
+    },
+    "id": "1CwsY-azgbaySnpgjD7cQMSklvud0LnGejSSJwa1iSW4",
+    "name": "Chaise Longue - Wet Leg"
+  },
+  {
+    "properties": {
+      "specialbooks": "halloween,usa",
+      "tabber": "Jeremie",
+      "type": "Group",
+      "language": "english",
+      "status": "READY_TO_PLAY",
+      "date": "20231031",
+      "gender": "male",
+      "difficulty": "3.591",
+      "artist": "Queens Of The Stone Age",
+      "duration": "00:03:34",
+      "song": "Burn The Witch",
+      "source": "new",
+      "year": "2006"
+    },
+    "id": "1ADAEnpoQSztzw5rz5dShIDL31Q8iIkQGpiiAAkl74rg",
+    "name": "Burn The Witch - Queens Of The Stone Age"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "type": "Person",
+      "song": "You Oughta Know",
+      "gender": "female",
+      "status": "READY_TO_PLAY",
+      "year": "1995",
+      "artist": "Alanis Morissette",
+      "duration": "00:04:06",
+      "difficulty": "2.862",
+      "language": "english",
+      "source": "new",
+      "date": "20230620",
+      "specialbooks": "pride,canada"
+    },
+    "id": "1JAoZVgkm1j_mk_d-zmrUJXS8GZEVgYGG77XIHVjX-T4",
+    "name": "You Oughta Know - Alanis Morissette"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "gender": "female",
+      "artist": "Atomic Kitten",
+      "difficulty": "3.108",
+      "language": "english",
+      "specialbooks": "uk",
+      "type": "Group",
+      "status": "READY_TO_PLAY",
+      "song": "Whole Again",
+      "duration": "00:03:02",
+      "source": "new",
+      "year": "2000"
+    },
+    "id": "1MfnO7Ii17gbMXfz989LGJpbIhffYw_LnQmt4gM9jooo",
+    "name": "Whole Again - Atomic Kitten"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "specialbooks": "uk,canada",
+      "type": "Person",
+      "duration": "00:03:20",
+      "gender": "duet",
+      "source": "new",
+      "artist": "Bryan Adams, Melanie C",
+      "year": "1998",
+      "language": "english",
+      "tabber": "Mischa",
+      "song": "When You're Gone"
+    },
+    "id": "1OHUKyANdIYCC9KPF4sSICiXsiZw9UpHLJE0heH26y0I",
+    "name": "When You're Gone - Bryan Adams, Melanie C"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "type": "Group",
+      "specialbooks": "usa,pride",
+      "artist": "Sister Sledge",
+      "source": "new",
+      "year": "1979",
+      "status": "READY_TO_PLAY",
+      "tabber": "Mischa",
+      "duration": "00:03:24",
+      "gender": "female",
+      "difficulty": "1.721",
+      "song": "We Are Family",
+      "date": "20230620"
+    },
+    "id": "1YIfZa_VnIb-U5Z1HKL-Zik8Svib-vZdsMxxKlWmJLeU",
+    "name": "We Are Family - Sister Sledge"
+  },
+  {
+    "properties": {
+      "song": "Voyage voyage",
+      "gender": "male",
+      "year": "2001",
+      "tabber": "Mischa",
+      "type": "Person",
+      "duration": "00:04:06",
+      "artist": "Desireless",
+      "status": "READY_TO_PLAY",
+      "language": "french",
+      "specialbooks": "france",
+      "difficulty": "4.618",
+      "source": "new",
+      "date": "20240716"
+    },
+    "id": "1pLtvl6F_2_tHnjlsatfH22Yy4vUoLYlkbc5P8Ax_FDw",
+    "name": "Voyage voyage - Desireless"
+  },
+  {
+    "properties": {
+      "specialbooks": "ireland",
+      "gender": "duet",
+      "type": "Group",
+      "language": "english",
+      "difficulty": "2.573",
+      "date": "20250318",
+      "source": "new",
+      "artist": "Aslan (feat. Sin\u00e9ad O'Connor)",
+      "song": "Up in Arms",
+      "tabber": "Mischa",
+      "duration": "00:03:30",
+      "status": "READY_TO_PLAY",
+      "year": "2007"
+    },
+    "id": "12pwemHtF8qKqW1rWG8axg9IA4Qo5R1OSDATcz-eDfCA",
+    "name": "Up in Arms - Aslan (feat. Sin\u00e9ad O'Connor)"
+  },
+  {
+    "properties": {
+      "difficulty": "1.426",
+      "source": "new",
+      "song": "Twist in My Sobriety",
+      "date": "20240625",
+      "gender": "female",
+      "year": "1988",
+      "specialbooks": "uk,pride",
+      "tabber": "Mischa",
+      "language": "english",
+      "artist": "Tanita Tikaram",
+      "type": "Person",
+      "status": "READY_TO_PLAY",
+      "duration": "00:04:46"
+    },
+    "id": "1fqW5zydr-koB7jjKYhf4KRttqcZbGZ5V_0NnYuUwKVI",
+    "name": "Twist in My Sobriety - Tanita Tikaram"
+  },
+  {
+    "properties": {
+      "duration": "00:03:04",
+      "source": "new",
+      "difficulty": "2.906",
+      "date": "20240625",
+      "tabber": "Jeremie",
+      "specialbooks": "usa,pride",
+      "gender": "male",
+      "year": "2014",
+      "language": "english",
+      "type": "Group",
+      "artist": "Against Me!",
+      "song": "True Trans Soul Rebel",
+      "status": "READY_TO_PLAY"
+    },
+    "id": "14rc7TmP8FTRR1EWbG4Q9fWc-_CPvwonI_YzB7u1UjjA",
+    "name": "True Trans Soul Rebel - Against Me!"
+  },
+  {
+    "properties": {
+      "year": "1986",
+      "song": "True Colors",
+      "duration": "00:03:34",
+      "artist": "Cindy Lauper",
+      "gender": "female",
+      "specialbooks": "usa,pride",
+      "source": "new",
+      "difficulty": "2.651",
+      "status": "READY_TO_PLAY",
+      "language": "english",
+      "date": "20230620",
+      "tabber": "Jeremie",
+      "type": "Person"
+    },
+    "id": "1gyb1_B6LoMlPD2hjAdUSBS6uOFX-MW3YaWveR3ZvKnE",
+    "name": "True Colors - Cindy Lauper"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "specialbooks": "usa,halloween",
+      "duration": "00:04:02",
+      "artist": "Tenacious D",
+      "source": "new",
+      "tabber": "Mischa",
+      "difficulty": "2.253",
+      "gender": "male",
+      "date": "20221101",
+      "song": "Tribute",
+      "year": "2001",
+      "type": "Group",
+      "status": "READY_TO_PLAY"
+    },
+    "id": "1ce8ejEsM93FH6aa1PkB-TdtGePv6G_vTMhYaGpEwar4",
+    "name": "Tribute - Tenacious D"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "source": "new",
+      "tabber": "Annalisa",
+      "year": "2023",
+      "artist": "Hozier",
+      "specialbooks": "ireland",
+      "song": "Too Sweet",
+      "language": "english",
+      "difficulty": "2.728",
+      "type": "Person",
+      "status": "READY_TO_PLAY",
+      "date": "20250318",
+      "duration": "00:04:06"
+    },
+    "id": "11bM7EPUf5N2IN9sGYe6I67vIuhZY2ZREbrNfkzQpfKI",
+    "name": "Too Sweet - Hozier"
+  },
+  {
+    "properties": {
+      "date": "20221101",
+      "song": "Time Warp",
+      "year": "1973",
+      "status": "READY_TO_PLAY",
+      "specialbooks": "halloween,uk,pride",
+      "language": "english",
+      "artist": "Little Nell, Patricia Quinn, Richard O'Brien",
+      "type": "Group",
+      "difficulty": "2.582",
+      "tabber": "Bastien",
+      "duration": "00:03:28",
+      "gender": "duet",
+      "source": "off"
+    },
+    "id": "186m5PsYFu5Iobp7EFqiihnmWmBhkxXmWS86NvNsmMBs",
+    "name": "Time Warp - Little Nell, Patricia Quinn, Richard O'Brien"
+  },
+  {
+    "properties": {
+      "type": "person",
+      "tabber": "Bastien",
+      "year": "1977",
+      "status": "READY_TO_PLAY",
+      "source": "new",
+      "duration": "00:04:02",
+      "artist": "Umberto Tozzi",
+      "specialbooks": "italy",
+      "language": "italian",
+      "song": "Ti Amo",
+      "gender": "male"
+    },
+    "id": "1DxF5tp-E7td4KxyWY-Woi2k3uuFdLWIm3jr2z_Tmn1w",
+    "name": "Ti Amo - Umberto Tozzi"
+  },
+  {
+    "properties": {
+      "specialbooks": "australia,halloween",
+      "type": "Group",
+      "language": "english",
+      "difficulty": "3.475",
+      "status": "READY_TO_PLAY",
+      "artist": "AC/DC",
+      "source": "new",
+      "year": "1990",
+      "duration": "00:04:52",
+      "tabber": "Mischa",
+      "song": "Thunderstruck",
+      "gender": "male"
+    },
+    "id": "1XfAvc-Qcj429emwpz4hlO9koxH2s6b9AnongFDqzBQA",
+    "name": "Thunderstruck - AC/DC"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "duration": "00:05:10",
+      "specialbooks": "usa,halloween",
+      "year": "1982",
+      "song": "Thriller",
+      "gender": "male",
+      "type": "Person",
+      "date": "20221101",
+      "language": "english",
+      "artist": "Michael Jackson",
+      "tabber": "Mischa",
+      "difficulty": "4.843"
+    },
+    "id": "1kHF9iqYtm02u7OGIKR_ffQS96P3tv1AW7eoqihMwMAM",
+    "name": "Thriller - Michael Jackson"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "year": "2013",
+      "difficulty": "2.028",
+      "artist": "Dropkick Murphys",
+      "duration": "00:03:52",
+      "date": "20221206",
+      "status": "READY_TO_PLAY",
+      "language": "english",
+      "specialbooks": "usa,xmas",
+      "tabber": "Mischa",
+      "song": "The Season's Upon Us",
+      "gender": "male",
+      "type": "Group"
+    },
+    "id": "135qKLo235HHAZpcHQejfMoWF0rt3DDeRgSDKdOLhqN4",
+    "name": "The Season's Upon Us - Dropkick Murphys"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "type": "Group",
+      "specialbooks": "spain",
+      "tabber": "Mischa",
+      "source": "new",
+      "year": "2002",
+      "duration": "00:03:08",
+      "artist": "Las Ketchup",
+      "gender": "female",
+      "song": "The Ketchup Song (Aserej\u00e9)",
+      "difficulty": "3.657",
+      "language": "english"
+    },
+    "id": "1lYKf_hqYfa4G4pXpti7ojwI-_rJ_fGqlO4KvExt0zr4",
+    "name": "The Ketchup Song (Aserej\u00e9) - Las Ketchup"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "artist": "Lady Gaga",
+      "gender": "female",
+      "duration": "00:04:20",
+      "year": "2011",
+      "specialbooks": "usa,pride",
+      "tabber": "Mischa",
+      "difficulty": "3.601",
+      "date": "20250603",
+      "status": "READY_TO_PLAY",
+      "song": "The Edge Of Glory (Radio Edit)",
+      "type": "Person",
+      "language": "english"
+    },
+    "id": "1HGSo9QczJixLqcWEJ3sUy6O0SBMoXIek5XtNYDRyWK0",
+    "name": "The Edge Of Glory (Radio Edit) - Lady Gaga"
+  },
+  {
+    "properties": {
+      "song": "Thank God It's Christmas",
+      "specialbooks": "uk,xmas",
+      "difficulty": "3.137",
+      "duration": "00:04:12",
+      "source": "new",
+      "gender": "male",
+      "type": "Group",
+      "year": "1984",
+      "tabber": "Mischa",
+      "status": "READY_TO_PLAY",
+      "artist": "Queen",
+      "date": "20221206",
+      "language": "english"
+    },
+    "id": "1OibcEKFfgTlEmrym-MP_JYzxr8PzXLtfahWulYkLQQ4",
+    "name": "Thank God It's Christmas - Queen"
+  },
+  {
+    "properties": {
+      "song": "TEXAS HOLD'EM",
+      "difficulty": "3.5",
+      "status": "READY_TO_PLAY",
+      "type": "Person",
+      "date": "20250701",
+      "language": "english",
+      "duration": "00:03:53",
+      "artist": "Beyonc\u00e9",
+      "year": "2024",
+      "gender": "female",
+      "tabber": "Annalisa",
+      "specialbooks": "usa,can2025",
+      "source": "new"
+    },
+    "id": "1YM7bTV91E2wnQiZnPHlbYpRsVJza6NovqGrUGwNEu5Y",
+    "name": "TEXAS HOLD'EM - Beyonc\u00e9"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "difficulty": "3.004",
+      "gender": "ensemble",
+      "type": "Group",
+      "song": "Tequila",
+      "source": "new",
+      "specialbooks": "usa",
+      "artist": "The Champs",
+      "year": "1958",
+      "language": "spanish",
+      "status": "READY_TO_PLAY",
+      "duration": "00:02:10"
+    },
+    "id": "1A3jqjbOwF74EMYtBs7nsuztB9uAm-YdjTUAYzaI1Tv8",
+    "name": "Tequila - The Champs"
+  },
+  {
+    "properties": {
+      "specialbooks": "italy",
+      "status": "READY_TO_PLAY",
+      "type": "Person",
+      "language": "italian",
+      "gender": "instrumental",
+      "source": "new",
+      "tabber": "Bastien",
+      "song": "Tarantella napoletana",
+      "date": "20250527",
+      "year": "2015",
+      "difficulty": "1.442",
+      "artist": "Andrea Colombari",
+      "duration": "00:01:32"
+    },
+    "id": "1t-G-u32-AyF1Hayc_ErVYZYOiKaistNRGQm9B2dY-DE",
+    "name": "Tarantella napoletana - Andrea Colombari"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "tabber": "Mischa",
+      "status": "READY_TO_PLAY",
+      "year": "1988",
+      "type": "Person",
+      "artist": "Tracy Chapman",
+      "song": "Talkin' Bout a Revolution",
+      "specialbooks": "usa",
+      "gender": "female",
+      "duration": "00:02:33",
+      "language": "english"
+    },
+    "id": "1mQgGxdXsBJTJlWs9PrfacNi6h23xbpOCc0q90IPHnbk",
+    "name": "Talkin' Bout a Revolution - Tracy Chapman"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "source": "new",
+      "duration": "00:02:20",
+      "year": "1963",
+      "type": "group",
+      "gender": "male",
+      "language": "english",
+      "artist": "The Beach Boys",
+      "tabber": "Mischa",
+      "difficulty": "4.2",
+      "specialbooks": "usa",
+      "date": "20250617",
+      "song": "Surfin' U.S.A."
+    },
+    "id": "1dmjjw5elNG1ahsop31FNWWFS8QLJB4gNlGFwHBNjHPw",
+    "name": "Surfin' U.S.A. - The Beach Boys"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "gender": "male",
+      "language": "english",
+      "date": "20240702",
+      "difficulty": "2.233",
+      "tabber": "Bastien",
+      "specialbooks": "usa",
+      "source": "new",
+      "type": "Group",
+      "year": "2005",
+      "artist": "Fall Out Boy",
+      "duration": "00:03:34",
+      "song": "Sugar, We're Goin Down"
+    },
+    "id": "14SfdP2cD7QDt2HmjoTE4uhKCwpYJgO3mSsvxA4karf8",
+    "name": "Sugar, We're Goin Down - Fall Out Boy"
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "artist": "Elton John",
+      "tabber": "Mischa",
+      "difficulty": "2.828",
+      "status": "READY_TO_PLAY",
+      "gender": "male",
+      "date": "20221206",
+      "source": "new",
+      "duration": "00:04:30",
+      "song": "Step Into Christmas",
+      "language": "english",
+      "year": "1973",
+      "specialbooks": "uk,xmas"
+    },
+    "id": "10--GaqykJ4KhBUBWFnHrDUpmzg8UfY5l-sdRHiuea_I",
+    "name": "Step Into Christmas - Elton John"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "duration": "00:02:56",
+      "tabber": "Bastien",
+      "language": "french,english",
+      "year": "2002",
+      "date": "20220712",
+      "artist": "Dionysos",
+      "specialbooks": "france",
+      "song": "Song For Jedi",
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "difficulty": "3.099",
+      "type": "Group"
+    },
+    "id": "1LYMroXQrWSp_TBQhUwlqzps2OsGN0JNIMqXDvHFMV3U",
+    "name": "Song For Jedi - Dionysos"
+  },
+  {
+    "properties": {
+      "song": "Somebody's Watching Me",
+      "date": "20231031",
+      "duration": "00:03:40",
+      "source": "new",
+      "artist": "Rockwell",
+      "tabber": "Mischa",
+      "language": "english",
+      "year": "1984",
+      "type": "Person",
+      "gender": "male",
+      "status": "READY_TO_PLAY",
+      "difficulty": "3.216",
+      "specialbooks": "usa,halloween"
+    },
+    "id": "11Aq8eDW2C_oY5d3LHwQtJMs0EJ7PSA0p7Ibw-vgJJE8",
+    "name": "Somebody's Watching Me - Rockwell"
+  },
+  {
+    "properties": {
+      "date": "20211207",
+      "specialbooks": "usa,xmas",
+      "gender": "female",
+      "duration": "00:03:04",
+      "difficulty": "1.963",
+      "source": "new",
+      "song": "Silent Night",
+      "year": "2007",
+      "artist": "Taylor Swift",
+      "status": "READY_TO_PLAY",
+      "tabber": "Mischa",
+      "type": "Person",
+      "language": "english"
+    },
+    "id": "1NjV22E8yTEfVESoepK39dsQHsxwnlva5Tz3HX-MMiPo",
+    "name": "Silent Night - Taylor Swift"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "difficulty": "2.719",
+      "status": "READY_TO_PLAY",
+      "artist": "Laura Branigan",
+      "type": "Person",
+      "duration": "00:03:50",
+      "gender": "female",
+      "tabber": "Mischa",
+      "language": "english",
+      "specialbooks": "usa,womens",
+      "date": "20231024",
+      "year": "1984",
+      "song": "Self Control"
+    },
+    "id": "1hsVoPE8x6ZQ0grMgp-GKnzfN35a1EBTkeATyP_DTULQ",
+    "name": "Self Control - Laura Branigan"
+  },
+  {
+    "properties": {
+      "duration": "00:04:06",
+      "source": "new",
+      "year": "1995",
+      "status": "READY_TO_PLAY",
+      "artist": "The Corrs",
+      "gender": "female",
+      "tabber": "Mischa",
+      "date": "20250318",
+      "type": "Group",
+      "language": "english",
+      "song": "Runaway",
+      "difficulty": "2.883",
+      "specialbooks": "ireland"
+    },
+    "id": "1DmOGP48zVBITqSWhVxy2oX3Yt56F4yeRfH7rHy4XcEU",
+    "name": "Runaway - The Corrs"
+  },
+  {
+    "properties": {
+      "song": "Roar",
+      "tabber": "Mischa",
+      "artist": "Katy Perry",
+      "specialbooks": "usa,pride",
+      "type": "Person",
+      "duration": "00:03:40",
+      "source": "new",
+      "date": "20230620",
+      "status": "READY_TO_PLAY",
+      "difficulty": "2.214",
+      "gender": "female",
+      "language": "english",
+      "year": "2013"
+    },
+    "id": "1arg4ZKOJwmOi1NYsbne82_51vfPL0_TQX3tA2sOwAFo",
+    "name": "Roar - Katy Perry"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "difficulty": "2.449",
+      "date": "20250304",
+      "language": "english",
+      "duration": "00:03:32",
+      "artist": "Amy Winehouse",
+      "tabber": "Mischa",
+      "song": "Rehab",
+      "specialbooks": "uk",
+      "gender": "female",
+      "type": "Person",
+      "source": "new",
+      "year": "2006"
+    },
+    "id": "1T3atjll8DusoSyNDcuHLBHShnzvRF-US1SmcC_KyWvk",
+    "name": "Rehab - Amy Winehouse"
+  },
+  {
+    "properties": {
+      "difficulty": "4.572",
+      "specialbooks": "usa",
+      "date": "20221101",
+      "gender": "male",
+      "tabber": "Bastien",
+      "duration": "00:04:26",
+      "artist": "Jonathan Coulton",
+      "language": "english",
+      "type": "Person",
+      "status": "READY_TO_PLAY",
+      "song": "Re: Your Brains",
+      "source": "off",
+      "year": "2006"
+    },
+    "id": "1kaoRl1dbccm3ofujrc7oGNnzXvAFPOKxXp3gcustgZ0",
+    "name": "Re: Your Brains - Jonathan Coulton"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "specialbooks": "pride.uk",
+      "difficulty": "3.533",
+      "artist": "Queen",
+      "year": "1984",
+      "type": "Group",
+      "language": "english",
+      "gender": "male",
+      "song": "Radio Gaga",
+      "duration": "00:05:48",
+      "tabber": "Mischa",
+      "source": "new",
+      "date": "20230620"
+    },
+    "id": "138sQeF7kDZHX53sVXWcQczONPOlDCmUQTlq_xbhOrWU",
+    "name": "Radio Gaga - Queen"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "language": "english",
+      "duration": "00:02:58",
+      "artist": "Sabrina Carpenter",
+      "gender": "female",
+      "specialbooks": "usa",
+      "song": "Please Please Please",
+      "year": "2024",
+      "tabber": "Annalisa",
+      "type": "Person",
+      "source": "new"
+    },
+    "id": "1amRX8RkLPWHUqsHDkQwg4SWahL7Cxfpw795wg8Zg1ho",
+    "name": "Please Please Please - Sabrina Carpenter"
+  },
+  {
+    "properties": {
+      "duration": "00:03:16",
+      "language": "italian",
+      "year": "1980",
+      "source": "new",
+      "song": "Pedro",
+      "tabber": "Annalisa",
+      "type": "Person",
+      "specialbooks": "italy",
+      "artist": "Raffaella Carr\u00e0",
+      "status": "READY_TO_PLAY",
+      "date": "20250527",
+      "difficulty": "1.722",
+      "gender": "female"
+    },
+    "id": "1xA_cSCHsvQPG-HJdJ5N62z-a83yBuq2G2wyOydIraf8",
+    "name": "Pedro - Raffaella Carr\u00e0"
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "gender": "female",
+      "date": "20250318",
+      "song": "Orinoco Flow",
+      "status": "READY_TO_PLAY",
+      "duration": "00:04:22",
+      "specialbooks": "ireland",
+      "year": "1988",
+      "tabber": "Mischa",
+      "difficulty": "2.437",
+      "language": "english",
+      "source": "new",
+      "artist": "Enya"
+    },
+    "id": "1wMTL1cBjyF99by0CF1XV5LnEBDYR9On371OSymO9_Ao",
+    "name": "Orinoco Flow - Enya"
+  },
+  {
+    "properties": {
+      "specialbooks": "ireland",
+      "duration": "00:04:26",
+      "gender": "male",
+      "difficulty": "1.69",
+      "date": "20250318",
+      "language": "english",
+      "artist": "U2",
+      "song": "One",
+      "status": "READY_TO_PLAY",
+      "source": "new",
+      "type": "Group",
+      "year": "1991",
+      "tabber": "Mischa"
+    },
+    "id": "1qDgdMBYOwLRWNZxWgzFQF58NsByybndEgoEVsI5kzEQ",
+    "name": "One - U2"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "tabber": "Kirsten",
+      "song": "O Canada",
+      "status": "READY_TO_PLAY",
+      "difficulty": "2.59",
+      "specialbooks": "canada,can2025",
+      "duration": "00:01:26",
+      "type": "Person",
+      "date": "20240702",
+      "artist": "Calixa Lavall\u00e9e",
+      "language": "english,french",
+      "year": "2013",
+      "gender": "ensemble"
+    },
+    "id": "1gJJ1ir9WAyX_wAALsEIfRD1hXHZTQSUgdmOcmmGwCiM",
+    "name": "O Canada - Calixa Lavall\u00e9e"
+  },
+  {
+    "properties": {
+      "tabber": "Bastien",
+      "gender": "male",
+      "source": "new",
+      "song": "Nancy Boy",
+      "duration": "00:03:20",
+      "language": "english",
+      "status": "READY_TO_PLAY",
+      "artist": "Placebo",
+      "type": "Group",
+      "year": "1996",
+      "specialbooks": "uk"
+    },
+    "id": "1ZaKhZjOhkdcdWpQOL8sGVJF5yzZ3-ILG0ea9QX18XjE",
+    "name": "Nancy Boy - Placebo"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "year": "2002",
+      "language": "english",
+      "status": "READY_TO_PLAY",
+      "duration": "00:03:41",
+      "tabber": "Mischa",
+      "type": "Person",
+      "specialbooks": "regular,uk,halloween",
+      "gender": "female",
+      "date": "20241029",
+      "artist": "Sophie Ellis-Bextor",
+      "song": "Murder On The Dancefloor",
+      "difficulty": "3.534"
+    },
+    "id": "1lEa6OQ5EIfLpx-K3iQ1QWOqExogLq9lXTJc0fYcYr0c",
+    "name": "Murder On The Dancefloor - Sophie Ellis-Bextor"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "duration": "00:04:16",
+      "language": "french",
+      "date": "20230718",
+      "artist": "Aliz\u00e9e",
+      "tabber": "Bastien",
+      "year": "2000",
+      "gender": "female",
+      "specialbooks": "france",
+      "difficulty": "2.775",
+      "type": "Person",
+      "source": "new",
+      "song": "Moi... Lolita"
+    },
+    "id": "1R6obAOU_YVXAQ5w1oorkfp4ZE-NmdfgFlUDasPMHSFc",
+    "name": "Moi... Lolita - Aliz\u00e9e"
+  },
+  {
+    "properties": {
+      "specialbooks": "uk,xmas",
+      "difficulty": "2.629",
+      "status": "READY_TO_PLAY",
+      "song": "Mistletoe and Wine",
+      "duration": "00:04:00",
+      "tabber": "Mischa",
+      "date": "20211207",
+      "gender": "male",
+      "year": "1988",
+      "language": "english",
+      "type": "Person",
+      "source": "new"
+    },
+    "id": "1UUdqWlU_hlgr_LoVS04J-rPEMw4QG5KgG2uGiT0_KPU",
+    "name": "Mistletoe and Wine - Cliff Richard"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "source": "new",
+      "song": "Mamma Mia",
+      "duration": "00:04:03",
+      "specialbooks": "sweden",
+      "year": "1975",
+      "tabber": "Mischa",
+      "gender": "female",
+      "status": "READY_TO_PLAY",
+      "difficulty": "3.315",
+      "artist": "ABBA",
+      "language": "english",
+      "date": "20250415"
+    },
+    "id": "1wks57cFZwtctsZ-A4QcFtyWLwkQ1oLd-xHDtz_siBuE",
+    "name": "Mamma Mia - ABBA"
+  },
+  {
+    "properties": {
+      "date": "20241022",
+      "language": "english",
+      "source": "new",
+      "gender": "duet",
+      "artist": "Mahna Mahna and The Two Snowths",
+      "specialbooks": "usa,halloween",
+      "song": "Mah Na Mah Na",
+      "difficulty": "2.032",
+      "status": "READY_TO_PLAY",
+      "tabber": "Mischa",
+      "duration": "00:02:04",
+      "type": "Group",
+      "year": "1969"
+    },
+    "id": "1ePBVqOAt3YE7soTud8M12QPAo4JKzLoSYriIxSgSRyc",
+    "name": "Mah Na Mah Na - Mahna Mahna and The Two Snowths"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "gender": "female",
+      "status": "READY_TO_PLAY",
+      "specialbooks": "usa",
+      "year": "1987",
+      "song": "Luka",
+      "artist": "Suzanne Vega",
+      "tabber": "Mischa",
+      "source": "new",
+      "duration": "00:03:44",
+      "type": "Person"
+    },
+    "id": "1L5VjTrfzI0eBRvLhsxcbTrOPYhaHbABOte69NPyWWmo",
+    "name": "Luka - Suzanne Vega"
+  },
+  {
+    "properties": {
+      "tabber": "Bastien",
+      "gender": "male",
+      "date": "20230718",
+      "song": "Les Champs-\u00c9lys\u00e9es",
+      "difficulty": "4.127",
+      "artist": "Joe Dassin",
+      "year": "1969",
+      "duration": "00:02:26",
+      "status": "READY_TO_PLAY",
+      "specialbooks": "france",
+      "type": "Person",
+      "source": "old",
+      "language": "french"
+    },
+    "id": "12-2CEcPg3UAQSpELAgE22d7oyBPq3jVZwctkiwYNru0",
+    "name": "Les Champs-\u00c9lys\u00e9es - Joe Dassin"
+  },
+  {
+    "properties": {
+      "duration": "00:02:28",
+      "song": "Le Banana Split",
+      "year": "1979",
+      "tabber": "Bastien",
+      "difficulty": "1.666",
+      "gender": "female",
+      "language": "french",
+      "artist": "Lio",
+      "source": "new",
+      "type": "Person",
+      "date": "20230718",
+      "specialbooks": "france",
+      "status": "READY_TO_PLAY"
+    },
+    "id": "1yh48GdfJ-QAHtnTQa2_ua2qQSsCiPPApf2_ajU6YwjQ",
+    "name": "Le Banana Split - Lio"
+  },
+  {
+    "properties": {
+      "difficulty": "1.72",
+      "duration": "00:05:36",
+      "specialbooks": "valentines,usa,hawaii",
+      "year": "2015",
+      "artist": "Kuana Torres Kahele, Napua Greig, James Ford Murphy",
+      "date": "20230214",
+      "type": "Person",
+      "song": "Lava",
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "gender": "duet",
+      "language": "english",
+      "tabber": "Caroline"
+    },
+    "id": "1-p3BVwOZwcRi4LOnAID_u4sHl-esVklZr3wfK4fIhGI",
+    "name": "Lava - Kuana Torres Kahele, Napua Greig, James Ford Murphy"
+  },
+  {
+    "properties": {
+      "duration": "00:01:00",
+      "specialbooks": "france",
+      "difficulty": "1.84",
+      "gender": "male",
+      "status": "READY_TO_PLAY",
+      "artist": "Rouget de Lisle",
+      "date": "20230718",
+      "year": "1909",
+      "source": "new",
+      "tabber": "Bastien",
+      "language": "french",
+      "type": "Person"
+    },
+    "id": "1_BnbkK-uI5vSxgAjxJHetJjUxyRo61Ru8RgDhTtVOUU",
+    "name": "La Marseillaise - Chorale De Saint Cyr"
+  },
+  {
+    "properties": {
+      "gender": "female",
+      "song": "Knots",
+      "duration": "00:03:22",
+      "type": "Person",
+      "source": "new",
+      "specialbooks": "ireland",
+      "difficulty": "3.162",
+      "artist": "Lisa Hannigan",
+      "date": "20250318",
+      "year": "2011",
+      "tabber": "Mischa",
+      "language": "english",
+      "status": "READY_TO_PLAY"
+    },
+    "id": "1HMFi_TQ-ukO8XIll3kdEKFbAYpeWEvkmP-bFjW1JmKk",
+    "name": "Knots - Lisa Hannigan"
+  },
+  {
+    "properties": {
+      "year": "1997",
+      "specialbooks": "usa",
+      "type": "Group",
+      "duration": "00:03:12",
+      "tabber": "Bastien",
+      "gender": "male",
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "language": "english",
+      "artist": "Green Day",
+      "song": "King for a Day"
+    },
+    "id": "1_kKlg1V3rnCs04TpLFTrfRpjzXf6gRuNKIXMst_Uqek",
+    "name": "King for a Day - Green Day"
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "date": "20221206",
+      "language": "english",
+      "difficulty": "3.573",
+      "status": "READY_TO_PLAY",
+      "artist": "Bobby Helms",
+      "source": "new",
+      "gender": "male",
+      "year": "1957",
+      "song": "Jingle Bell Rock",
+      "specialbooks": "xmas,usa",
+      "duration": "00:02:06",
+      "tabber": "Mischa"
+    },
+    "id": "1NiZ_bcPCpVcqFmBiPLsb4bGG0VoY-kzM-WIxLRTf2cA",
+    "name": "Jingle Bell Rock - Bobby Helms"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "gender": "male",
+      "song": "It's My Life",
+      "tabber": "Mischa",
+      "language": "english",
+      "duration": "00:03:42",
+      "type": "group",
+      "specialbooks": "usa",
+      "source": "new",
+      "artist": "Bon Jovi",
+      "year": "2000"
+    },
+    "id": "13DjPxHIbcv484OIfCBp9dYtH1xfEQIDZ9eomShwn85E",
+    "name": "It's My Life - Bon Jovi"
+  },
+  {
+    "properties": {
+      "gender": "female",
+      "year": "1990",
+      "date": "20250415",
+      "artist": "Roxette",
+      "difficulty": "3.363",
+      "song": "It Must Have Been Love",
+      "status": "READY_TO_PLAY",
+      "language": "english",
+      "type": "Group",
+      "specialbooks": "valentines,sweden",
+      "source": "new",
+      "tabber": "Mischa",
+      "duration": "00:04:16"
+    },
+    "id": "1PSTXRsEj2e8Qj0KekbCitpPJE49R6vAuW-uEdmdRj5k",
+    "name": "It Must Have Been Love - Roxette"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "status": "READY_TO_PLAY",
+      "language": "english",
+      "year": "1983",
+      "duration": "00:04:02",
+      "song": "Islands in the Stream",
+      "artist": "Dolly Parton, Kenny Rogers",
+      "type": "Person",
+      "specialbooks": "usa",
+      "source": "new",
+      "gender": "duet"
+    },
+    "id": "1AOV__aDLXHFH-t7-1mojFZNffEQ1URe2a8IRJOOzLEg",
+    "name": "Islands in the Stream - Dolly Parton, Kenny Rogers"
+  },
+  {
+    "properties": {
+      "date": "20250318",
+      "source": "new",
+      "language": "english",
+      "tabber": "Mischa",
+      "difficulty": "2.179",
+      "type": "Group",
+      "specialbooks": "usa",
+      "duration": "00:02:30",
+      "year": "2005",
+      "gender": "male",
+      "song": "I'm Shipping Up To Boston",
+      "artist": "Dropkick Murphys",
+      "status": "READY_TO_PLAY"
+    },
+    "id": "1lDFVZmyy9hdLnIJXub-Q0h9FnBmftXc77aDbNwDGAxE",
+    "name": "I'm Shipping Up To Boston - Dropkick Murphys"
+  },
+  {
+    "properties": {
+      "artist": "Bruce Springsteen",
+      "year": "1984",
+      "date": "20231024",
+      "specialbooks": "usa,valentines",
+      "difficulty": "3.121",
+      "duration": "00:02:26",
+      "gender": "male",
+      "tabber": "Mischa",
+      "source": "new",
+      "language": "english",
+      "status": "READY_TO_PLAY",
+      "type": "Person",
+      "song": "I'm On Fire"
+    },
+    "id": "1DTtyyKZ9LzUmHTVEIRk2-w32ejvScIZfCST-3TvdZcg",
+    "name": "I'm On Fire - Bruce Springsteen"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "artist": "Ryan Gosling",
+      "gender": "male",
+      "song": "I'm Just Ken",
+      "duration": "00:03:42",
+      "status": "READY_TO_PLAY",
+      "type": "Person",
+      "year": "2023",
+      "tabber": "Bastien",
+      "specialbooks": "canada",
+      "source": "new"
+    },
+    "id": "1ZU1savhxkwWO3haWTZXKmLh40jrlebMVzWODCNAsFBk",
+    "name": "I'm Just Ken - Ryan Gosling"
+  },
+  {
+    "properties": {
+      "song": "I Love You Always Forever",
+      "type": "Person",
+      "date": "20250218",
+      "status": "READY_TO_PLAY",
+      "artist": "Donna Lewis",
+      "tabber": "Mischa",
+      "specialbooks": "uk,wales,valentines",
+      "gender": "female",
+      "language": "english",
+      "year": "1996",
+      "difficulty": "2.423",
+      "duration": "00:03:43",
+      "source": "new"
+    },
+    "id": "1byBZsQxQ4yWgX7s2Fo99u0a7fmlfb3Cd2W-8IcqDRPg",
+    "name": "I Love You Always Forever - Donna Lewis"
+  },
+  {
+    "properties": {
+      "duration": "00:02:54",
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "artist": "Joan Jett & The Blackhearts",
+      "gender": "female",
+      "date": "20250701",
+      "language": "english",
+      "specialbooks": "valentines,usa,can2025",
+      "tabber": "Bastien",
+      "year": "2015",
+      "song": "I Love Rock 'N Roll",
+      "type": "Group",
+      "difficulty": "3.635"
+    },
+    "id": "1j_OzfO2QlqfqZn3DTHAivy3zhqGHGNSBJNaYoEsS6ws",
+    "name": "I Love Rock 'N Roll - Joan Jett & The Blackhearts"
+  },
+  {
+    "properties": {
+      "artist": "Donna Summer",
+      "year": "1979",
+      "tabber": "Mischa",
+      "gender": "female",
+      "duration": "00:03:22",
+      "source": "new",
+      "date": "20230613",
+      "language": "english",
+      "specialbooks": "valentines,usa,pride",
+      "type": "Person",
+      "song": "I Feel Love",
+      "difficulty": "1.787",
+      "status": "READY_TO_PLAY"
+    },
+    "id": "1KyFpsNYM9wHU-OYFHoDa_KzymXk5ROyfDevYOrPiXnM",
+    "name": "I Feel Love - Donna Summer"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "language": "english",
+      "source": "new",
+      "difficulty": "2.492",
+      "date": "20250624",
+      "specialbooks": "usa,pride",
+      "song": "Hot Stuff (Single Version)",
+      "duration": "00:03:49",
+      "year": "1979",
+      "artist": "Donna Summer",
+      "status": "READY_TO_PLAY",
+      "type": "Person",
+      "gender": "female"
+    },
+    "id": "14b1_nI-c2dZoZ1MyqnCRXH-7B7HVu2vz80ee002LMzw",
+    "name": "Hot Stuff (Single Version) - Donna Summer"
+  },
+  {
+    "properties": {
+      "specialbooks": "ireland",
+      "status": "READY_TO_PLAY",
+      "date": "20250318",
+      "song": "Here Comes the Morning",
+      "artist": "Ukulele Tuesday",
+      "difficulty": "2.671",
+      "gender": "female",
+      "language": "english",
+      "source": "new",
+      "type": "Group",
+      "duration": "00:04:05",
+      "tabber": "Mischa",
+      "year": "2023"
+    },
+    "id": "1BGIjOiVW98xoZ2jq7CB5OXIiEG2QaHcIhJIbkjNmxWU",
+    "name": "Here Comes the Morning - Ukulele Tuesday"
+  },
+  {
+    "properties": {
+      "artist": "Billie Eilish",
+      "type": "Person",
+      "gender": "female",
+      "song": "Happier Than Ever",
+      "tabber": "Mischa",
+      "language": "english",
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "duration": "00:04:58",
+      "difficulty": "2.756",
+      "year": "2021",
+      "specialbooks": "usa"
+    },
+    "id": "13gfrD_bLHC7XH8VCCYztQpGWArSyiM6MnDqUxKv9tEk",
+    "name": "Happier Than Ever - Billie Eilish"
+  },
+  {
+    "properties": {
+      "language": "italian",
+      "type": "Group",
+      "tabber": "Annalisa",
+      "status": "READY_TO_PLAY",
+      "song": "Hanno ucciso l'Uomo Ragno",
+      "specialbooks": "italy",
+      "duration": "00:04:02",
+      "artist": "883",
+      "difficulty": "2.37",
+      "source": "new",
+      "date": "20250527",
+      "gender": "male",
+      "year": "1992"
+    },
+    "id": "1_jGe3V1TAV_76-h2DiAM38vH617Q1k_xOlaD8owb2bI",
+    "name": "Hanno ucciso l'Uomo Ragno - 883"
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "year": "2007",
+      "artist": "MIKA",
+      "language": "english",
+      "song": "Grace Kelly",
+      "duration": "00:02:56",
+      "difficulty": "3.896",
+      "status": "READY_TO_PLAY",
+      "source": "new",
+      "specialbooks": "uk,pride",
+      "date": "20230620",
+      "gender": "male",
+      "tabber": "Mischa"
+    },
+    "id": "1FQ4QHu21o30tAFwqAoScDZcHsJyLfOc2k4hX5q7BhKU",
+    "name": "Grace Kelly - MIKA"
+  },
+  {
+    "properties": {
+      "duration": "00:03:12",
+      "difficulty": "2.013",
+      "tabber": "Mischa",
+      "status": "READY_TO_PLAY",
+      "song": "Get the Party Started",
+      "year": "2001",
+      "specialbooks": "usa",
+      "gender": "female",
+      "source": "new",
+      "language": "english",
+      "artist": "P!nk",
+      "type": "Person",
+      "date": "20250304"
+    },
+    "id": "15fCeH46RapANEWTERGZkWIrtz3w3vk-KnRG00gVuldc",
+    "name": "Get the Party Started - P!nk"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "duration": "00:04:00",
+      "type": "Group",
+      "language": "english",
+      "status": "READY_TO_PLAY",
+      "source": "new",
+      "song": "Get Lucky (Radio Edit) [feat. Pharrell Williams, Nile Rodgers]",
+      "specialbooks": "france",
+      "tabber": "Mischa",
+      "year": "2013",
+      "artist": "Daft Punk"
+    },
+    "id": "1IbcczjRRkDh928C9RQvXoia7wLPeP0vhKxfBRDS8pR4",
+    "name": "Get Lucky (Radio Edit) [feat. Pharrell Williams, Nile Rodgers] - Daft Punk"
+  },
+  {
+    "properties": {
+      "duration": "00:05:18",
+      "difficulty": "2.674",
+      "language": "english",
+      "song": "Freedom! '90 (Edit)",
+      "type": "Person",
+      "gender": "male",
+      "status": "READY_TO_PLAY",
+      "specialbooks": "uk,pride",
+      "year": "1990",
+      "tabber": "Mischa",
+      "artist": "George Michael",
+      "source": "new",
+      "date": "20230620"
+    },
+    "id": "18CzB-7onilHf8ujOEb09RJy5kELNruuOdsy9reM_ww8",
+    "name": "Freedom! '90 (Edit) - George Michael"
+  },
+  {
+    "properties": {
+      "difficulty": "3.424",
+      "date": "20230110",
+      "duration": "00:03:28",
+      "status": "READY_TO_PLAY",
+      "source": "new",
+      "year": "2004",
+      "type": "Group",
+      "tabber": "Bastien",
+      "artist": "Modest Mouse",
+      "song": "Float On",
+      "language": "english",
+      "specialbooks": "usa",
+      "gender": "male"
+    },
+    "id": "1HCmv60_lLvuE3C3TNDFLxRLm7Tpe8mc0kzygwSpAHCU",
+    "name": "Float On - Modest Mouse"
+  },
+  {
+    "properties": {
+      "artist": "Tracy Chapman",
+      "year": "1988",
+      "tabber": "Mischa",
+      "duration": "00:04:52",
+      "gender": "female",
+      "source": "new",
+      "date": "20250603",
+      "song": "Fast Car",
+      "status": "READY_TO_PLAY",
+      "type": "Person",
+      "specialbooks": "usa,pride",
+      "difficulty": "2.534",
+      "language": "english"
+    },
+    "id": "13wGACuRvBVTveyyvw1eOnmuygiFGxGPS2U0LmYcMg-Y",
+    "name": "Fast Car - Tracy Chapman"
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "specialbooks": "usa,pride",
+      "song": "Express Yourself",
+      "artist": "Madonna",
+      "date": "20230620",
+      "language": "english",
+      "difficulty": "1.269",
+      "duration": "00:03:56",
+      "year": "1989",
+      "gender": "female",
+      "tabber": "Mischa"
+    },
+    "id": "1rzWnpEdHa-aHv1OSvZcugW2ibFdRduKRq0rAS7XuH98",
+    "name": "Express Yourself - Madonna"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "date": "20211102",
+      "difficulty": "4.248",
+      "song": "Enter Sandman",
+      "tabber": "Mischa",
+      "type": "Group",
+      "year": "1991",
+      "duration": "00:05:06",
+      "source": "new",
+      "language": "english",
+      "artist": "Metallica",
+      "gender": "male",
+      "specialbooks": "halloween,usa"
+    },
+    "id": "1Flz8fWyk3dMOKPoi7MFTHE5g4XaZ_aiMNf2UJo9bgsU",
+    "name": "Enter Sandman - Metallica"
+  },
+  {
+    "properties": {
+      "type": "Person",
+      "year": "1986",
+      "song": "Driving Home for Christmas",
+      "gender": "male",
+      "duration": "00:03:56",
+      "specialbooks": "xmas,uk",
+      "tabber": "Mischa",
+      "status": "READY_TO_PLAY",
+      "difficulty": "3.624",
+      "artist": "Chris Rea",
+      "language": "english",
+      "source": "new",
+      "date": "20221206"
+    },
+    "id": "1sH51w2raESkslg0pJczk5KkwL7UKwLWxJ4qmn60juqU",
+    "name": "Driving Home for Christmas - Chris Rea"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "artist": "The Mamas & The Papas",
+      "gender": "female",
+      "duration": "00:03:10",
+      "year": "1968",
+      "status": "READY_TO_PLAY",
+      "source": "new",
+      "tabber": "Bastien",
+      "difficulty": "3.63",
+      "specialbooks": "usa",
+      "language": "english",
+      "song": "Dream A Little Dream Of Me",
+      "date": "20240702"
+    },
+    "id": "1g2U3N389m6j4qQSirHfh9R_7V2ez2vvc-xdn8zeCDe4",
+    "name": "Dream A Little Dream Of Me - The Mamas & The Papas"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "difficulty": "4.996",
+      "source": "new",
+      "artist": "No Doubt",
+      "duration": "00:04:16",
+      "specialbooks": "usa",
+      "year": "1995",
+      "tabber": "Mischa",
+      "song": "Don't Speak",
+      "status": "READY_TO_PLAY",
+      "gender": "female",
+      "type": "Group"
+    },
+    "id": "1UkFpCkogB1ZOfzrd6pX37atQ6GFg0TGG9v1feKsihgk",
+    "name": "Don't Speak - No Doubt"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "source": "new",
+      "tabber": "Mischa",
+      "gender": "duet",
+      "type": "Person",
+      "specialbooks": "usa",
+      "status": "READY_TO_PLAY",
+      "artist": "Lady Gaga, Bruno Mars",
+      "song": "Die With A Smile",
+      "duration": "00:04:04",
+      "year": "2024"
+    },
+    "id": "1skyhCmXvWrrnFraRmo8G6pSL5XqBACslplQylkbjKHo",
+    "name": "Die With A Smile - Lady Gaga, Bruno Mars"
+  },
+  {
+    "properties": {
+      "duration": "00:03:49",
+      "status": "READY_TO_PLAY",
+      "type": "Person",
+      "gender": "male",
+      "language": "spanish",
+      "artist": "Luis Fonsi, Daddy Yankee",
+      "song": "Despacito",
+      "specialbooks": "puerto rico",
+      "year": "2019",
+      "source": "new",
+      "tabber": "Mischa"
+    },
+    "id": "1quA-M9qLQrsezPJhqs7UGUverNTxcemB6NgxRd4vK-Q",
+    "name": "Despacito - Luis Fonsi, Daddy Yankee"
+  },
+  {
+    "properties": {
+      "gender": "male",
+      "tabber": "Jeremie",
+      "duration": "00:02:54",
+      "specialbooks": "halloween,usa",
+      "source": "new",
+      "year": "2013",
+      "difficulty": "2.904",
+      "artist": "Imagine Dragons",
+      "date": "20221101",
+      "type": "Group",
+      "song": "Demons",
+      "status": "READY_TO_PLAY",
+      "language": "english"
+    },
+    "id": "17wBPzc86Kz2nMrbMowpA68b9K2XuC-_bhyou7qtUrUU",
+    "name": "Demons - Imagine Dragons"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "duration": "00:02:54",
+      "year": "2009",
+      "artist": "Horslips",
+      "difficulty": "3.342",
+      "language": "english",
+      "song": "Dearg Doom",
+      "specialbooks": "ireland",
+      "date": "20250318",
+      "gender": "male",
+      "type": "Group",
+      "tabber": "Mischa"
+    },
+    "id": "1vz9CB_S-hGsnEmjU2DkuHiFLab2c_65X4eGr3Yo5Baw",
+    "name": "Dearg Doom - Horslips"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "song": "Crush",
+      "language": "english",
+      "specialbooks": "usa",
+      "difficulty": "3.453",
+      "type": "Person",
+      "artist": "Jennifer Paige",
+      "tabber": "Mischa",
+      "duration": "00:03:04",
+      "year": "1998",
+      "gender": "female",
+      "source": "new"
+    },
+    "id": "1CqKWV9ATHJjrmUQk9vidm48bmHKT9Zdxr5VVmwOcrIc",
+    "name": "Crush - Jennifer Paige"
+  },
+  {
+    "properties": {
+      "difficulty": "2.514",
+      "source": "new",
+      "song": "Cruel Summer",
+      "language": "english",
+      "status": "READY_TO_PLAY",
+      "tabber": "Annalisa",
+      "type": "Person",
+      "date": "20240702",
+      "specialbooks": "usa",
+      "gender": "female",
+      "artist": "Taylor Swift",
+      "year": "2019",
+      "duration": "00:02:58"
+    },
+    "id": "1B4tjbQQFpFjT5adSjt7c2mwo6PVE-dW2Jqin837Mz_g",
+    "name": "Cruel Summer - Taylor Swift"
+  },
+  {
+    "properties": {
+      "duration": "00:03:42",
+      "date": "20230620",
+      "specialbooks": "uk,pride",
+      "gender": "male",
+      "status": "READY_TO_PLAY",
+      "language": "english",
+      "type": "Person",
+      "year": "1973",
+      "difficulty": "2.585",
+      "song": "Crocodile Rock",
+      "tabber": "Mischa",
+      "source": "old",
+      "artist": "Elton John"
+    },
+    "id": "1Nz7ZfzwiRzTZhG0JJKp1ksOJBjWB3pww3_IVL5CQKQc",
+    "name": "Crocodile Rock - Elton John"
+  },
+  {
+    "properties": {
+      "date": "20240716",
+      "duration": "00:02:14",
+      "type": "Person",
+      "tabber": "Bastien",
+      "song": "Comptine d'un autre \u00e9t\u00e9, l'apr\u00e8s-midi",
+      "status": "READY_TO_PLAY",
+      "artist": "Yann Tiersen",
+      "source": "new",
+      "gender": "instrumental",
+      "specialbooks": "france",
+      "year": "2001",
+      "difficulty": "1.615"
+    },
+    "id": "17Ghpbjbq9_JLRuyOjFGmNr9DFZur3Wwa6IU1eT6614M",
+    "name": "Comptine d'un autre \u00e9t\u00e9, l'apr\u00e8s-midi - Yann Tiersen"
+  },
+  {
+    "properties": {
+      "status": "READY_TO_PLAY",
+      "gender": "male",
+      "artist": "Richard Cheese",
+      "type": "Group",
+      "source": "new",
+      "song": "Christmas In Las Vegas",
+      "date": "20221206",
+      "year": "2006",
+      "duration": "00:02:06",
+      "specialbooks": "xmas,usa",
+      "difficulty": "3.594",
+      "language": "english",
+      "tabber": "Bastien"
+    },
+    "id": "1N3T9m7eSbBJlmnYXDyu9oTinuvqPVXO2zw__18innMY",
+    "name": "Christmas In Las Vegas - Richard Cheese"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "date": "20221206",
+      "gender": "male",
+      "song": "Christmas (Baby Please Come Home)",
+      "duration": "00:02:20",
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "type": "Group",
+      "artist": "U2",
+      "tabber": "Mischa",
+      "year": "1987",
+      "difficulty": "3.031",
+      "specialbooks": "xmas,ireland"
+    },
+    "id": "14cAYoNQFhOBcTGqNDQtU_ODHTLTowUTMIes-22wwFnw",
+    "name": "Christmas (Baby Please Come Home) - U2"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "specialbooks": "usa",
+      "tabber": "Mischa",
+      "song": "Californication",
+      "difficulty": "2.896",
+      "type": "Group",
+      "artist": "Red Hot Chilli Peppers",
+      "year": "1999",
+      "source": "new",
+      "date": "20240702",
+      "status": "READY_TO_PLAY",
+      "duration": "00:05:24",
+      "gender": "male"
+    },
+    "id": "1Wh1R5C0QWv7qIy1VNewugERjhbVxQI7ZyFURz8KMIbE",
+    "name": "Californication - Red Hot Chilli Peppers"
+  },
+  {
+    "properties": {
+      "year": "1977",
+      "difficulty": "2.072",
+      "status": "READY_TO_PLAY",
+      "tabber": "Bastien",
+      "date": "20220712",
+      "language": "french",
+      "type": "Person",
+      "source": "new",
+      "artist": "Plastic Bertrand",
+      "song": "\u00c7a Plane Pour Moi",
+      "specialbooks": "france",
+      "duration": "00:03:08",
+      "gender": "male"
+    },
+    "id": "1X3WpS7S2KICwN6uM7ZlmiTcOthsa2ov0kXu_dJmlPNA",
+    "name": "\u00c7a Plane Pour Moi - Plastic Bertrand"
+  },
+  {
+    "properties": {
+      "tabber": "Mischa",
+      "language": "english",
+      "status": "READY_TO_PLAY",
+      "artist": "Bruce Springsteen",
+      "duration": "00:04:00",
+      "date": "20230704",
+      "type": "Person",
+      "difficulty": "3.42",
+      "year": "1984",
+      "gender": "male",
+      "song": "Born in the U.S.A.",
+      "source": "new",
+      "specialbooks": "usa,can2025"
+    },
+    "id": "1DNxPv7QdbH6suN6GWiFchLz7iyAJIbmVDDj-F8QTnNs",
+    "name": "Born in the U.S.A. - Bruce Springsteen"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "date": "20250304",
+      "duration": "00:04:04",
+      "status": "READY_TO_PLAY",
+      "gender": "female",
+      "source": "new",
+      "specialbooks": "usa",
+      "tabber": "Bea",
+      "year": "1997",
+      "type": "Person",
+      "song": "Bitch",
+      "artist": "Meredith Brooks",
+      "difficulty": "3.209"
+    },
+    "id": "1lQQwYnk8ZTQfolvUKDAWlI_08aLgLGGNDkZtyKHw0NQ",
+    "name": "Bitch - Meredith Brooks"
+  },
+  {
+    "properties": {
+      "tabber": "Bastien",
+      "duration": "00:03:10",
+      "language": "english",
+      "gender": "male",
+      "artist": "Weezer",
+      "status": "READY_TO_PLAY",
+      "source": "new",
+      "type": "Group",
+      "song": "Beverly Hills",
+      "difficulty": "3.095",
+      "specialbooks": "usa",
+      "year": "2005"
+    },
+    "id": "1NtgmWKUJD0BGANdn0i8g_G6guocpvgyxAt9iTEb7-oM",
+    "name": "Beverly Hills - Weezer"
+  },
+  {
+    "properties": {
+      "year": "2017",
+      "duration": "00:03:28",
+      "language": "english",
+      "status": "READY_TO_PLAY",
+      "artist": "M\u00e5neskin",
+      "date": "20250527",
+      "difficulty": "2.87",
+      "tabber": "Bastien",
+      "song": "Beggin'",
+      "specialbooks": "italy",
+      "source": "new",
+      "gender": "male",
+      "type": "Group"
+    },
+    "id": "1PJHu4F1s15qFTEMecYjz-l11eHxhaeEYrOyWyGah_74",
+    "name": "Beggin' - M\u00e5neskin"
+  },
+  {
+    "properties": {
+      "source": "new",
+      "language": "english,russian",
+      "difficulty": "4.3",
+      "type": "Group",
+      "song": "All The Things She Said",
+      "specialbooks": "russia,pride",
+      "date": "20250624",
+      "duration": "00:03:30",
+      "artist": "t.A.T.u.",
+      "tabber": "Mischa",
+      "status": "READY_TO_PLAY",
+      "year": "2002",
+      "gender": "female"
+    },
+    "id": "1ALrAIUFG9EpJp5wfY_P9t8bSvVH8NHxOp4BRz_ljeaM",
+    "name": "All The Things She Said - t.A.T.u."
+  },
+  {
+    "properties": {
+      "artist": "Smash Mouth",
+      "specialbooks": "usa",
+      "date": "20230905",
+      "difficulty": "4.299",
+      "year": "1999",
+      "duration": "00:03:12",
+      "tabber": "Bastien",
+      "gender": "male",
+      "type": "Group",
+      "source": "new",
+      "status": "READY_TO_PLAY",
+      "song": "All Star",
+      "language": "english"
+    },
+    "id": "1UbYymuDxipG83DWz7LumKjHG-r1qZOYHIRRd7WRpEjo",
+    "name": "All Star - Smash Mouth"
+  },
+  {
+    "properties": {
+      "specialbooks": "usa",
+      "duration": "00:04:24",
+      "source": "new",
+      "song": "All I Wanna Do",
+      "artist": "Sheryl Crow",
+      "status": "READY_TO_PLAY",
+      "type": "Person",
+      "year": "1994",
+      "gender": "female",
+      "language": "english",
+      "tabber": "Mischa"
+    },
+    "id": "1mHe9r7jdVfV8OdTsdkl-cxTNzUmrdvWQqY2R-eLK6CE",
+    "name": "All I Wanna Do - Sheryl Crow"
+  },
+  {
+    "properties": {
+      "type": "Group",
+      "source": "new",
+      "date": "20230620",
+      "language": "english",
+      "duration": "00:03:16",
+      "song": "A Little Respect",
+      "tabber": "Mischa",
+      "specialbooks": "valentines,uk,pride",
+      "gender": "male",
+      "status": "READY_TO_PLAY",
+      "artist": "Erasure",
+      "year": "1988",
+      "difficulty": "2.688"
+    },
+    "id": "1jqAUWwnntudPuyZKcVAhNk5InMT-gvwEQmdNWPdcAWE",
+    "name": "A Little Respect - Erasure"
+  },
+  {
+    "properties": {
+      "artist": "America",
+      "source": "new",
+      "year": "1971",
+      "song": "A Horse With No Name",
+      "gender": "male",
+      "tabber": "Bastien",
+      "type": "Group",
+      "difficulty": "2.675",
+      "date": "20230704",
+      "specialbooks": "usa",
+      "language": "english",
+      "status": "READY_TO_PLAY",
+      "duration": "00:03:40"
+    },
+    "id": "12W7WhONzU8rfyIpG8u_7PeyuQ2nudsyoe2lLR-6XfSk",
+    "name": "A Horse With No Name - America"
+  },
+  {
+    "properties": {
+      "specialbooks": "halloween,uk,scotland",
+      "artist": "Travis",
+      "difficulty": "2.284",
+      "tabber": "Mischa",
+      "language": "english",
+      "date": "20221101",
+      "type": "Group",
+      "song": "A Ghost",
+      "year": "2020",
+      "duration": "00:03:38",
+      "source": "new",
+      "gender": "male",
+      "status": "READY_TO_PLAY"
+    },
+    "id": "1zPVU3jqE7IPsXXt4mumAV03qdSbRvYsJxHuNsT3t7JY",
+    "name": "A Ghost - Travis"
+  },
+  {
+    "properties": {
+      "language": "english",
+      "date": "20241015",
+      "year": "1976",
+      "specialbooks": "halloween,usa",
+      "gender": "male",
+      "tabber": "Bastien",
+      "duration": "00:03:46",
+      "difficulty": "2.215",
+      "source": "new",
+      "type": "Group",
+      "status": "READY_TO_PLAY",
+      "artist": "Blue \u00d6yster Cult",
+      "song": "(Don't Fear) The Reaper (Single Version)"
+    },
+    "id": "1l45rb8UG600z_AwSmuzBHLRPX1VcaHUJbDEsfplswYc",
+    "name": "(Don't Fear) The Reaper (Single Version) - Blue \u00d6yster Cult"
+  }
+]
