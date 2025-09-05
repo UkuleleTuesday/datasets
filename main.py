@@ -73,12 +73,16 @@ def main():
             return f"{(year // 10) * 10}s"
 
         df_with_year["decade"] = df_with_year["year"].apply(map_year_to_decade)
-        decade_counts = df_with_year["decade"].value_counts()
-
-        # Custom sort for decades to ensure '<1950' comes first
-        sorted_decades = sorted(decade_counts.index, key=lambda x: (x != '<1950', x))
-        decade_counts = decade_counts.reindex(sorted_decades)
-
+        
+        # Define the chronological order of decades
+        decade_order = sorted([d for d in df_with_year["decade"].unique() if d != '<1950'])
+        if '<1950' in df_with_year["decade"].unique():
+            decade_order.insert(0, '<1950')
+        
+        # Convert to categorical type to enforce order
+        df_with_year["decade"] = pd.Categorical(df_with_year["decade"], categories=decade_order, ordered=True)
+        
+        decade_counts = df_with_year["decade"].value_counts().sort_index()
         st.bar_chart(decade_counts)
 
         # Difficulty distribution
