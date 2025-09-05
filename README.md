@@ -1,6 +1,6 @@
-# Ukulele Tuesday Songbook Statistics
+# Ukulele Tuesday Statistics
 
-This repository contains a Streamlit application that provides data visualizations and insights into the song sheets used by [Ukulele Tuesday](https://www.ukuleletuesday.com/).
+This repository contains a Streamlit application that provides data visualizations and insights for [Ukulele Tuesday](https://www.ukuleletuesday.ie/) datasets. For now, it's providing some insights into our song books and song sheets.
 
 ## Live Application
 
@@ -32,7 +32,7 @@ The application provides various statistics about the songs, including:
    ```
 
 ### Building the Dataset
-The data is sourced from a Google Drive folder. To build the dataset, you need to have credentials configured to access the Google Drive API. Then, run the following command:
+The data is sourced from Google Drive folders (we store our song sheets on Google Drive/Google Docs, and metadata about songs is pushed as Google Drive properties). To build the dataset, you need to have credentials configured to access the Google Drive API. Then, run the following command:
 
 ```bash
 export GDRIVE_SONG_SHEETS_FOLDER_IDS="<your_folder_ids_here>"
