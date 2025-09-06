@@ -2,21 +2,35 @@ import altair as alt
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+from gdrive_data import load_song_sheets_data_from_secrets, clear_data_cache, test_configuration
 
 
-def load_data(filepath):
-    """Load and preprocess the song sheets dataset."""
+def load_data():
+    """Load and preprocess the song sheets dataset from Google Drive."""
     try:
-        df = pd.read_json(filepath)
-    except ValueError as e:
-        st.error(f"Error reading JSON file: {e}")
-        return None
-    except FileNotFoundError:
-        st.error(f"Error: The file '{filepath}' was not found.")
-        st.info(
-            "Please run the build_song_sheets_dataset.py script to generate it first."
-        )
-        return None
+        # Fetch data from Google Drive using cached function
+        data = load_song_sheets_data_from_secrets()
+        df = pd.DataFrame(data)
+        
+        if df.empty:
+            st.error("No data retrieved from Google Drive.")
+            return None
+            
+    except Exception as e:
+        st.error(f"Failed to load data from Google Drive: {e}")
+        
+        # Try to fall back to local JSON file if it exists
+        fallback_path = "data/song_sheets_dataset.json"
+        try:
+            st.info(f"Attempting to load from fallback file: {fallback_path}")
+            df = pd.read_json(fallback_path)
+            st.warning("Using cached local data. Consider refreshing when Google Drive access is restored.")
+        except (FileNotFoundError, ValueError):
+            st.info(
+                "Please check your Google Drive credentials and folder IDs in the secrets configuration. "
+                "For local development, copy secrets.toml.template to .streamlit/secrets.toml and configure your values."
+            )
+            return None
 
     # Use json_normalize to flatten the 'properties' column
     properties_df = pd.json_normalize(df["properties"])
@@ -49,7 +63,19 @@ def main():
         """
     )
 
-    df = load_data("data/song_sheets_dataset.json")
+    # Add data refresh button and config test
+    col1, col2, col3 = st.columns([1, 1, 8])
+    with col1:
+        if st.button("🔄 Refresh Data", help="Clear cache and reload data from Google Drive"):
+            clear_data_cache()
+            st.rerun()
+    
+    with col2:
+        if st.button("🔧 Test Config", help="Test Google Drive configuration"):
+            with st.expander("Configuration Test Results", expanded=True):
+                test_configuration()
+
+    df = load_data()
 
     if df is not None:
         # Map display options to query param values
