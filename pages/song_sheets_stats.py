@@ -161,8 +161,12 @@ def main():
         st.dataframe(df.drop("id", axis=1))
 
         st.subheader("Data Quality Check")
-        missing_data_df = df[df.isna().any(axis=1)]
-        st.write("Songs with one or more missing fields:")
+        # List of columns that are allowed to have missing values
+        optional_cols = ["features", "song_title"]
+        # Columns to check for missing values are all columns except the optional ones
+        cols_to_check = [col for col in df.columns if col not in optional_cols]
+        missing_data_df = df[df[cols_to_check].isna().any(axis=1)]
+        st.write("Songs with one or more missing required fields:")
         st.dataframe(missing_data_df.drop("id", axis=1))
 
         st.markdown("---")
