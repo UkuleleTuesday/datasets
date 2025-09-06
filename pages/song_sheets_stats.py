@@ -22,6 +22,9 @@ def load_data(filepath):
     # Concatenate the flattened properties with the original dataframe (id and name)
     df = pd.concat([df.drop("properties", axis=1), properties_df], axis=1)
 
+    # Sort by song name
+    df = df.sort_values(by="name").reset_index(drop=True)
+
     # Data cleaning and type conversion
     df["difficulty"] = pd.to_numeric(df["difficulty"], errors="coerce")
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
