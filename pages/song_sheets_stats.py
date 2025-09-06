@@ -1,3 +1,4 @@
+import altair as alt
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -134,7 +135,18 @@ def main():
         ]
         chord_counts = pd.Series(all_chords).value_counts().reset_index()
         chord_counts.columns = ["chord", "count"]
-        st.bar_chart(chord_counts, x="chord", y="count")
+        
+        chart = (
+            alt.Chart(chord_counts)
+            .mark_bar()
+            .encode(
+                x=alt.X("chord", sort=None, title="Chord"),
+                y=alt.Y("count", title="Frequency"),
+                tooltip=["chord", "count"],
+            )
+            .interactive()
+        )
+        st.altair_chart(chart, use_container_width=True)
 
         # Gender distribution
         st.subheader("Gender Distribution")
