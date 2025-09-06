@@ -1,3 +1,4 @@
+import altair as alt
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -30,6 +31,7 @@ def load_data(filepath):
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
     df["date"] = pd.to_datetime(df["date"], format="%Y%m%d", errors="coerce")
     df["specialbooks"] = df["specialbooks"].str.split(",")
+    df["chords"] = df["chords"].str.split(",")
 
     return df
 
@@ -126,6 +128,26 @@ def main():
         difficulty_groups = df["difficulty"].dropna().round(0).astype(int)
         st.bar_chart(difficulty_groups.value_counts().sort_index())
 
+        # Most common chords
+        st.subheader("Most Common Chords")
+        all_chords = [
+            chord for sublist in df["chords"].dropna() for chord in sublist
+        ]
+        chord_counts = pd.Series(all_chords).value_counts().reset_index()
+        chord_counts.columns = ["chord", "count"]
+        
+        chart = (
+            alt.Chart(chord_counts)
+            .mark_bar()
+            .encode(
+                x=alt.X("count", title="Frequency"),
+                y=alt.Y("chord", sort=None, title="Chord"),
+                tooltip=["chord", "count"],
+            )
+            .interactive()
+        )
+        st.altair_chart(chart, use_container_width=True)
+
         # Gender distribution
         st.subheader("Gender Distribution")
         gender_counts = df["gender"].value_counts().reset_index()
@@ -139,8 +161,12 @@ def main():
         st.dataframe(df.drop("id", axis=1))
 
         st.subheader("Data Quality Check")
-        missing_data_df = df[df.isna().any(axis=1)]
-        st.write("Songs with one or more missing fields:")
+        # List of columns that are allowed to have missing values
+        optional_cols = ["features", "song_title"]
+        # Columns to check for missing values are all columns except the optional ones
+        cols_to_check = [col for col in df.columns if col not in optional_cols]
+        missing_data_df = df[df[cols_to_check].isna().any(axis=1)]
+        st.write("Songs with one or more missing required fields:")
         st.dataframe(missing_data_df.drop("id", axis=1))
 
         st.markdown("---")
