@@ -135,6 +135,12 @@ def main():
         st.header("Raw Data")
         st.dataframe(df.drop("id", axis=1))
 
+        st.subheader("Data Quality Check")
+        if st.checkbox("Show songs with missing data"):
+            missing_data_df = df[df.isna().any(axis=1)]
+            st.write("Songs with one or more missing fields:")
+            st.dataframe(missing_data_df.drop("id", axis=1))
+
         st.markdown("---")
         st.markdown(
             "Found an issue or have a feature request? "
