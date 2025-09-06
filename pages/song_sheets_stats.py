@@ -133,7 +133,7 @@ def main():
             chord for sublist in df["chords"].dropna() for chord in sublist
         ]
         chord_counts = pd.Series(all_chords).value_counts()
-        st.bar_chart(chord_counts.head(20))
+        st.bar_chart(chord_counts)
 
         # Gender distribution
         st.subheader("Gender Distribution")
