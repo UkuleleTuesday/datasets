@@ -140,8 +140,8 @@ def main():
             alt.Chart(chord_counts)
             .mark_bar()
             .encode(
-                x=alt.X("chord", sort=None, title="Chord"),
-                y=alt.Y("count", title="Frequency"),
+                x=alt.X("count", title="Frequency"),
+                y=alt.Y("chord", sort=None, title="Chord"),
                 tooltip=["chord", "count"],
             )
             .interactive()
