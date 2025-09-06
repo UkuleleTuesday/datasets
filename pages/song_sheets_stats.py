@@ -30,6 +30,7 @@ def load_data(filepath):
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
     df["date"] = pd.to_datetime(df["date"], format="%Y%m%d", errors="coerce")
     df["specialbooks"] = df["specialbooks"].str.split(",")
+    df["chords"] = df["chords"].str.split(",")
 
     return df
 
@@ -125,6 +126,14 @@ def main():
         # Round difficulty to nearest integer for grouping, then count and sort.
         difficulty_groups = df["difficulty"].dropna().round(0).astype(int)
         st.bar_chart(difficulty_groups.value_counts().sort_index())
+
+        # Most common chords
+        st.subheader("Most Common Chords")
+        all_chords = [
+            chord for sublist in df["chords"].dropna() for chord in sublist
+        ]
+        chord_counts = pd.Series(all_chords).value_counts()
+        st.bar_chart(chord_counts.head(20))
 
         # Gender distribution
         st.subheader("Gender Distribution")
