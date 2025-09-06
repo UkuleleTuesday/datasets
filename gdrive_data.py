@@ -5,9 +5,11 @@ This module provides functions to fetch song sheets data from Google Drive
 using Streamlit's caching and secrets management.
 """
 import json
+import os
 import streamlit as st
 from typing import List, Optional, Dict, Any
 from google.auth import credentials, default, impersonated_credentials
+from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
@@ -25,7 +27,20 @@ def get_credentials(
     Returns:
         A Google credentials object.
     """
-    creds, _ = default(scopes=scopes)
+    # Try to get credentials from Streamlit secrets first
+    try:
+        if "GOOGLE_APPLICATION_CREDENTIALS_JSON" in st.secrets:
+            # Parse service account JSON from secrets
+            service_account_info = json.loads(st.secrets["GOOGLE_APPLICATION_CREDENTIALS_JSON"])
+            creds = service_account.Credentials.from_service_account_info(
+                service_account_info, scopes=scopes
+            )
+        else:
+            # Fall back to default credentials (ADC or environment)
+            creds, _ = default(scopes=scopes)
+    except Exception:
+        # Fall back to default credentials
+        creds, _ = default(scopes=scopes)
 
     if target_principal:
         creds = impersonated_credentials.Credentials(
@@ -164,17 +179,20 @@ def test_configuration() -> bool:
         # Check if secrets are available
         if "gdrive" not in st.secrets:
             st.error("❌ Missing 'gdrive' section in secrets configuration")
+            st.info("📝 Copy `secrets.toml.template` to `.streamlit/secrets.toml` and configure your values.")
             return False
             
         # Check folder_ids
         folder_ids_str = st.secrets["gdrive"].get("folder_ids", "")
         if not folder_ids_str or folder_ids_str.strip() == "":
             st.error("❌ Missing or empty 'folder_ids' in gdrive configuration")
+            st.info("📝 Add your Google Drive folder IDs to the configuration.")
             return False
             
         folder_ids = [folder_id.strip() for folder_id in folder_ids_str.split(",") if folder_id.strip()]
         if not folder_ids:
             st.error("❌ No valid folder IDs found in configuration")
+            st.info("📝 Ensure folder IDs are comma-separated and not empty.")
             return False
             
         st.success(f"✅ Found {len(folder_ids)} folder ID(s)")
@@ -185,7 +203,14 @@ def test_configuration() -> bool:
             st.info(f"ℹ️ Using impersonation with: {target_principal}")
         else:
             st.info("ℹ️ Using default credentials (no impersonation)")
+        
+        # Check for credentials
+        if "GOOGLE_APPLICATION_CREDENTIALS_JSON" in st.secrets:
+            st.success("✅ Service account JSON found in secrets")
+        else:
+            st.info("ℹ️ No service account JSON in secrets - using default credentials")
             
+        st.info("🔧 Configuration appears valid. Try the 'Refresh Data' button to test the actual connection.")
         return True
         
     except Exception as e:

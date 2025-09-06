@@ -58,6 +58,8 @@ The Streamlit app uses automated data fetching with Google Drive API. To configu
 2. **Streamlit Cloud Deployment**:
    - Add the same configuration to your app's secrets in the Streamlit Cloud dashboard
 
+For detailed setup instructions, see [GDRIVE_SETUP.md](GDRIVE_SETUP.md).
+
 #### Authentication
 
 For Google Drive API access, you need to set up authentication:
@@ -69,6 +71,8 @@ For Google Drive API access, you need to set up authentication:
 **Production/Streamlit Cloud:**
 - Use a dedicated service account with appropriate Google Drive permissions
 - For enhanced security, consider setting up impersonation with a dedicated service account
+
+See [GDRIVE_SETUP.md](GDRIVE_SETUP.md) for complete setup instructions.
 
 ### Running the App
 You can run the Streamlit app locally:
