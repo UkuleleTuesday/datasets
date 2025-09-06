@@ -80,6 +80,8 @@ def build_dataset(output_file: str):
                 if not page_token:
                     break
 
+        all_files.sort(key=lambda item: item["name"])
+
         output_dir = os.path.dirname(output_file)
         if output_dir:
             os.makedirs(output_dir, exist_ok=True)
