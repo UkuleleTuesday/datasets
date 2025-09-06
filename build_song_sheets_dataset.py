@@ -80,6 +80,10 @@ def build_dataset(output_file: str):
                 if not page_token:
                     break
 
+        for file_data in all_files:
+            if "properties" in file_data and file_data["properties"]:
+                file_data["properties"] = dict(sorted(file_data["properties"].items()))
+
         all_files.sort(key=lambda item: item["name"])
 
         output_dir = os.path.dirname(output_file)
