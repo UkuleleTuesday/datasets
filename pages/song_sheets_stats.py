@@ -12,54 +12,54 @@ def load_data_from_gcs():
     try:
         # Connect to GCS using streamlit's connection
         conn = st.connection('gcs', type=FilesConnection)
-        
+
         # List all files in the song-sheets folder
         bucket_path = "gs://songbook-generator-cache-europe-west1/song-sheets/"
-        
+
         with st.spinner("Loading songs from GCS bucket..."):
             files = conn.fs.ls(bucket_path)
-        
+
         # Filter for .metadata.json files only
         metadata_files = [f for f in files if f.endswith('.json')]
-        
+
         if not metadata_files:
             st.error("No .metadata.json files found in the GCS bucket")
             return None
-        
+
         # Load all metadata files
         all_data = []
         progress_bar = st.progress(0)
         total_files = len(metadata_files)
-        
+
         for i, file_path in enumerate(metadata_files):
             try:
                 # Read the JSON content - assuming it has the same format as Drive API returns
                 with conn.fs.open(file_path, 'r') as f:
                     entry = json.load(f)
-                
+
                 # The .metadata.json files should already have the Drive API format
                 # with "properties", "id", and "name" fields
                 all_data.append(entry)
-                
+
                 # Update progress
                 progress_bar.progress((i + 1) / total_files)
-                
+
             except Exception as e:
                 st.warning(f"Error loading {file_path}: {e}")
                 continue
-        
+
         progress_bar.empty()
-        
+
         if not all_data:
             st.error("No valid metadata files could be loaded from GCS")
             return None
-            
+
         # Create DataFrame from the loaded data
         df = pd.DataFrame(all_data)
-        
+
         st.success(f"Successfully loaded {len(all_data)} songs from GCS bucket")
         return df
-        
+
     except Exception as e:
         st.error(f"Error connecting to GCS bucket: {e}")
         st.info("🔄 Falling back to local dataset file if available...")
@@ -81,7 +81,7 @@ def load_data_from_local():
             "Please run the build_song_sheets_dataset.py script to generate it first."
         )
         return None
-    
+
     return process_dataframe(df)
 
 
@@ -114,7 +114,7 @@ def load_data():
     df = load_data_from_gcs()
     if df is not None:
         return process_dataframe(df)
-    
+
     # Fall back to local file
     return load_data_from_local()
 
@@ -210,15 +210,15 @@ def main():
             return f"{(year // 10) * 10}s"
 
         df_with_year["decade"] = df_with_year["year"].apply(map_year_to_decade)
-        
+
         # Define the chronological order of decades
         decade_order = sorted([d for d in df_with_year["decade"].unique() if d != '<1950'])
         if '<1950' in df_with_year["decade"].unique():
             decade_order.insert(0, '<1950')
-        
+
         # Convert to categorical type to enforce order
         df_with_year["decade"] = pd.Categorical(df_with_year["decade"], categories=decade_order, ordered=True)
-        
+
         decade_counts = df_with_year["decade"].value_counts().sort_index()
         st.bar_chart(decade_counts)
 
@@ -235,7 +235,7 @@ def main():
         ]
         chord_counts = pd.Series(all_chords).value_counts().reset_index()
         chord_counts.columns = ["chord", "count"]
-        
+
         chart = (
             alt.Chart(chord_counts)
             .mark_bar()
