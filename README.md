@@ -28,7 +28,7 @@ The application provides various statistics about the songs, including:
 
 ### Prerequisites
 - Python 3.10+
-- `uv` package manager (or pip)
+- `uv` package manager
 
 ### Dependencies
 The application uses several key dependencies for GCS integration:
@@ -43,11 +43,6 @@ The application uses several key dependencies for GCS integration:
 2. Install dependencies:
    ```bash
    uv sync
-   ```
-   
-   Or with pip:
-   ```bash
-   pip install -e .
    ```
 
 ### Running the App
