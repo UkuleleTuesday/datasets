@@ -2,12 +2,82 @@ import altair as alt
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+from st_files_connection import FilesConnection
+import json
 
 
-def load_data(filepath):
-    """Load and preprocess the song sheets dataset."""
+def load_data_from_gcs():
+    """Load and preprocess the song sheets dataset from GCS bucket."""
+    try:
+        # Connect to GCS using streamlit's connection
+        conn = st.connection('gcs', type=FilesConnection)
+        
+        # List all files in the song-sheets folder
+        bucket_path = "gs://songbook-generator-cache-europe-west1/song-sheets/"
+        
+        with st.spinner("Loading songs from GCS bucket..."):
+            files = conn.fs.ls(bucket_path)
+        
+        # Filter for .metadata.json files only
+        metadata_files = [f for f in files if f.endswith('.metadata.json')]
+        
+        if not metadata_files:
+            st.error("No .metadata.json files found in the GCS bucket")
+            return None
+        
+        # Load all metadata files
+        all_data = []
+        progress_bar = st.progress(0)
+        total_files = len(metadata_files)
+        
+        for i, file_path in enumerate(metadata_files):
+            try:
+                # Read the JSON content
+                with conn.fs.open(file_path, 'r') as f:
+                    metadata = json.load(f)
+                
+                # Extract filename without path and extension for the name
+                filename = file_path.split('/')[-1].replace('.metadata.json', '')
+                
+                # Create entry in the same format as the original dataset
+                entry = {
+                    "properties": metadata,
+                    "id": metadata.get("id", filename),  # Use ID from metadata or filename as fallback
+                    "name": metadata.get("song", filename) + " - " + metadata.get("artist", "Unknown") if metadata.get("song") and metadata.get("artist") else filename
+                }
+                all_data.append(entry)
+                
+                # Update progress
+                progress_bar.progress((i + 1) / total_files)
+                
+            except Exception as e:
+                st.warning(f"Error loading {file_path}: {e}")
+                continue
+        
+        progress_bar.empty()
+        
+        if not all_data:
+            st.error("No valid metadata files could be loaded from GCS")
+            return None
+            
+        # Create DataFrame from the loaded data
+        df = pd.DataFrame(all_data)
+        
+        st.success(f"Successfully loaded {len(all_data)} songs from GCS bucket")
+        return df
+        
+    except Exception as e:
+        st.error(f"Error connecting to GCS bucket: {e}")
+        st.info("🔄 Falling back to local dataset file if available...")
+        return None
+
+
+def load_data_from_local():
+    """Load and preprocess the song sheets dataset from local file (fallback)."""
+    filepath = "data/song_sheets_dataset.json"
     try:
         df = pd.read_json(filepath)
+        st.info("📁 Using local dataset file as fallback")
     except ValueError as e:
         st.error(f"Error reading JSON file: {e}")
         return None
@@ -17,6 +87,39 @@ def load_data(filepath):
             "Please run the build_song_sheets_dataset.py script to generate it first."
         )
         return None
+    
+    return process_dataframe(df)
+
+
+def process_dataframe(df):
+    """Process and clean the dataframe."""
+    # Use json_normalize to flatten the 'properties' column
+    properties_df = pd.json_normalize(df["properties"])
+    # Concatenate the flattened properties with the original dataframe (id and name)
+    df = pd.concat([df.drop("properties", axis=1), properties_df], axis=1)
+
+    # Sort by song name
+    df = df.sort_values(by="name").reset_index(drop=True)
+
+    # Data cleaning and type conversion
+    df["difficulty"] = pd.to_numeric(df["difficulty"], errors="coerce")
+    df["year"] = pd.to_numeric(df["year"], errors="coerce")
+    df["date"] = pd.to_datetime(df["date"], format="%Y%m%d", errors="coerce")
+    df["specialbooks"] = df["specialbooks"].str.split(",")
+    df["chords"] = df["chords"].str.split(",")
+
+    return df
+
+
+def load_data():
+    """Load song sheets dataset, trying GCS first, then falling back to local file."""
+    # Try loading from GCS first
+    df = load_data_from_gcs()
+    if df is not None:
+        return process_dataframe(df)
+    
+    # Fall back to local file
+    return load_data_from_local()
 
     # Use json_normalize to flatten the 'properties' column
     properties_df = pd.json_normalize(df["properties"])
@@ -49,7 +152,7 @@ def main():
         """
     )
 
-    df = load_data("data/song_sheets_dataset.json")
+    df = load_data()
 
     if df is not None:
         # Map display options to query param values

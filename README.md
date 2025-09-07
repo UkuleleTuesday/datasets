@@ -8,6 +8,12 @@ The dashboard is deployed and can be viewed live at:
 
 **https://ukuleletuesday-stats.streamlit.app/**
 
+## Data Source
+
+The application automatically loads song metadata from our public GCS bucket (`songbook-generator-cache-europe-west1`) where JSON metadata files are published. This eliminates the need for manual dataset syncing and ensures the dashboard always shows the latest song data.
+
+If GCS access is unavailable, the app will fall back to a local dataset file for development purposes.
+
 ## Features
 
 The application provides various statistics about the songs, including:
@@ -22,7 +28,7 @@ The application provides various statistics about the songs, including:
 
 ### Prerequisites
 - Python 3.10+
-- `uv` package manager
+- `uv` package manager (or pip)
 
 ### Setup
 1. Clone the repository.
@@ -30,9 +36,27 @@ The application provides various statistics about the songs, including:
    ```bash
    uv sync
    ```
+   
+   Or with pip:
+   ```bash
+   pip install -e .
+   ```
 
-### Building the Dataset
-The data is sourced from Google Drive folders (we store our song sheets on Google Drive/Google Docs, and metadata about songs is pushed as Google Drive properties). To build the dataset, you need to have credentials configured to access the Google Drive API. Then, run the following command:
+### Running the App
+The app will automatically load data from GCS when running. For local development:
+
+```bash
+uv run streamlit run main.py
+```
+
+Or with pip:
+```bash
+streamlit run main.py
+```
+
+### Local Development with Manual Dataset (Optional)
+
+For development when GCS access is not available, you can still build a local dataset from Google Drive:
 
 ```bash
 export GDRIVE_SONG_SHEETS_FOLDER_IDS="<your_folder_ids_here>"
@@ -41,9 +65,4 @@ export GDRIVE_TARGET_PRINCIPAL="<your_service_account_email>"
 uv run python build_song_sheets_dataset.py data/song_sheets_dataset.json
 ```
 
-### Running the App
-Once the dataset is built, you can run the Streamlit app locally:
-
-```bash
-uv run streamlit run main.py
-```
+The app will automatically use this local file as a fallback if GCS is unavailable.
