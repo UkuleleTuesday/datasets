@@ -32,19 +32,12 @@ def load_data_from_gcs():
         
         for i, file_path in enumerate(metadata_files):
             try:
-                # Read the JSON content
+                # Read the JSON content - assuming it has the same format as Drive API returns
                 with conn.fs.open(file_path, 'r') as f:
-                    metadata = json.load(f)
+                    entry = json.load(f)
                 
-                # Extract filename without path and extension for the name
-                filename = file_path.split('/')[-1].replace('.metadata.json', '')
-                
-                # Create entry in the same format as the original dataset
-                entry = {
-                    "properties": metadata,
-                    "id": metadata.get("id", filename),  # Use ID from metadata or filename as fallback
-                    "name": metadata.get("song", filename) + " - " + metadata.get("artist", "Unknown") if metadata.get("song") and metadata.get("artist") else filename
-                }
+                # The .metadata.json files should already have the Drive API format
+                # with "properties", "id", and "name" fields
                 all_data.append(entry)
                 
                 # Update progress
