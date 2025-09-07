@@ -51,13 +51,6 @@ The application uses several key dependencies for GCS integration:
 uv run streamlit run main.py
 ```
 
-Or with pip:
-```bash
-streamlit run main.py
-```
-
-The app will display loading progress and automatically handle any connection issues.
-
 ### Local Development with Manual Dataset (Fallback)
 
 The app includes automatic fallback to a local dataset. If you need to manually build this dataset from Google Drive for development:
