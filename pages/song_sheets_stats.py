@@ -6,6 +6,7 @@ from st_files_connection import FilesConnection
 import json
 
 
+@st.cache_data(ttl=600)
 def load_data_from_gcs():
     """Load and preprocess the song sheets dataset from GCS bucket."""
     try:
