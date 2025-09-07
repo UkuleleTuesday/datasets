@@ -19,7 +19,7 @@ def load_data_from_gcs():
             files = conn.fs.ls(bucket_path)
         
         # Filter for .metadata.json files only
-        metadata_files = [f for f in files if f.endswith('.metadata.json')]
+        metadata_files = [f for f in files if f.endswith('.json')]
         
         if not metadata_files:
             st.error("No .metadata.json files found in the GCS bucket")
