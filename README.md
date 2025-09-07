@@ -30,14 +30,6 @@ The application provides various statistics about the songs, including:
 - Python 3.10+
 - `uv` package manager
 
-### Dependencies
-The application uses several key dependencies for GCS integration:
-- `streamlit` - Main web framework
-- `st-files-connection` - Streamlit connector for cloud storage
-- `gcsfs` - Google Cloud Storage filesystem interface
-- `altair` & `plotly` - Data visualization libraries
-- `pandas` - Data manipulation and analysis
-
 ### Setup
 1. Clone the repository.
 2. Install dependencies:
