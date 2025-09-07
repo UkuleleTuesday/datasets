@@ -8,7 +8,13 @@ The dashboard is deployed and can be viewed live at:
 
 **https://ukuleletuesday-stats.streamlit.app/**
 
-## Features
+## Data Sources
+
+* Public UT Song Sheets cache GCS bucket (`songbook-generator-cache-europe-west1/song-sheets/`) (using Streamlit's FilesConnection with GCS backend)
+
+## Dashboards
+
+**UT Song Sheets Dashboard**
 
 The application provides various statistics about the songs, including:
 - Distribution of songs by decade of release.
@@ -31,8 +37,15 @@ The application provides various statistics about the songs, including:
    uv sync
    ```
 
-### Building the Dataset
-The data is sourced from Google Drive folders (we store our song sheets on Google Drive/Google Docs, and metadata about songs is pushed as Google Drive properties). To build the dataset, you need to have credentials configured to access the Google Drive API. Then, run the following command:
+### Running the App
+
+```bash
+uv run streamlit run main.py
+```
+
+### Local Development with Manual Dataset (Fallback)
+
+The app includes automatic fallback to a local dataset. If you need to manually build this dataset from Google Drive for development:
 
 ```bash
 export GDRIVE_SONG_SHEETS_FOLDER_IDS="<your_folder_ids_here>"
@@ -41,9 +54,4 @@ export GDRIVE_TARGET_PRINCIPAL="<your_service_account_email>"
 uv run python build_song_sheets_dataset.py data/song_sheets_dataset.json
 ```
 
-### Running the App
-Once the dataset is built, you can run the Streamlit app locally:
-
-```bash
-uv run streamlit run main.py
-```
+The generated `data/song_sheets_dataset.json` file will be automatically used as a fallback if GCS is unavailable.

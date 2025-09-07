@@ -12,4 +12,7 @@ dependencies = [
     "google-auth-oauthlib>=1.2.1",
     "pandas>=2.0.0",
     "plotly>=5.0.0",
+    "altair>=5.0.0",
+    "st-files-connection>=0.1.0",
+    "gcsfs>=2025.9.0",
 ]
