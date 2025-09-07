@@ -8,18 +8,13 @@ The dashboard is deployed and can be viewed live at:
 
 **https://ukuleletuesday-stats.streamlit.app/**
 
-## Data Source
+## Data Sources
 
-The application automatically loads song metadata from our public GCS bucket (`songbook-generator-cache-europe-west1/song-sheets/`) using Streamlit's FilesConnection. The system:
+* Public UT Song Sheets cache GCS bucket (`songbook-generator-cache-europe-west1/song-sheets/`) (using Streamlit's FilesConnection with GCS backend)
 
-- **Automatically discovers** all `.json` metadata files in the GCS bucket
-- **Loads data in real-time** with 10-minute caching for optimal performance
-- **Assumes metadata format** matches Google Drive API response structure (with `properties`, `id`, and `name` fields)
-- **Provides automatic fallback** to local dataset file (`data/song_sheets_dataset.json`) if GCS is unavailable
+## Dashboards
 
-This architecture eliminates manual dataset syncing and ensures the dashboard always displays the latest song data from the publishing pipeline.
-
-## Features
+**UT Song Sheets Dashboard**
 
 The application provides various statistics about the songs, including:
 - Distribution of songs by decade of release.
@@ -28,17 +23,6 @@ The application provides various statistics about the songs, including:
 - Difficulty distribution.
 - Cumulative growth of the songbook over time.
 - Filtering to view stats for all songs or just the "Current edition".
-
-## Technical Architecture
-
-The application uses a modern, automated data pipeline:
-
-1. **GCS Integration**: Direct connection to Google Cloud Storage bucket using `st-files-connection`
-2. **Automatic Discovery**: Dynamically finds all `.json` metadata files in the bucket
-3. **Real-time Loading**: Loads fresh data on each session with 10-minute caching
-4. **Progress Tracking**: Visual progress bars for data loading operations
-5. **Intelligent Fallback**: Seamless fallback to local dataset for development
-6. **Data Processing**: Automatic flattening and cleaning of Drive API response format
 
 ## Development
 
@@ -67,11 +51,6 @@ The application uses several key dependencies for GCS integration:
    ```
 
 ### Running the App
-
-The app automatically loads data from the GCS bucket on startup with intelligent fallback:
-
-1. **Primary**: Loads from GCS bucket (`songbook-generator-cache-europe-west1/song-sheets/`)
-2. **Fallback**: Uses local dataset file if GCS is unavailable
 
 ```bash
 uv run streamlit run main.py
