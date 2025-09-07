@@ -92,6 +92,9 @@ def process_dataframe(df):
     # Concatenate the flattened properties with the original dataframe (id and name)
     df = pd.concat([df.drop("properties", axis=1), properties_df], axis=1)
 
+    # Drop mimeType and parents if they exist, ignoring errors if not
+    df = df.drop(columns=["mimeType", "parents"], errors="ignore")
+
     # Sort by song name
     df = df.sort_values(by="name").reset_index(drop=True)
 
