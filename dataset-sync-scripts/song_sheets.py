@@ -26,6 +26,7 @@ import sys
 import json
 import datetime
 import gcsfs
+import io
 
 
 def main() -> None:
@@ -56,45 +57,60 @@ def main() -> None:
         print(f"No .json files found under gs://{src_base}; skipping writes.")
         return
 
-    today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
-    date_path = f"{dst_prefix}/{today}/data.jsonl"
+    # Generate new dataset content in memory
+    new_content_io = io.StringIO()
+    written = 0
+    for fp in json_files:
+        try:
+            with fs.open(fp, "r") as in_f:
+                data = json.load(in_f)
+        except Exception as exc:
+            print(f"WARNING: skipping {fp} (invalid JSON): {exc}", file=sys.stderr)
+            continue
+
+        # Accept either dict or list-of-dicts; write one JSON object per line
+        if isinstance(data, list):
+            for item in data:
+                new_content_io.write(json.dumps(item, separators=(",", ":")) + "\n")
+                written += 1
+        elif isinstance(data, dict):
+            new_content_io.write(json.dumps(data, separators=(",", ":")) + "\n")
+            written += 1
+        else:
+            # Fallback: wrap primitive under 'value'
+            new_content_io.write(json.dumps({"value": data}, separators=(",", ":")) + "\n")
+            written += 1
+    new_content = new_content_io.getvalue()
+    new_content_io.close()
+
+    # Compare with existing 'latest' to see if an update is needed
     latest_path = f"{dst_prefix}/latest/data.jsonl"
+    gcs_latest_full_path = f"{dst_bucket}/{latest_path.lstrip('/')}"
+    if fs.exists(gcs_latest_full_path):
+        try:
+            with fs.open(gcs_latest_full_path, "r") as f:
+                current_latest_content = f.read()
+            if new_content == current_latest_content:
+                print("Dataset content is unchanged. Skipping writes.")
+                return
+        except Exception as e:
+            print(f"WARNING: Could not read existing latest file to compare: {e}", file=sys.stderr)
 
-    def write_jsonl(target_rel_path: str) -> None:
-        gcs_target = f"{dst_bucket}/{target_rel_path.lstrip('/')}"
-        # GCS doesn't need pre-creating "dirs"
-        written = 0
-        with fs.open(gcs_target, "w") as out_f:
-            for fp in json_files:
-                try:
-                    with fs.open(fp, "r") as in_f:
-                        data = json.load(in_f)
-                except Exception as exc:
-                    print(f"WARNING: skipping {fp} (invalid JSON): {exc}", file=sys.stderr)
-                    continue
-
-                # Accept either dict or list-of-dicts; write one JSON object per line
-                if isinstance(data, list):
-                    for item in data:
-                        out_f.write(json.dumps(item, separators=(",", ":")) + "\n")
-                        written += 1
-                elif isinstance(data, dict):
-                    out_f.write(json.dumps(data, separators=(",", ":")) + "\n")
-                    written += 1
-                else:
-                    # Fallback: wrap primitive under 'value'
-                    out_f.write(json.dumps({"value": data}, separators=(",", ":")) + "\n")
-                    written += 1
-
-        print(f"Wrote {written} lines to gs://{gcs_target}")
+    def write_content(content: str, gcs_path: str):
+        with fs.open(gcs_path, "w") as f:
+            f.write(content)
+        print(f"Wrote {len(content.splitlines())} lines to gs://{gcs_path}")
 
     # Write date-stamped and latest under DST_PREFIX
-    write_jsonl(date_path)
-    write_jsonl(latest_path)
+    today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    date_path = f"{dst_prefix}/{today}/data.jsonl"
+    write_content(new_content, f"{dst_bucket}/{date_path.lstrip('/')}")
+    write_content(new_content, gcs_latest_full_path)
 
     # Optional PR-local latest under EXTRA_LATEST_PREFIX
     if extra_latest_base:
-        write_jsonl(f"{extra_latest_base.strip('/')}/latest/data.jsonl")
+        pr_latest_path = f"{extra_latest_base.strip('/')}/latest/data.jsonl"
+        write_content(new_content, f"{dst_bucket}/{pr_latest_path.lstrip('/')}")
 
 
 if __name__ == "__main__":
