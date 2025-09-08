@@ -29,6 +29,13 @@ import gcsfs
 import io
 
 
+def write_content(fs: gcsfs.GCSFileSystem, content: str, gcs_path: str):
+    """Write string content to a GCS path."""
+    with fs.open(gcs_path, "w") as f:
+        f.write(content)
+    print(f"Wrote {len(content.splitlines())} lines to gs://{gcs_path}")
+
+
 def main() -> None:
     # Config via env
     src_bucket = os.getenv("SRC_BUCKET", "songbook-generator-cache-europe-west1")
@@ -96,21 +103,16 @@ def main() -> None:
         except Exception as e:
             print(f"WARNING: Could not read existing latest file to compare: {e}", file=sys.stderr)
 
-    def write_content(content: str, gcs_path: str):
-        with fs.open(gcs_path, "w") as f:
-            f.write(content)
-        print(f"Wrote {len(content.splitlines())} lines to gs://{gcs_path}")
-
     # Write date-stamped and latest under DST_PREFIX
     today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
     date_path = f"{dst_prefix}/{today}/data.jsonl"
-    write_content(new_content, f"{dst_bucket}/{date_path.lstrip('/')}")
-    write_content(new_content, gcs_latest_full_path)
+    write_content(fs, new_content, f"{dst_bucket}/{date_path.lstrip('/')}")
+    write_content(fs, new_content, gcs_latest_full_path)
 
     # Optional PR-local latest under EXTRA_LATEST_PREFIX
     if extra_latest_base:
         pr_latest_path = f"{extra_latest_base.strip('/')}/latest/data.jsonl"
-        write_content(new_content, f"{dst_bucket}/{pr_latest_path.lstrip('/')}")
+        write_content(fs, new_content, f"{dst_bucket}/{pr_latest_path.lstrip('/')}")
 
 
 if __name__ == "__main__":
