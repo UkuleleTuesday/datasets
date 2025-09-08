@@ -32,3 +32,5 @@ jobs:
 
       - name: Run dataset aggregation
         run: ./dataset-sync-scripts/song_sheets.py
+        env:
+          DST_PREFIX: ${{ github.event_name == 'pull_request' && format('song-sheets/aggregated/previews/pr-{0}', github.event.pull_request.number) || '' }}
