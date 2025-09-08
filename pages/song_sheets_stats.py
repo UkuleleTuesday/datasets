@@ -2,66 +2,39 @@ import altair as alt
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-from st_files_connection import FilesConnection
 import json
+import urllib.request
 
 
 @st.cache_data(ttl=600)
-def load_data_from_gcs():
-    """Load and preprocess the song sheets dataset from GCS bucket."""
+def load_data_from_public_url():
+    """Load and preprocess the song sheets dataset from a public URL."""
+    dataset_url = "https://ukulele-tuesday-datasets.storage.googleapis.com/song-sheets/aggregated/latest/data.jsonl"
+    all_data = []
+
     try:
-        # Connect to GCS using streamlit's connection
-        conn = st.connection('gcs', type=FilesConnection)
-
-        # List all files in the song-sheets folder
-        bucket_path = "gs://songbook-generator-cache-europe-west1/song-sheets/"
-
-        with st.spinner("Loading songs from GCS bucket..."):
-            files = conn.fs.ls(bucket_path)
-
-        # Filter for .metadata.json files only
-        metadata_files = [f for f in files if f.endswith('.json')]
-
-        if not metadata_files:
-            st.error("No .metadata.json files found in the GCS bucket")
-            return None
-
-        # Load all metadata files
-        all_data = []
-        progress_bar = st.progress(0)
-        total_files = len(metadata_files)
-
-        for i, file_path in enumerate(metadata_files):
-            try:
-                # Read the JSON content - assuming it has the same format as Drive API returns
-                with conn.fs.open(file_path, 'r') as f:
-                    entry = json.load(f)
-
-                # The .metadata.json files should already have the Drive API format
-                # with "properties", "id", and "name" fields
-                all_data.append(entry)
-
-                # Update progress
-                progress_bar.progress((i + 1) / total_files)
-
-            except Exception as e:
-                st.warning(f"Error loading {file_path}: {e}")
-                continue
-
-        progress_bar.empty()
+        with st.spinner("Loading aggregated dataset..."):
+            with urllib.request.urlopen(dataset_url) as response:
+                if response.status != 200:
+                    st.error(f"Failed to fetch data: HTTP {response.status}")
+                    return None
+                for line in response:
+                    try:
+                        all_data.append(json.loads(line))
+                    except json.JSONDecodeError:
+                        st.warning(f"Skipping invalid JSON line: {line.strip()}")
+                        continue
 
         if not all_data:
-            st.error("No valid metadata files could be loaded from GCS")
+            st.error("No data found in the dataset file.")
             return None
 
-        # Create DataFrame from the loaded data
         df = pd.DataFrame(all_data)
-
-        st.success(f"Successfully loaded {len(all_data)} songs from GCS bucket")
+        st.success(f"Successfully loaded {len(all_data)} songs")
         return df
 
     except Exception as e:
-        st.error(f"Error connecting to GCS bucket: {e}")
+        st.error(f"Error loading data from public URL: {e}")
         st.info("🔄 Falling back to local dataset file if available...")
         return None
 
@@ -109,9 +82,9 @@ def process_dataframe(df):
 
 
 def load_data():
-    """Load song sheets dataset, trying GCS first, then falling back to local file."""
-    # Try loading from GCS first
-    df = load_data_from_gcs()
+    """Load song sheets dataset, trying public URL first, then falling back to local file."""
+    # Try loading from public URL first
+    df = load_data_from_public_url()
     if df is not None:
         return process_dataframe(df)
 
