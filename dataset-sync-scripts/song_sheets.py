@@ -33,7 +33,7 @@ def main() -> None:
     src_bucket = os.getenv("SRC_BUCKET", "songbook-generator-cache-europe-west1")
     src_prefix = os.getenv("SRC_PREFIX", "song-sheets/").lstrip("/")
     dst_bucket = os.getenv("DST_BUCKET", "ukulele-tuesday-datasets")
-    dst_prefix = os.getenv("DST_PREFIX", "song-sheets/aggregated").lstrip("/")
+    dst_prefix = os.environ.get("DST_PREFIX", "song-sheets/aggregated").lstrip("/")
     extra_latest_base = os.getenv("EXTRA_LATEST_PREFIX")  # optional
 
     requester_pays_project = os.getenv("GCSFS_REQUESTER_PAYS")  # optional
