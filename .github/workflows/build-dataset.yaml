@@ -1,6 +1,7 @@
 name: Aggregate Song Sheets Daily (JSONL)
 
 on:
+  pull_request:
   schedule:
     - cron: "0 0 * * *"     # daily UTC
   workflow_dispatch:
