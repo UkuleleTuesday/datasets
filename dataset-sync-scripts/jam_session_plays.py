@@ -29,12 +29,19 @@ def main() -> None:
     # Process all worksheets except the first one (index 0)
     for worksheet in sh.worksheets()[1:]:
         print(f"--- Processing worksheet: {worksheet.title} ---")
-        # Fetches all records from the sheet.
-        # Assumes first row is header. Columns are Page, Song, Artist.
+        # Fetches all records from columns A-D of the sheet.
+        # Assumes first row is header.
         try:
-            list_of_hashes = worksheet.get_all_records()
-            for row in list_of_hashes:
-                print(row)
+            values = worksheet.get('A:D')
+            if not values:
+                continue
+
+            header = values[0]
+            for row_values in values[1:]:
+                # Pad row with empty strings if it's shorter than the header
+                padded_row = row_values + [''] * (len(header) - len(row_values))
+                row_dict = dict(zip(header, padded_row))
+                print(row_dict)
         except Exception as e:
             print(f"Error processing worksheet {worksheet.title}: {e}")
 
