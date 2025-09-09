@@ -104,28 +104,17 @@ def main() -> None:
     )
     spreadsheets = response.get("files", [])
 
+    all_sessions = []
     for spreadsheet in spreadsheets:
-        print(f"Processing spreadsheet: {spreadsheet['name']}")
         sh = gc.open_by_key(spreadsheet["id"])
 
         # Process all worksheets except the first one (index 0)
         for worksheet in sh.worksheets()[1:]:
-            print(f"--- Processing worksheet: {worksheet.title} ---")
-            # Fetches all records from columns A-D of the sheet.
-            # Assumes first row is header.
-            try:
-                values = worksheet.get("A:D")
-                if not values:
-                    continue
+            session_data = transform_to_session(spreadsheet["name"], worksheet)
+            if session_data:
+                all_sessions.append(session_data)
 
-                header = values[0]
-                for row_values in values[1:]:
-                    # Pad row with empty strings if it's shorter than the header
-                    padded_row = row_values + [""] * (len(header) - len(row_values))
-                    row_dict = dict(zip(header, padded_row))
-                    print(row_dict)
-            except Exception as e:
-                print(f"Error processing worksheet {worksheet.title}: {e}")
+    print(json.dumps(all_sessions, indent=2))
 
 
 if __name__ == "__main__":
