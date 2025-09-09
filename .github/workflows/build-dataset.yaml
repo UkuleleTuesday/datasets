@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  aggregate:
+  sync-song-sheets:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,7 +41,7 @@ jobs:
         env:
           DST_PREFIX: ${{ github.event_name == 'pull_request' && format('song-sheets/aggregated/previews/pr-{0}', github.event.pull_request.number) || 'song-sheets/aggregated' }}
 
-  sync_jam_session_plays:
+  sync-jam-sessions:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
