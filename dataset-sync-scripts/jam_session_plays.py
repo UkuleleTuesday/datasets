@@ -3,7 +3,8 @@
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
-#   "gspread"
+#   "gspread",
+#   "google-auth"
 # ]
 # ///
 
@@ -12,12 +13,16 @@ Fetch jam session plays data from a Google Sheet and print it.
 """
 
 import gspread
+import google.auth
 
 
 def main() -> None:
     # Authenticates via application default credentials
-    gc = gspread.service_account()
-    
+    creds, _ = google.auth.default(
+        scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"]
+    )
+    gc = gspread.authorize(creds)
+
     spreadsheet_id = "1HeYf0OJHJorY10FIotvVlpdv-xGrmYroABRBxMYrNOQ"
     sh = gc.open_by_key(spreadsheet_id)
 
