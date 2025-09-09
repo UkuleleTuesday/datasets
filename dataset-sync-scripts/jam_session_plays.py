@@ -13,9 +13,75 @@
 Fetch jam session plays data from a Google Sheet and print it.
 """
 
+import datetime
+import json
+import uuid
+
 import gspread
 import google.auth
 from googleapiclient.discovery import build
+
+
+def transform_to_session(spreadsheet_name: str, worksheet) -> dict:
+    try:
+        session_date_str = worksheet.title
+        session_date = datetime.datetime.strptime(session_date_str, "%Y/%m/%d").date()
+    except ValueError:
+        print(f"Skipping worksheet with invalid date format title: {worksheet.title}")
+        return None
+
+    session = {
+        "session_id": str(uuid.uuid4()),
+        "date": session_date.isoformat(),
+        "venue": None,
+        "source_sheet": spreadsheet_name,
+        "ingested_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "events": [],
+        "requests": [],  # Per schema, but no source data for this yet
+    }
+
+    values = worksheet.get("A:D")
+    if not values or len(values) < 2:
+        return None  # No data or header only
+
+    header = values[0]
+    position = 1
+    break_found = False
+
+    for row_values in values[1:]:
+        padded_row = row_values + [""] * (len(header) - len(row_values))
+        row_dict = dict(zip(header, padded_row))
+
+        page = row_dict.get("Page", "").strip()
+        song = row_dict.get("Song", "").strip()
+        artist = row_dict.get("Artist", "").strip()
+
+        if not page and not song and not artist:
+            if not break_found:
+                session["events"].append({"position": position, "type": "break"})
+                break_found = True
+                position += 1
+            else:
+                # After a break, an empty row signifies the end of songs for the session
+                break
+            continue
+
+        requested_by = row_dict.get("Requested By", "").strip() or None
+        if requested_by not in ["A", "G", "O"]:
+            requested_by = None
+
+        event = {
+            "position": position,
+            "type": "song",
+            "page": page,
+            "song": song,
+            "artist": artist,
+            "requested_by_code": requested_by,
+        }
+        session["events"].append(event)
+        position += 1
+
+    return session
 
 
 def main() -> None:
