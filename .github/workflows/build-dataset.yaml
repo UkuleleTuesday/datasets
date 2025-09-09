@@ -40,3 +40,28 @@ jobs:
         run: ./dataset-sync-scripts/song_sheets.py
         env:
           DST_PREFIX: ${{ github.event_name == 'pull_request' && format('song-sheets/aggregated/previews/pr-{0}', github.event.pull_request.number) || 'song-sheets/aggregated' }}
+
+  sync_jam_session_plays:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Auth to Google Cloud (WIF)
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: dataset-sync@ukulele-tuesday-datasets.iam.gserviceaccount.com
+          # Add sheets scope for gspread
+          scopes: https://www.googleapis.com/auth/spreadsheets.readonly
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Run jam session plays sync
+        run: ./dataset-sync-scripts/jam_session_plays.py
