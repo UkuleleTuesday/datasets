@@ -16,6 +16,7 @@ Fetch jam session plays data from a Google Sheet and print it.
 
 import datetime
 import json
+import os
 import uuid
 
 import gspread
@@ -123,12 +124,20 @@ def get_worksheet_data(sh):
 
 def main() -> None:
     # Authenticates via application default credentials
+    # Impersonate service account if SERVICE_ACCOUNT_EMAIL is set (for local dev)
+    target_principal = os.getenv("SERVICE_ACCOUNT_EMAIL")
+
     creds, _ = google.auth.default(
         scopes=[
             "https://www.googleapis.com/auth/spreadsheets.readonly",
             "https://www.googleapis.com/auth/drive.readonly",
-        ]
+        ],
+        target_principal=target_principal,
     )
+
+    if target_principal:
+        print(f"Impersonating service account: {target_principal}")
+
     gc = gspread.authorize(creds)
     drive_service = build("drive", "v3", credentials=creds)
 
