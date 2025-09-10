@@ -2,6 +2,7 @@ import json
 import pandas as pd
 import streamlit as st
 import urllib.request
+import altair as alt
 from typing import List, Dict, Any, Optional
 
 @st.cache_data(ttl=600)
@@ -86,8 +87,15 @@ def main():
         # Create a unique song identifier (song + artist)
         songs_df['song_artist'] = songs_df['song'] + " - " + songs_df['artist']
         
-        song_counts = songs_df['song_artist'].value_counts().nlargest(20)
+        song_counts = songs_df['song_artist'].value_counts().nlargest(20).reset_index()
+        song_counts.columns = ['song_artist', 'count']
+
+        chart = alt.Chart(song_counts).mark_bar().encode(
+            x=alt.X('count', title='Times Played'),
+            y=alt.Y('song_artist', sort='-x', title='Song'),
+            tooltip=['song_artist', 'count']
+        ).interactive()
         
-        st.bar_chart(song_counts, horizontal=True)
+        st.altair_chart(chart, use_container_width=True)
 
 main()
