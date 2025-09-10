@@ -148,62 +148,9 @@ def load_data_from_public_url(dataset_type: str) -> Optional[pd.DataFrame]:
 
 @st.cache_data
 def load_dataset_data(dataset_type: str) -> Optional[pd.DataFrame]:
-    """Load dataset data from public URL first, with local file fallback."""
-    # Try loading from public URL first
-    df = load_data_from_public_url(dataset_type)
-    if df is not None:
-        return df
-    
-    # Fall back to local files if public URL fails
-    st.info(f"Could not load {dataset_type} from public URL, trying local files...")
-    
-    # Look for data files in common locations
-    possible_paths = [
-        Path(__file__).parent.parent / f"data/{dataset_type}.json",
-        Path(__file__).parent.parent / f"data/{dataset_type}.jsonl",
-        Path(__file__).parent.parent / f"{dataset_type}.json",
-        Path(__file__).parent.parent / f"{dataset_type}.jsonl",
-    ]
-    
-    for path in possible_paths:
-        if path.exists():
-            try:
-                return load_data_file(path)
-            except Exception as e:
-                st.warning(f"Could not load data from {path}: {e}")
-                continue
-    
-    return None
+    """Load dataset data from public GCS URL."""
+    return load_data_from_public_url(dataset_type)
 
-
-def load_data_file(file_path: Path) -> pd.DataFrame:
-    """Load data from a JSON or JSONL file."""
-    try:
-        if file_path.suffix == '.jsonl':
-            # Load JSONL file
-            data = []
-            with open(file_path, 'r') as f:
-                for line in f:
-                    line = line.strip()
-                    if line:
-                        data.append(json.loads(line))
-        else:
-            # Load JSON file
-            with open(file_path, 'r') as f:
-                data = json.load(f)
-        
-        # Convert to DataFrame
-        if isinstance(data, list):
-            df = pd.json_normalize(data)
-        elif isinstance(data, dict):
-            df = pd.json_normalize([data])
-        else:
-            raise ValueError(f"Unsupported data format: {type(data)}")
-        
-        return df
-        
-    except Exception as e:
-        raise Exception(f"Failed to load data from {file_path}: {e}")
 
 
 def format_field_value(value: Any, field_info: Dict[str, Any]) -> str:
@@ -438,8 +385,8 @@ def main():
         df = load_dataset_data(selected_dataset)
     
     if df is None:
-        st.warning(f"No data available for dataset '{selected_dataset}'. This could be due to network connectivity issues or the dataset not being available yet.")
-        st.info("The explorer shows the schema structure even without data. To see actual data, ensure you have an internet connection to access the public dataset.")
+        st.error(f"Unable to load data for dataset '{selected_dataset}' from the public URL.")
+        st.info("Please check your internet connection and try again. The dataset explorer requires access to the public Ukulele Tuesday datasets.")
         return
     
     # Show dataset overview
