@@ -274,12 +274,20 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
 
     # Load and aggregate all JSON data
     all_data = []
-    for fp in json_files:
+    
+    # Use fs.cat for parallel fetching
+    try:
+        # fs.cat returns a dictionary of path -> content (bytes)
+        file_contents = fs.cat(json_files)
+    except Exception as e:
+        print(f"ERROR: Failed to fetch files from GCS: {e}", file=sys.stderr)
+        raise
+    
+    for path, content in file_contents.items():
         try:
-            with fs.open(fp, "r") as in_f:
-                data = json.load(in_f)
-        except Exception as exc:
-            print(f"WARNING: skipping {fp} (invalid JSON): {exc}", file=sys.stderr)
+            data = json.loads(content)
+        except json.JSONDecodeError as exc:
+            print(f"WARNING: skipping gs://{path} (invalid JSON): {exc}", file=sys.stderr)
             continue
 
         # Accept either dict or list-of-dicts
@@ -302,19 +310,6 @@ def generate_jsonl_content(data: List[Dict[str, Any]]) -> str:
     content = content_io.getvalue()
     content_io.close()
     return content
-
-
-def should_skip_write(content: str, output_paths: List[str], writer: OutputWriter) -> bool:
-    """Check if we should skip writing by comparing with existing content."""
-    # For multiple outputs, check the first one that exists for comparison
-    for path in output_paths:
-        existing_content = writer.read_content(path)
-        if existing_content is not None:
-            if content == existing_content:
-                print("Dataset content is unchanged. Skipping writes.")
-                return True
-            break  # Found an existing file to compare against
-    return False
 
 
 @click.command()
@@ -360,20 +355,24 @@ def main(dataset: str, output: tuple):
     
     # Initialize output writer
     writer = OutputWriter()
-    
-    # Check if we should skip writing (content unchanged)
-    if should_skip_write(content, output_paths, writer):
-        return
-    
+
     # Write to all specified outputs
+    synced_count = 0
     for output_path in output_paths:
+        # Check if we should skip writing for this path
+        existing_content = writer.read_content(output_path)
+        if existing_content is not None and content == existing_content:
+            print(f"Content for {output_path} is unchanged. Skipping write.")
+            continue
+
         try:
             writer.write_content(content, output_path)
+            synced_count += 1
         except Exception as e:
             print(f"ERROR: Failed to write to {output_path}: {e}", file=sys.stderr)
             sys.exit(1)
-    
-    print(f"Successfully synced {dataset} dataset to {len(output_paths)} destination(s)")
+
+    print(f"Successfully synced {dataset} dataset to {synced_count} of {len(output_paths)} destination(s)")
 
 
 if __name__ == "__main__":

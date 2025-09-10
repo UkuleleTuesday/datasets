@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UT Session",
+  "type": "object",
+  "required": ["session_id","date","events","requests"],
+  "properties": {
+    "session_id": {"type":"string"},
+    "date": {"type":"string","format":"date"},
+    "venue": {"type":["string","null"]},
+    "source_sheet": {"type":["string","null"]},
+    "ingested_at": {"type":["string","null"],"format":"date-time"},
+
+    "events": {
+      "type":"array",
+      "items": {
+        "type":"object",
+        "required":["position","type"],
+        "properties": {
+          "position":{"type":"integer","minimum":1},
+          "type":{"type":"string","enum":["song","break","note"]},
+
+          "page":{"type":["integer","string","null"]},
+          "song":{"type":["string","null"]},
+          "artist":{"type":["string","null"]},
+          "requested_by_code":{"type":["string","null"],"enum":["A","G","O",null]},
+          "request_id":{"type":["string","null"]},
+
+          "label":{"type":["string","null"]},
+          "duration_sec":{"type":["integer","null"],"minimum":0}
+        },
+        "oneOf": [
+          { "properties": {"type":{"const":"song"}}, "required":["song","artist"] },
+          { "properties": {"type":{"const":"break"}} },
+          { "properties": {"type":{"const":"note"}},  "required":["label"] }
+        ]
+      }
+    },
+
+    "requests": {
+      "type":"array",
+      "items": {
+        "type":"object"
+      }
+    }
+  }
+}
