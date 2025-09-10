@@ -97,5 +97,58 @@ def main():
         ).interactive()
         
         st.altair_chart(chart, use_container_width=True)
+        
+        # --- Rising Stars and Falls from Grace ---
+        st.subheader("Song Popularity Trends")
+
+        # Define recent and past periods (6 months)
+        analysis_end_date = pd.to_datetime(end_date)
+        period_midpoint = analysis_end_date - pd.DateOffset(months=6)
+        period_start = analysis_end_date - pd.DateOffset(months=12)
+
+        # Filter songs and sessions for each period
+        recent_songs = songs_df[songs_df['date'] > period_midpoint]
+        past_songs = songs_df[(songs_df['date'] > period_start) & (songs_df['date'] <= period_midpoint)]
+        
+        sessions_recent_count = df[df['date'] > period_midpoint]['session_id'].nunique()
+        sessions_past_count = df[(df['date'] > period_start) & (df['date'] <= period_midpoint)]['session_id'].nunique()
+
+        if sessions_recent_count > 0 and sessions_past_count > 0:
+            # Calculate frequencies
+            freq_recent = (recent_songs['song_artist'].value_counts() / sessions_recent_count).reset_index()
+            freq_recent.columns = ['song_artist', 'recent_freq']
+            
+            freq_past = (past_songs['song_artist'].value_counts() / sessions_past_count).reset_index()
+            freq_past.columns = ['song_artist', 'past_freq']
+
+            # Merge and calculate change
+            trends_df = pd.merge(freq_recent, freq_past, on='song_artist', how='outer').fillna(0)
+            trends_df['change'] = trends_df['recent_freq'] - trends_df['past_freq']
+            
+            # Rising Stars
+            rising_stars = trends_df.nlargest(10, 'change')
+            st.markdown("##### Biggest Rising Stars")
+            st.caption(f"Songs played more frequently in the last 6 months compared to the 6 months prior.")
+
+            rising_chart = alt.Chart(rising_stars).mark_bar().encode(
+                x=alt.X('change', title='Increase in Plays per Session'),
+                y=alt.Y('song_artist', sort='-x', title='Song'),
+                tooltip=['song_artist', 'change']
+            ).interactive()
+            st.altair_chart(rising_chart, use_container_width=True)
+            
+            # Falls from Grace
+            falling_stars = trends_df.nsmallest(10, 'change')
+            st.markdown("##### Biggest Falls from Grace")
+            st.caption(f"Songs played less frequently in the last 6 months compared to the 6 months prior.")
+
+            falling_chart = alt.Chart(falling_stars).mark_bar(color='firebrick').encode(
+                x=alt.X('change', title='Decrease in Plays per Session'),
+                y=alt.Y('song_artist', sort='x', title='Song'),
+                tooltip=['song_artist', 'change']
+            ).interactive()
+            st.altair_chart(falling_chart, use_container_width=True)
+        else:
+            st.info("Not enough data in the selected time range to calculate popularity trends (requires at least 12 months of data).")
 
 main()
