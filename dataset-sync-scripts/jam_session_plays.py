@@ -5,7 +5,8 @@
 # dependencies = [
 #   "gspread",
 #   "google-auth",
-#   "google-api-python-client"
+#   "google-api-python-client",
+#   "tenacity"
 # ]
 # ///
 
@@ -20,6 +21,21 @@ import uuid
 import gspread
 import google.auth
 from googleapiclient.discovery import build
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception
+
+from gspread.exceptions import APIError
+
+
+# Define a retry condition to only retry on 429 Too Many Requests errors
+def is_rate_limit_error(exception):
+    return isinstance(exception, APIError) and exception.response.status_code == 429
+
+
+retry_on_rate_limit = retry(
+    wait=wait_exponential(multiplier=1, min=2, max=60),
+    stop=stop_after_attempt(5),
+    retry=retry_if_exception(is_rate_limit_error),
+)
 
 
 def transform_to_session(spreadsheet_name: str, worksheet_title: str, values: list) -> dict:
@@ -82,6 +98,29 @@ def transform_to_session(spreadsheet_name: str, worksheet_title: str, values: li
     return session
 
 
+@retry_on_rate_limit
+def get_spreadsheets(drive_service, folder_id):
+    query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.spreadsheet'"
+    response = (
+        drive_service.files()
+        .list(q=query, fields="files(id, name)", supportsAllDrives=True, includeItemsFromAllDrives=True)
+        .execute()
+    )
+    return response.get("files", [])
+
+
+@retry_on_rate_limit
+def get_worksheet_data(sh):
+    worksheets_to_process = sh.worksheets()[1:]
+    if not worksheets_to_process:
+        return None, None
+
+    ranges = [f"'{w.title}'!A:D" for w in worksheets_to_process]
+    batch_get_result = sh.values_batch_get(ranges)
+    value_ranges = batch_get_result.get("valueRanges", [])
+    return worksheets_to_process, value_ranges
+
+
 def main() -> None:
     # Authenticates via application default credentials
     creds, _ = google.auth.default(
@@ -94,27 +133,16 @@ def main() -> None:
     drive_service = build("drive", "v3", credentials=creds)
 
     folder_id = "1TY4KCBrbHODyCKCtWXgtNlCHs2-8Svpd"
-    query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.spreadsheet'"
-    response = (
-        drive_service.files()
-        .list(q=query, fields="files(id, name)", supportsAllDrives=True, includeItemsFromAllDrives=True)
-        .execute()
-    )
-    spreadsheets = response.get("files", [])
+    spreadsheets = get_spreadsheets(drive_service, folder_id)
 
     all_sessions = []
     for spreadsheet in spreadsheets:
         sh = gc.open_by_key(spreadsheet["id"])
 
         # Process all worksheets except the first one (index 0)
-        worksheets_to_process = sh.worksheets()[1:]
+        worksheets_to_process, value_ranges = get_worksheet_data(sh)
         if not worksheets_to_process:
             continue
-
-        # Fetch all worksheet data in a single batch request
-        ranges = [f"'{w.title}'!A:D" for w in worksheets_to_process]
-        batch_get_result = sh.values_batch_get(ranges)
-        value_ranges = batch_get_result.get("valueRanges", [])
 
         # The API does not guarantee the order of responses, so map them back
         # to worksheets by the returned range string.
