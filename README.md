@@ -56,25 +56,18 @@ The dashboard loads data from the public datasets and provides interactive visua
 
 ### Prerequisites
 - Python 3.10+ (tested with 3.11 and 3.12)
-- `uv` package manager (recommended) or pip
+- `uv` package manager
 
 ### Setup
 
-#### Option 1: Using uv (Recommended)
+#### Option 1: Using uv
 1. Clone the repository
 2. Install dependencies:
    ```bash
    uv sync
    ```
 
-#### Option 2: Using pip
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   pip install streamlit click google-api-python-client google-auth-httplib2 google-auth-oauthlib pandas plotly altair st-files-connection gcsfs jsonschema
-   ```
-
-#### Option 3: Development Container
+#### Option 2: Development Container
 This repository includes a devcontainer configuration for VS Code and GitHub Codespaces:
 - Open in VS Code with the Dev Containers extension
 - Or use GitHub Codespaces for instant development environment
@@ -82,14 +75,8 @@ This repository includes a devcontainer configuration for VS Code and GitHub Cod
 
 ### Running the App
 
-With uv:
 ```bash
 uv run streamlit run main.py
-```
-
-With pip:
-```bash
-streamlit run main.py
 ```
 
 ### Testing
