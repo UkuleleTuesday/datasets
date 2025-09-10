@@ -304,19 +304,6 @@ def generate_jsonl_content(data: List[Dict[str, Any]]) -> str:
     return content
 
 
-def should_skip_write(content: str, output_paths: List[str], writer: OutputWriter) -> bool:
-    """Check if we should skip writing by comparing with existing content."""
-    # For multiple outputs, check the first one that exists for comparison
-    for path in output_paths:
-        existing_content = writer.read_content(path)
-        if existing_content is not None:
-            if content == existing_content:
-                print("Dataset content is unchanged. Skipping writes.")
-                return True
-            break  # Found an existing file to compare against
-    return False
-
-
 @click.command()
 @click.option(
     "--dataset", 
@@ -360,20 +347,24 @@ def main(dataset: str, output: tuple):
     
     # Initialize output writer
     writer = OutputWriter()
-    
-    # Check if we should skip writing (content unchanged)
-    if should_skip_write(content, output_paths, writer):
-        return
-    
+
     # Write to all specified outputs
+    synced_count = 0
     for output_path in output_paths:
+        # Check if we should skip writing for this path
+        existing_content = writer.read_content(output_path)
+        if existing_content is not None and content == existing_content:
+            print(f"Content for {output_path} is unchanged. Skipping write.")
+            continue
+
         try:
             writer.write_content(content, output_path)
+            synced_count += 1
         except Exception as e:
             print(f"ERROR: Failed to write to {output_path}: {e}", file=sys.stderr)
             sys.exit(1)
-    
-    print(f"Successfully synced {dataset} dataset to {len(output_paths)} destination(s)")
+
+    print(f"Successfully synced {dataset} dataset to {synced_count} of {len(output_paths)} destination(s)")
 
 
 if __name__ == "__main__":
