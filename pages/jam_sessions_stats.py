@@ -86,7 +86,7 @@ def main():
         # Create a unique song identifier (song + artist)
         songs_df['song_artist'] = songs_df['song'] + " - " + songs_df['artist']
         
-        song_counts = songs_df['song_artist'].value_counts().nlargest(20).sort_values(ascending=True)
+        song_counts = songs_df['song_artist'].value_counts().nlargest(20)
         
         st.bar_chart(song_counts, horizontal=True)
 
