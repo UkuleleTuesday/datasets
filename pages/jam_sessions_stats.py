@@ -101,10 +101,10 @@ def main():
         # --- Rising Stars and Falls from Grace ---
         st.subheader("Song Popularity Trends")
 
-        # Define recent and past periods (6 months)
+        # Define recent and past periods (12 months)
         analysis_end_date = pd.to_datetime(end_date)
-        period_midpoint = analysis_end_date - pd.DateOffset(months=6)
-        period_start = analysis_end_date - pd.DateOffset(months=12)
+        period_midpoint = analysis_end_date - pd.DateOffset(months=12)
+        period_start = analysis_end_date - pd.DateOffset(months=24)
 
         # Filter songs and sessions for each period
         recent_songs = songs_df[songs_df['date'] > period_midpoint]
@@ -128,7 +128,7 @@ def main():
             # Rising Stars
             rising_stars = trends_df.nlargest(10, 'change')
             st.markdown("##### Biggest Rising Stars")
-            st.caption(f"Songs played more frequently in the last 6 months compared to the 6 months prior.")
+            st.caption(f"Songs played more frequently in the last 12 months compared to the 12 months prior.")
 
             rising_chart = alt.Chart(rising_stars).mark_bar().encode(
                 x=alt.X('change', title='Increase in Plays per Session'),
@@ -140,7 +140,7 @@ def main():
             # Falls from Grace
             falling_stars = trends_df.nsmallest(10, 'change')
             st.markdown("##### Biggest Falls from Grace")
-            st.caption(f"Songs played less frequently in the last 6 months compared to the 6 months prior.")
+            st.caption(f"Songs played less frequently in the last 12 months compared to the 12 months prior.")
 
             falling_chart = alt.Chart(falling_stars).mark_bar(color='firebrick').encode(
                 x=alt.X('change', title='Decrease in Plays per Session'),
@@ -149,6 +149,6 @@ def main():
             ).interactive()
             st.altair_chart(falling_chart, use_container_width=True)
         else:
-            st.info("Not enough data in the selected time range to calculate popularity trends (requires at least 12 months of data).")
+            st.info("Not enough data in the selected time range to calculate popularity trends (requires at least 24 months of data).")
 
 main()
