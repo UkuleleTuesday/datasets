@@ -6,24 +6,36 @@
 #   "gspread",
 #   "google-auth",
 #   "google-api-python-client",
-#   "tenacity"
+#   "tenacity",
+#   "gcsfs"
 # ]
 # ///
 
 """
-Fetch jam session plays data from a Google Sheet and print it.
+Fetch jam session plays data from a Google Sheet and sync to GCS.
+Writes to both date-stamped and 'latest' paths, with optional preview folder support.
+
+Env vars:
+  DST_BUCKET            (default: ukulele-tuesday-datasets)
+  DST_PREFIX            (default: jam-sessions)
+  EXTRA_LATEST_PREFIX   (optional; e.g., jam-sessions/previews/pr-123)
+  GCSFS_REQUESTER_PAYS  (optional; set to a billing project ID to enable requester pays)
+  SERVICE_ACCOUNT_EMAIL (optional; for local dev impersonation)
 """
 
 import datetime
 import json
 import os
+import sys
 import uuid
+import io
 
 import gspread
 import google.auth
 from google.auth import impersonated_credentials
 from googleapiclient.discovery import build
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception
+import gcsfs
 
 from gspread.exceptions import APIError
 
@@ -123,6 +135,63 @@ def get_worksheet_data(sh):
     return worksheets_to_process, value_ranges
 
 
+def write_content(fs: gcsfs.GCSFileSystem, content: str, gcs_path: str):
+    """Write string content to a GCS path."""
+    with fs.open(gcs_path, "w") as f:
+        f.write(content)
+    print(f"Wrote {len(content.splitlines())} lines to gs://{gcs_path}")
+
+
+def sync_sessions_to_gcs(all_sessions: list):
+    """Sync session data to GCS with date-stamped and latest paths."""
+    # Config via env
+    dst_bucket = os.getenv("DST_BUCKET", "ukulele-tuesday-datasets")
+    dst_prefix = os.environ.get("DST_PREFIX", "jam-sessions").lstrip("/")
+    extra_latest_base = os.getenv("EXTRA_LATEST_PREFIX")  # optional
+
+    requester_pays_project = os.getenv("GCSFS_REQUESTER_PAYS")  # optional
+    fs_kwargs = {}
+    if requester_pays_project:
+        fs_kwargs = {"requester_pays": True, "project": requester_pays_project}
+
+    fs = gcsfs.GCSFileSystem(**fs_kwargs)
+
+    if not all_sessions:
+        print("No session data to sync. Skipping GCS writes.")
+        return
+
+    # Generate JSONL content in memory (one JSON object per line)
+    new_content_io = io.StringIO()
+    for session in all_sessions:
+        new_content_io.write(json.dumps(session, separators=(",", ":")) + "\n")
+    new_content = new_content_io.getvalue()
+    new_content_io.close()
+
+    # Compare with existing 'latest' to see if an update is needed
+    latest_path = f"{dst_prefix}/latest/data.jsonl"
+    gcs_latest_full_path = f"{dst_bucket}/{latest_path.lstrip('/')}"
+    if fs.exists(gcs_latest_full_path):
+        try:
+            with fs.open(gcs_latest_full_path, "r") as f:
+                current_latest_content = f.read()
+            if new_content == current_latest_content:
+                print("Dataset content is unchanged. Skipping writes.")
+                return
+        except Exception as e:
+            print(f"WARNING: Could not read existing latest file to compare: {e}", file=sys.stderr)
+
+    # Write date-stamped and latest under DST_PREFIX
+    today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    date_path = f"{dst_prefix}/{today}/data.jsonl"
+    write_content(fs, new_content, f"{dst_bucket}/{date_path.lstrip('/')}")
+    write_content(fs, new_content, gcs_latest_full_path)
+
+    # Optional PR-local latest under EXTRA_LATEST_PREFIX
+    if extra_latest_base:
+        pr_latest_path = f"{extra_latest_base.strip('/')}/latest/data.jsonl"
+        write_content(fs, new_content, f"{dst_bucket}/{pr_latest_path.lstrip('/')}")
+
+
 def main() -> None:
     # Authenticates via application default credentials
     # Impersonate service account if SERVICE_ACCOUNT_EMAIL is set (for local dev)
@@ -176,7 +245,11 @@ def main() -> None:
                 if session_data:
                     all_sessions.append(session_data)
 
-    print(json.dumps(all_sessions, indent=2))
+    # Sync to GCS instead of just printing
+    sync_sessions_to_gcs(all_sessions)
+    
+    # Also print for debugging/logging purposes
+    print(f"Processed {len(all_sessions)} jam sessions")
 
 
 if __name__ == "__main__":

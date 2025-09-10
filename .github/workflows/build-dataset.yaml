@@ -65,3 +65,5 @@ jobs:
 
       - name: Run jam session plays sync
         run: ./dataset-sync-scripts/jam_session_plays.py
+        env:
+          DST_PREFIX: ${{ github.event_name == 'pull_request' && format('jam-sessions/previews/pr-{0}', github.event.pull_request.number) || 'jam-sessions' }}
