@@ -7,6 +7,11 @@ pg = st.navigation(
             title="Song Sheets Stats",
             icon=":material/analytics:",
             default=True,
+        ),
+        st.Page(
+            "pages/dataset_explorer.py",
+            title="Dataset Explorer",
+            icon=":material/dataset:",
         )
     ]
 )
