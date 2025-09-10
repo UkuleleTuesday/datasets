@@ -274,12 +274,20 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
 
     # Load and aggregate all JSON data
     all_data = []
-    for fp in json_files:
+    
+    # Use fs.cat for parallel fetching
+    try:
+        # fs.cat returns a dictionary of path -> content (bytes)
+        file_contents = fs.cat(json_files)
+    except Exception as e:
+        print(f"ERROR: Failed to fetch files from GCS: {e}", file=sys.stderr)
+        raise
+    
+    for path, content in file_contents.items():
         try:
-            with fs.open(fp, "r") as in_f:
-                data = json.load(in_f)
-        except Exception as exc:
-            print(f"WARNING: skipping {fp} (invalid JSON): {exc}", file=sys.stderr)
+            data = json.loads(content)
+        except json.JSONDecodeError as exc:
+            print(f"WARNING: skipping gs://{path} (invalid JSON): {exc}", file=sys.stderr)
             continue
 
         # Accept either dict or list-of-dicts
