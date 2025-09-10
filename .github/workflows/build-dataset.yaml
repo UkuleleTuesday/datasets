@@ -11,8 +11,19 @@ permissions:
   contents: read
 
 jobs:
-  sync-song-sheets:
+  sync-datasets:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dataset:
+          - type: song-sheets
+            file: song-sheets-data.jsonl
+            prefix: song-sheets/aggregated
+            needs_sheets_scope: false
+          - type: jam-sessions
+            file: jam-sessions-data.jsonl
+            prefix: jam-sessions
+            needs_sheets_scope: true
     steps:
       - uses: actions/checkout@v4
 
@@ -27,6 +38,7 @@ jobs:
           token_format: access_token
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: dataset-sync@ukulele-tuesday-datasets.iam.gserviceaccount.com
+          scopes: ${{ matrix.dataset.needs_sheets_scope && 'https://www.googleapis.com/auth/spreadsheets.readonly' || '' }}
 
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
@@ -37,55 +49,17 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Run dataset aggregation
-        run: ./dataset-sync.py --dataset song-sheets -o "song-sheets-data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/latest/data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/$(date +%Y-%m-%d)/data.jsonl"
+        run: ./dataset-sync.py --dataset ${{ matrix.dataset.type }} -o "${{ matrix.dataset.file }}" -o "gs://${DST_BUCKET}/${DST_PREFIX}/latest/data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/$(date +%Y-%m-%d)/data.jsonl"
         env:
           DST_BUCKET: ukulele-tuesday-datasets
-          DST_PREFIX: ${{ github.event_name == 'pull_request' && format('song-sheets/aggregated/previews/pr-{0}', github.event.pull_request.number) || 'song-sheets/aggregated' }}
+          DST_PREFIX: ${{ github.event_name == 'pull_request' && format('{0}/previews/pr-{1}', matrix.dataset.prefix, github.event.pull_request.number) || matrix.dataset.prefix }}
 
-      - name: Validate song-sheets dataset
-        run: ./validate_datasets.py --dataset song-sheets song-sheets-data.jsonl
+      - name: Validate ${{ matrix.dataset.type }} dataset
+        run: ./validate_datasets.py --dataset ${{ matrix.dataset.type }} ${{ matrix.dataset.file }}
 
-      - name: Upload song-sheets dataset as artifact
+      - name: Upload ${{ matrix.dataset.type }} dataset as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: song-sheets-dataset
-          path: song-sheets-data.jsonl
-          retention-days: 30
-
-  sync-jam-sessions:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Auth to Google Cloud (WIF)
-        uses: google-github-actions/auth@v2
-        with:
-          token_format: access_token
-          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
-          service_account: dataset-sync@ukulele-tuesday-datasets.iam.gserviceaccount.com
-          # Add sheets scope for gspread
-          scopes: https://www.googleapis.com/auth/spreadsheets.readonly
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-
-      - name: Run jam session plays sync
-        run: ./dataset-sync.py --dataset jam-sessions -o "jam-sessions-data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/latest/data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/$(date +%Y-%m-%d)/data.jsonl"
-        env:
-          DST_BUCKET: ukulele-tuesday-datasets
-          DST_PREFIX: ${{ github.event_name == 'pull_request' && format('jam-sessions/previews/pr-{0}', github.event.pull_request.number) || 'jam-sessions' }}
-
-      - name: Validate jam-sessions dataset
-        run: ./validate_datasets.py --dataset jam-sessions jam-sessions-data.jsonl
-
-      - name: Upload jam-sessions dataset as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: jam-sessions-dataset
-          path: jam-sessions-data.jsonl
+          name: ${{ matrix.dataset.type }}-dataset
+          path: ${{ matrix.dataset.file }}
           retention-days: 30
