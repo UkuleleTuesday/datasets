@@ -21,6 +21,7 @@ import uuid
 
 import gspread
 import google.auth
+from google.auth import impersonated_credentials
 from googleapiclient.discovery import build
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception
 
@@ -126,17 +127,20 @@ def main() -> None:
     # Authenticates via application default credentials
     # Impersonate service account if SERVICE_ACCOUNT_EMAIL is set (for local dev)
     target_principal = os.getenv("SERVICE_ACCOUNT_EMAIL")
+    scopes = [
+        "https://www.googleapis.com/auth/spreadsheets.readonly",
+        "https://www.googleapis.com/auth/drive.readonly",
+    ]
 
-    creds, _ = google.auth.default(
-        scopes=[
-            "https://www.googleapis.com/auth/spreadsheets.readonly",
-            "https://www.googleapis.com/auth/drive.readonly",
-        ],
-        target_principal=target_principal,
-    )
+    creds, _ = google.auth.default(scopes=scopes)
 
     if target_principal:
         print(f"Impersonating service account: {target_principal}")
+        creds = impersonated_credentials.Credentials(
+            source_credentials=creds,
+            target_principal=target_principal,
+            target_scopes=scopes,
+        )
 
     gc = gspread.authorize(creds)
     drive_service = build("drive", "v3", credentials=creds)
