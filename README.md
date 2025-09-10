@@ -28,12 +28,12 @@ The dashboard is deployed and can be viewed live at:
 └── uv.lock                  # Dependency lock file
 ```
 
-## Data Sources
+## Datasets
 
-The platform processes two main dataset types:
+The platform currently provides two main datasets, both stored in the `ukulele-tuesday-datasets` GCS bucket:
 
-* **Song Sheets**: Aggregated from the public UT datasets at `https://ukulele-tuesday-datasets.storage.googleapis.com/song-sheets/aggregated/latest/data.jsonl`
-* **Jam Sessions**: Fetched from Google Sheets containing session setlists and transformed into structured session objects
+* **Song Sheets**: Comprehensive dataset of Ukulele Tuesday song sheets with metadata including artist, chords, difficulty, and contributor information
+* **Jam Sessions**: Historical jam session data with setlists, venue information, and song requests from live Ukulele Tuesday events
 
 ## Dashboards
 
