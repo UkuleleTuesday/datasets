@@ -49,6 +49,23 @@ def main():
     df = load_data_from_public_url()
 
     if df is not None:
+        df["date"] = pd.to_datetime(df["date"])
+
+        # Date range slider
+        min_date = df["date"].min().date()
+        max_date = df["date"].max().date()
+        
+        start_date, end_date = st.slider(
+            "Select date range",
+            min_value=min_date,
+            max_value=max_date,
+            value=(min_date, max_date),
+            format="YYYY-MM-DD"
+        )
+        
+        # Filter dataframe based on date range
+        df = df[(df["date"].dt.date >= start_date) & (df["date"].dt.date <= end_date)]
+
         # Explode the 'events' column to get one row per event
         events_df = df.explode("events").reset_index(drop=True)
         # Normalize the 'events' column, which contains dicts
