@@ -43,7 +43,7 @@ jobs:
           DST_PREFIX: ${{ github.event_name == 'pull_request' && format('song-sheets/aggregated/previews/pr-{0}', github.event.pull_request.number) || 'song-sheets/aggregated' }}
 
       - name: Validate song-sheets dataset
-        run: python validate_datasets.py --dataset song-sheets --song-sheets-file song-sheets-data.jsonl
+        run: ./validate_datasets.py --dataset song-sheets song-sheets-data.jsonl
 
       - name: Upload song-sheets dataset as artifact
         uses: actions/upload-artifact@v4
@@ -81,7 +81,7 @@ jobs:
           DST_PREFIX: ${{ github.event_name == 'pull_request' && format('jam-sessions/previews/pr-{0}', github.event.pull_request.number) || 'jam-sessions' }}
 
       - name: Validate jam-sessions dataset
-        run: python validate_datasets.py --dataset jam-sessions --jam-sessions-file jam-sessions-data.jsonl
+        run: ./validate_datasets.py --dataset jam-sessions jam-sessions-data.jsonl
 
       - name: Upload jam-sessions dataset as artifact
         uses: actions/upload-artifact@v4

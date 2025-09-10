@@ -49,7 +49,7 @@ def test_song_sheets_validation():
         result = subprocess.run([
             sys.executable, 'validate_datasets.py',
             '--dataset', 'song-sheets',
-            '--song-sheets-file', valid_file
+            valid_file
         ], capture_output=True, text=True)
         
         if result.returncode == 0:
@@ -84,7 +84,7 @@ def test_song_sheets_validation():
         result = subprocess.run([
             sys.executable, 'validate_datasets.py',
             '--dataset', 'song-sheets',
-            '--song-sheets-file', invalid_file
+            invalid_file
         ], capture_output=True, text=True)
         
         if result.returncode != 0:
@@ -132,7 +132,7 @@ def test_jam_sessions_validation():
         result = subprocess.run([
             sys.executable, 'validate_datasets.py',
             '--dataset', 'jam-sessions',
-            '--jam-sessions-file', valid_file
+            valid_file
         ], capture_output=True, text=True)
         
         if result.returncode == 0:
