@@ -1,9 +1,9 @@
-name: Aggregate Song Sheets Daily (JSONL)
+name: Synchronize Datasets
 
 on:
   pull_request:
   schedule:
-    - cron: "0 0 * * *"     # daily UTC
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 permissions:
