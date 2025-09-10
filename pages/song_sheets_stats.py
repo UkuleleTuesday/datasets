@@ -35,27 +35,10 @@ def load_data_from_public_url():
 
     except Exception as e:
         st.error(f"Error loading data from public URL: {e}")
-        st.info("🔄 Falling back to local dataset file if available...")
         return None
 
 
-def load_data_from_local():
-    """Load and preprocess the song sheets dataset from local file (fallback)."""
-    filepath = "data/song_sheets_dataset.json"
-    try:
-        df = pd.read_json(filepath)
-        st.info("📁 Using local dataset file as fallback")
-    except ValueError as e:
-        st.error(f"Error reading JSON file: {e}")
-        return None
-    except FileNotFoundError:
-        st.error(f"Error: The file '{filepath}' was not found.")
-        st.info(
-            "Please run the build_song_sheets_dataset.py script to generate it first."
-        )
-        return None
 
-    return process_dataframe(df)
 
 
 def process_dataframe(df):
@@ -82,31 +65,17 @@ def process_dataframe(df):
 
 
 def load_data():
-    """Load song sheets dataset, trying public URL first, then falling back to local file."""
-    # Try loading from public URL first
+    """Load song sheets dataset from public URL."""
+    # Load from public URL
     df = load_data_from_public_url()
     if df is not None:
         return process_dataframe(df)
+    
+    # No fallback available
+    st.error("Unable to load dataset from public URL and no local fallback is available.")
+    return None
 
-    # Fall back to local file
-    return load_data_from_local()
 
-    # Use json_normalize to flatten the 'properties' column
-    properties_df = pd.json_normalize(df["properties"])
-    # Concatenate the flattened properties with the original dataframe (id and name)
-    df = pd.concat([df.drop("properties", axis=1), properties_df], axis=1)
-
-    # Sort by song name
-    df = df.sort_values(by="name").reset_index(drop=True)
-
-    # Data cleaning and type conversion
-    df["difficulty"] = pd.to_numeric(df["difficulty"], errors="coerce")
-    df["year"] = pd.to_numeric(df["year"], errors="coerce")
-    df["date"] = pd.to_datetime(df["date"], format="%Y%m%d", errors="coerce")
-    df["specialbooks"] = df["specialbooks"].str.split(",")
-    df["chords"] = df["chords"].str.split(",")
-
-    return df
 
 
 def main():

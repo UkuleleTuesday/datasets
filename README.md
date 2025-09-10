@@ -73,15 +73,4 @@ The repository includes a unified `dataset-sync.py` script for syncing datasets 
 - `GCSFS_REQUESTER_PAYS`: GCP project ID for requester pays
 - `SERVICE_ACCOUNT_EMAIL`: Service account for impersonation (local dev)
 
-### Local Development with Manual Dataset (Fallback)
 
-The app includes automatic fallback to a local dataset. If you need to manually build this dataset from Google Drive for development:
-
-```bash
-export GDRIVE_SONG_SHEETS_FOLDER_IDS="<your_folder_ids_here>"
-# Optional, for impersonation
-export GDRIVE_TARGET_PRINCIPAL="<your_service_account_email>"
-uv run python build_song_sheets_dataset.py data/song_sheets_dataset.json
-```
-
-The generated `data/song_sheets_dataset.json` file will be automatically used as a fallback if GCS is unavailable.
