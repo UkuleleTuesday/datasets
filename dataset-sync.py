@@ -130,7 +130,6 @@ def transform_to_session(spreadsheet_name: str, worksheet_title: str, values: li
         "source_sheet": spreadsheet_name,
         "ingested_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "events": [],
-        "requests": [],  # Per schema, but no source data for this yet  
     }
     position = 1
     break_found = False

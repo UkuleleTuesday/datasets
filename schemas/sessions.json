@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "UT Session",
   "type": "object",
-  "required": ["session_id","date","events","requests"],
+  "required": ["session_id","date","events"],
   "properties": {
     "session_id": {"type":"string"},
     "date": {"type":"string","format":"date"},
@@ -33,13 +33,6 @@
           { "properties": {"type":{"const":"break"}} },
           { "properties": {"type":{"const":"note"}},  "required":["label"] }
         ]
-      }
-    },
-
-    "requests": {
-      "type":"array",
-      "items": {
-        "type":"object"
       }
     }
   }
