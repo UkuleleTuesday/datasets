@@ -14,6 +14,15 @@
         "type": "string",
         "description": "Display name of the song sheet"
       },
+      "mimeType": {
+        "type": "string",
+        "description": "MIME type of the source file, if applicable"
+      },
+      "parents": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Parent identifiers from the source, if applicable"
+      },
       "properties": {
         "type": "object",
         "required": ["artist", "song", "status", "tabber"],
