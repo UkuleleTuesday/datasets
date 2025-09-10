@@ -1,0 +1,68 @@
+[
+  {
+    "id": "sample1",
+    "name": "Hotel California - Eagles",
+    "properties": {
+      "artist": "Eagles",
+      "song": "Hotel California",
+      "status": "APPROVED",
+      "tabber": "John Doe",
+      "bpm": "74",
+      "chords": "Bm,F#,A,E,G,D,Em",
+      "date": "20240101",
+      "difficulty": "3.5",
+      "duration": "00:06:30",
+      "gender": "male",
+      "language": "English",
+      "source": "old",
+      "specialbooks": "regular,classic",
+      "time_signature": "4/4",
+      "type": "Group",
+      "year": "1976"
+    }
+  },
+  {
+    "id": "sample2",
+    "name": "Wonderwall - Oasis",
+    "properties": {
+      "artist": "Oasis",
+      "song": "Wonderwall",
+      "status": "READY_TO_PLAY",
+      "tabber": "Jane Smith",
+      "bpm": "87",
+      "chords": "Em7,G,D,C,Am",
+      "date": "20240215",
+      "difficulty": "2.0",
+      "duration": "00:04:18",
+      "gender": "male",
+      "language": "English",
+      "source": "new",
+      "specialbooks": "regular",
+      "time_signature": "4/4",
+      "type": "Group",
+      "year": "1995"
+    }
+  },
+  {
+    "id": "sample3",
+    "name": "Sweet Caroline - Neil Diamond",
+    "properties": {
+      "artist": "Neil Diamond",
+      "song": "Sweet Caroline",
+      "status": "APPROVED",
+      "tabber": "Bob Wilson",
+      "bpm": "125",
+      "chords": "C,F,G,Am",
+      "date": "20231110",
+      "difficulty": "1.5",
+      "duration": "00:03:45",
+      "gender": "male",
+      "language": "English",
+      "source": "old",
+      "specialbooks": "regular,easy",
+      "time_signature": "4/4",
+      "type": "Person",
+      "year": "1969"
+    }
+  }
+]
