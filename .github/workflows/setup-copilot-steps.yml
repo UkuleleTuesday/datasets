@@ -1,0 +1,40 @@
+name: Setup Copilot Steps
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  setup-copilot-steps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Auth to Google Cloud (WIF)
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: dataset-sync@ukulele-tuesday-datasets.iam.gserviceaccount.com
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Verify Google Auth Setup
+        run: |
+          echo "Google Cloud authentication setup complete"
+          gcloud auth list
+          echo "Project ID: ${{ secrets.GCP_PROJECT_ID }}"
