@@ -22,13 +22,17 @@ import google.auth
 from googleapiclient.discovery import build
 
 
-def transform_to_session(spreadsheet_name: str, worksheet) -> dict:
+def transform_to_session(spreadsheet_name: str, worksheet_title: str, values: list) -> dict:
     try:
-        session_date_str = worksheet.title
-        session_date = datetime.datetime.strptime(session_date_str, "%Y/%m/%d").date()
+        session_date = datetime.datetime.strptime(worksheet_title, "%Y/%m/%d").date()
     except ValueError:
-        print(f"Skipping worksheet with invalid date format title: {worksheet.title}")
+        print(f"Skipping worksheet with invalid date format title: {worksheet_title}")
         return None
+
+    if not values or len(values) < 2:
+        return None  # No data or header only
+
+    header = values[0]
 
     session = {
         "session_id": str(uuid.uuid4()),
@@ -39,12 +43,6 @@ def transform_to_session(spreadsheet_name: str, worksheet) -> dict:
         "events": [],
         "requests": [],  # Per schema, but no source data for this yet
     }
-
-    values = worksheet.get("A:D")
-    if not values or len(values) < 2:
-        return None  # No data or header only
-
-    header = values[0]
     position = 1
     break_found = False
 
@@ -109,10 +107,33 @@ def main() -> None:
         sh = gc.open_by_key(spreadsheet["id"])
 
         # Process all worksheets except the first one (index 0)
-        for worksheet in sh.worksheets()[1:]:
-            session_data = transform_to_session(spreadsheet["name"], worksheet)
-            if session_data:
-                all_sessions.append(session_data)
+        worksheets_to_process = sh.worksheets()[1:]
+        if not worksheets_to_process:
+            continue
+
+        # Fetch all worksheet data in a single batch request
+        ranges = [f"'{w.title}'!A:D" for w in worksheets_to_process]
+        batch_get_result = sh.values_batch_get(ranges)
+        value_ranges = batch_get_result.get("valueRanges", [])
+
+        # The API does not guarantee the order of responses, so map them back
+        # to worksheets by the returned range string.
+        range_data_map = {item["range"]: item.get("values", []) for item in value_ranges}
+
+        for i, worksheet in enumerate(worksheets_to_process):
+            # The range string in the response may have sheet name quoting differences
+            # compared to what we sent, so we check both.
+            # e.g., "'Sheet'1'!A:D" vs "Sheet'1!A:D"
+            # We use the index `i` from our worksheet list to get the corresponding
+            # range we requested.
+            worksheet_values = range_data_map.get(value_ranges[i]["range"])
+
+            if worksheet_values:
+                session_data = transform_to_session(
+                    spreadsheet["name"], worksheet.title, worksheet_values
+                )
+                if session_data:
+                    all_sessions.append(session_data)
 
     print(json.dumps(all_sessions, indent=2))
 
