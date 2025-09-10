@@ -99,3 +99,6 @@ venv.bak/
 
 # Aider-specific files
 .aider*
+
+# Dataset output files (for CI artifacts)
+*-data.jsonl

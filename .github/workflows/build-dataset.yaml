@@ -37,10 +37,17 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Run dataset aggregation
-        run: ./dataset-sync.py --dataset song-sheets -o "gs://${DST_BUCKET}/${DST_PREFIX}/latest/data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/$(date +%Y-%m-%d)/data.jsonl"
+        run: ./dataset-sync.py --dataset song-sheets -o "song-sheets-data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/latest/data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/$(date +%Y-%m-%d)/data.jsonl"
         env:
           DST_BUCKET: ukulele-tuesday-datasets
           DST_PREFIX: ${{ github.event_name == 'pull_request' && format('song-sheets/aggregated/previews/pr-{0}', github.event.pull_request.number) || 'song-sheets/aggregated' }}
+
+      - name: Upload song-sheets dataset as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: song-sheets-dataset
+          path: song-sheets-data.jsonl
+          retention-days: 30
 
   sync-jam-sessions:
     runs-on: ubuntu-latest
@@ -65,7 +72,14 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Run jam session plays sync
-        run: ./dataset-sync.py --dataset jam-sessions -o "gs://${DST_BUCKET}/${DST_PREFIX}/latest/data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/$(date +%Y-%m-%d)/data.jsonl"
+        run: ./dataset-sync.py --dataset jam-sessions -o "jam-sessions-data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/latest/data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/$(date +%Y-%m-%d)/data.jsonl"
         env:
           DST_BUCKET: ukulele-tuesday-datasets
           DST_PREFIX: ${{ github.event_name == 'pull_request' && format('jam-sessions/previews/pr-{0}', github.event.pull_request.number) || 'jam-sessions' }}
+
+      - name: Upload jam-sessions dataset as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jam-sessions-dataset
+          path: jam-sessions-data.jsonl
+          retention-days: 30
