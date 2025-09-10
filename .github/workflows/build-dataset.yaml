@@ -19,11 +19,11 @@ jobs:
           - type: song-sheets
             file: song-sheets-data.jsonl
             prefix: song-sheets/aggregated
-            needs_sheets_scope: false
+            scopes: ''
           - type: jam-sessions
             file: jam-sessions-data.jsonl
             prefix: jam-sessions
-            needs_sheets_scope: true
+            scopes: 'https://www.googleapis.com/auth/spreadsheets.readonly'
     steps:
       - uses: actions/checkout@v4
 
@@ -38,7 +38,7 @@ jobs:
           token_format: access_token
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: dataset-sync@ukulele-tuesday-datasets.iam.gserviceaccount.com
-          scopes: ${{ matrix.dataset.needs_sheets_scope && 'https://www.googleapis.com/auth/spreadsheets.readonly' || '' }}
+          scopes: ${{ matrix.dataset.scopes }}
 
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
