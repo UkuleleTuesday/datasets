@@ -24,6 +24,9 @@ jobs:
             file: jam-sessions-data.jsonl
             prefix: jam-sessions
             scopes: 'https://www.googleapis.com/auth/spreadsheets.readonly'
+            
+    name: Synchronize Dataset: ${{ matrix.dataset.type }}
+    
     steps:
       - uses: actions/checkout@v4
 
