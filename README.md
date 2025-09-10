@@ -43,6 +43,36 @@ The application provides various statistics about the songs, including:
 uv run streamlit run main.py
 ```
 
+### Dataset Sync
+
+The repository includes a unified `dataset-sync.py` script for syncing datasets to various destinations:
+
+#### Usage Examples
+
+```bash
+# Sync jam sessions to local file
+./dataset-sync.py --dataset jam-sessions -o /path/to/output.jsonl
+
+# Sync song sheets to GCS
+./dataset-sync.py --dataset song-sheets -o gs://bucket/path/data.jsonl
+
+# Sync to multiple destinations (both local and GCS)
+./dataset-sync.py --dataset jam-sessions \
+  -o /local/backup.jsonl \
+  -o gs://bucket/latest/data.jsonl \
+  -o gs://bucket/$(date +%Y-%m-%d)/data.jsonl
+```
+
+#### Supported Datasets
+- `jam-sessions`: Fetches jam session data from Google Sheets
+- `song-sheets`: Aggregates song sheet data from GCS
+
+#### Environment Variables
+- `SRC_BUCKET`: Source GCS bucket for song-sheets dataset
+- `DST_BUCKET`: Default destination GCS bucket
+- `GCSFS_REQUESTER_PAYS`: GCP project ID for requester pays
+- `SERVICE_ACCOUNT_EMAIL`: Service account for impersonation (local dev)
+
 ### Local Development with Manual Dataset (Fallback)
 
 The app includes automatic fallback to a local dataset. If you need to manually build this dataset from Google Drive for development:
