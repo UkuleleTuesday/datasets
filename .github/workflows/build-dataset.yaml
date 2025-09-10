@@ -37,8 +37,9 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Run dataset aggregation
-        run: ./dataset-sync-scripts/song_sheets.py
+        run: ./dataset-sync.py --dataset song-sheets -o "gs://${DST_BUCKET}/${DST_PREFIX}/latest/data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/$(date +%Y-%m-%d)/data.jsonl"
         env:
+          DST_BUCKET: ukulele-tuesday-datasets
           DST_PREFIX: ${{ github.event_name == 'pull_request' && format('song-sheets/aggregated/previews/pr-{0}', github.event.pull_request.number) || 'song-sheets/aggregated' }}
 
   sync-jam-sessions:
@@ -64,6 +65,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Run jam session plays sync
-        run: ./dataset-sync-scripts/jam_session_plays.py
+        run: ./dataset-sync.py --dataset jam-sessions -o "gs://${DST_BUCKET}/${DST_PREFIX}/latest/data.jsonl" -o "gs://${DST_BUCKET}/${DST_PREFIX}/$(date +%Y-%m-%d)/data.jsonl"
         env:
+          DST_BUCKET: ukulele-tuesday-datasets
           DST_PREFIX: ${{ github.event_name == 'pull_request' && format('jam-sessions/previews/pr-{0}', github.event.pull_request.number) || 'jam-sessions' }}
