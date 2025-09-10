@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 import streamlit as st
+import urllib.request
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 from jsonschema import validate, ValidationError
@@ -104,9 +105,58 @@ def extract_field_info(field_schema: Dict[str, Any]) -> Dict[str, Any]:
     return field_info
 
 
+@st.cache_data(ttl=600)
+def load_data_from_public_url(dataset_type: str) -> Optional[pd.DataFrame]:
+    """Load dataset data from public GCS URL."""
+    # Map dataset types to their public URLs
+    dataset_urls = {
+        "song-sheets": "https://ukulele-tuesday-datasets.storage.googleapis.com/song-sheets/aggregated/latest/data.jsonl",
+        "jam-sessions": "https://ukulele-tuesday-datasets.storage.googleapis.com/jam-sessions/latest/data.jsonl"
+    }
+    
+    if dataset_type not in dataset_urls:
+        return None
+    
+    dataset_url = dataset_urls[dataset_type]
+    all_data = []
+
+    try:
+        with st.spinner(f"Loading {dataset_type} dataset from public URL..."):
+            with urllib.request.urlopen(dataset_url) as response:
+                if response.status != 200:
+                    st.error(f"Failed to fetch data: HTTP {response.status}")
+                    return None
+                for line in response:
+                    try:
+                        all_data.append(json.loads(line))
+                    except json.JSONDecodeError:
+                        st.warning(f"Skipping invalid JSON line in {dataset_type} dataset")
+                        continue
+
+        if not all_data:
+            st.error(f"No data found in the {dataset_type} dataset file.")
+            return None
+
+        df = pd.json_normalize(all_data)
+        st.success(f"Successfully loaded {len(all_data)} {dataset_type} records from public dataset")
+        return df
+
+    except Exception as e:
+        st.error(f"Error loading {dataset_type} data from public URL: {e}")
+        return None
+
+
 @st.cache_data
 def load_dataset_data(dataset_type: str) -> Optional[pd.DataFrame]:
-    """Load dataset data from various possible locations."""
+    """Load dataset data from public URL first, with local file fallback."""
+    # Try loading from public URL first
+    df = load_data_from_public_url(dataset_type)
+    if df is not None:
+        return df
+    
+    # Fall back to local files if public URL fails
+    st.info(f"Could not load {dataset_type} from public URL, trying local files...")
+    
     # Look for data files in common locations
     possible_paths = [
         Path(__file__).parent.parent / f"data/{dataset_type}.json",
@@ -388,10 +438,8 @@ def main():
         df = load_dataset_data(selected_dataset)
     
     if df is None:
-        st.warning(f"No data file found for dataset '{selected_dataset}'. The explorer shows the schema structure but cannot display actual data.")
-        st.info("To add data, place a JSON or JSONL file in one of these locations:\n" + 
-                "\n".join([f"- `data/{selected_dataset}.json`", f"- `data/{selected_dataset}.jsonl`",
-                          f"- `{selected_dataset}.json`", f"- `{selected_dataset}.jsonl`"]))
+        st.warning(f"No data available for dataset '{selected_dataset}'. This could be due to network connectivity issues or the dataset not being available yet.")
+        st.info("The explorer shows the schema structure even without data. To see actual data, ensure you have an internet connection to access the public dataset.")
         return
     
     # Show dataset overview
