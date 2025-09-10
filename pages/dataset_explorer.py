@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 import streamlit as st
+import urllib.request
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 from jsonschema import validate, ValidationError
@@ -104,56 +105,52 @@ def extract_field_info(field_schema: Dict[str, Any]) -> Dict[str, Any]:
     return field_info
 
 
+@st.cache_data(ttl=600)
+def load_data_from_public_url(dataset_type: str) -> Optional[pd.DataFrame]:
+    """Load dataset data from public GCS URL."""
+    # Map dataset types to their public URLs
+    dataset_urls = {
+        "song-sheets": "https://ukulele-tuesday-datasets.storage.googleapis.com/song-sheets/aggregated/latest/data.jsonl",
+        "jam-sessions": "https://ukulele-tuesday-datasets.storage.googleapis.com/jam-sessions/latest/data.jsonl"
+    }
+    
+    if dataset_type not in dataset_urls:
+        return None
+    
+    dataset_url = dataset_urls[dataset_type]
+    all_data = []
+
+    try:
+        with st.spinner(f"Loading {dataset_type} dataset from public URL..."):
+            with urllib.request.urlopen(dataset_url) as response:
+                if response.status != 200:
+                    st.error(f"Failed to fetch data: HTTP {response.status}")
+                    return None
+                for line in response:
+                    try:
+                        all_data.append(json.loads(line))
+                    except json.JSONDecodeError:
+                        st.warning(f"Skipping invalid JSON line in {dataset_type} dataset")
+                        continue
+
+        if not all_data:
+            st.error(f"No data found in the {dataset_type} dataset file.")
+            return None
+
+        df = pd.json_normalize(all_data)
+        st.success(f"Successfully loaded {len(all_data)} {dataset_type} records from public dataset")
+        return df
+
+    except Exception as e:
+        st.error(f"Error loading {dataset_type} data from public URL: {e}")
+        return None
+
+
 @st.cache_data
 def load_dataset_data(dataset_type: str) -> Optional[pd.DataFrame]:
-    """Load dataset data from various possible locations."""
-    # Look for data files in common locations
-    possible_paths = [
-        Path(__file__).parent.parent / f"data/{dataset_type}.json",
-        Path(__file__).parent.parent / f"data/{dataset_type}.jsonl",
-        Path(__file__).parent.parent / f"{dataset_type}.json",
-        Path(__file__).parent.parent / f"{dataset_type}.jsonl",
-    ]
-    
-    for path in possible_paths:
-        if path.exists():
-            try:
-                return load_data_file(path)
-            except Exception as e:
-                st.warning(f"Could not load data from {path}: {e}")
-                continue
-    
-    return None
+    """Load dataset data from public GCS URL."""
+    return load_data_from_public_url(dataset_type)
 
-
-def load_data_file(file_path: Path) -> pd.DataFrame:
-    """Load data from a JSON or JSONL file."""
-    try:
-        if file_path.suffix == '.jsonl':
-            # Load JSONL file
-            data = []
-            with open(file_path, 'r') as f:
-                for line in f:
-                    line = line.strip()
-                    if line:
-                        data.append(json.loads(line))
-        else:
-            # Load JSON file
-            with open(file_path, 'r') as f:
-                data = json.load(f)
-        
-        # Convert to DataFrame
-        if isinstance(data, list):
-            df = pd.json_normalize(data)
-        elif isinstance(data, dict):
-            df = pd.json_normalize([data])
-        else:
-            raise ValueError(f"Unsupported data format: {type(data)}")
-        
-        return df
-        
-    except Exception as e:
-        raise Exception(f"Failed to load data from {file_path}: {e}")
 
 
 def format_field_value(value: Any, field_info: Dict[str, Any]) -> str:
@@ -388,10 +385,8 @@ def main():
         df = load_dataset_data(selected_dataset)
     
     if df is None:
-        st.warning(f"No data file found for dataset '{selected_dataset}'. The explorer shows the schema structure but cannot display actual data.")
-        st.info("To add data, place a JSON or JSONL file in one of these locations:\n" + 
-                "\n".join([f"- `data/{selected_dataset}.json`", f"- `data/{selected_dataset}.jsonl`",
-                          f"- `{selected_dataset}.json`", f"- `{selected_dataset}.jsonl`"]))
+        st.error(f"Unable to load data for dataset '{selected_dataset}' from the public URL.")
+        st.info("Please check your internet connection and try again. The dataset explorer requires access to the public Ukulele Tuesday datasets.")
         return
     
     # Show dataset overview
