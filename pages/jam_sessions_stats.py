@@ -85,15 +85,15 @@ def main():
         st.subheader("Top 20 Most Played Songs")
 
         # Create a unique song identifier (song only for conciseness)
-        songs_df['song_artist'] = songs_df['song']
+        songs_df['song_title'] = songs_df['song']
         
-        song_counts = songs_df['song_artist'].value_counts().nlargest(20).reset_index()
-        song_counts.columns = ['song_artist', 'count']
+        song_counts = songs_df['song_title'].value_counts().nlargest(20).reset_index()
+        song_counts.columns = ['song_title', 'count']
 
         chart = alt.Chart(song_counts).mark_bar().encode(
             x=alt.X('count', title='Times Played'),
-            y=alt.Y('song_artist', sort='-x', title='Song'),
-            tooltip=['song_artist', 'count']
+            y=alt.Y('song_title', sort='-x', title='Song'),
+            tooltip=['song_title', 'count']
         ).interactive()
         
         st.altair_chart(chart, use_container_width=True)
@@ -115,14 +115,14 @@ def main():
 
         if sessions_recent_count > 0 and sessions_past_count > 0:
             # Calculate frequencies
-            freq_recent = (recent_songs['song_artist'].value_counts() / sessions_recent_count).reset_index()
-            freq_recent.columns = ['song_artist', 'recent_freq']
+            freq_recent = (recent_songs['song_title'].value_counts() / sessions_recent_count).reset_index()
+            freq_recent.columns = ['song_title', 'recent_freq']
             
-            freq_past = (past_songs['song_artist'].value_counts() / sessions_past_count).reset_index()
-            freq_past.columns = ['song_artist', 'past_freq']
+            freq_past = (past_songs['song_title'].value_counts() / sessions_past_count).reset_index()
+            freq_past.columns = ['song_title', 'past_freq']
 
             # Merge and calculate change
-            trends_df = pd.merge(freq_recent, freq_past, on='song_artist', how='outer').fillna(0)
+            trends_df = pd.merge(freq_recent, freq_past, on='song_title', how='outer').fillna(0)
             trends_df['change'] = trends_df['recent_freq'] - trends_df['past_freq']
             
             # Rising Stars
@@ -132,8 +132,8 @@ def main():
 
             rising_chart = alt.Chart(rising_stars).mark_bar().encode(
                 x=alt.X('change', title='Increase in Plays per Session'),
-                y=alt.Y('song_artist', sort='-x', title='Song'),
-                tooltip=['song_artist', 'change']
+                y=alt.Y('song_title', sort='-x', title='Song'),
+                tooltip=['song_title', 'change']
             ).interactive()
             st.altair_chart(rising_chart, use_container_width=True)
             
@@ -144,8 +144,8 @@ def main():
 
             falling_chart = alt.Chart(falling_stars).mark_bar(color='firebrick').encode(
                 x=alt.X('change', title='Decrease in Plays per Session'),
-                y=alt.Y('song_artist', sort='x', title='Song'),
-                tooltip=['song_artist', 'change']
+                y=alt.Y('song_title', sort='x', title='Song'),
+                tooltip=['song_title', 'change']
             ).interactive()
             st.altair_chart(falling_chart, use_container_width=True)
         else:
