@@ -84,8 +84,8 @@ def main():
         st.header("Analysis")
         st.subheader("Top 20 Most Played Songs")
 
-        # Create a unique song identifier (song + artist)
-        songs_df['song_artist'] = songs_df['song'] + " - " + songs_df['artist']
+        # Create a unique song identifier (song only for conciseness)
+        songs_df['song_artist'] = songs_df['song']
         
         song_counts = songs_df['song_artist'].value_counts().nlargest(20).reset_index()
         song_counts.columns = ['song_artist', 'count']
