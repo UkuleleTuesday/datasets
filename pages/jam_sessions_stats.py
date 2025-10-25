@@ -82,12 +82,12 @@ def main():
         col3.metric("Unique Songs Played", songs_df['song'].nunique())
         
         st.header("Analysis")
-        st.subheader("Top 20 Most Played Songs")
+        st.subheader("Most Played Songs")
 
         # Create a unique song identifier (song + artist)
         songs_df['song_artist'] = songs_df['song'] + " - " + songs_df['artist']
         
-        song_counts = songs_df['song_artist'].value_counts().nlargest(20).reset_index()
+        song_counts = songs_df['song_artist'].value_counts().reset_index()
         song_counts.columns = ['song_artist', 'count']
 
         chart = alt.Chart(song_counts).mark_bar().encode(
