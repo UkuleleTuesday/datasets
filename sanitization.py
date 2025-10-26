@@ -2,6 +2,7 @@
 Utilities for sanitizing jam session data using canonical song sheets.
 """
 import difflib
+import pandas as pd
 from typing import Optional, Dict, Any, List, Tuple
 
 
@@ -125,7 +126,8 @@ def sanitize_jam_events(
         - matches_log: List of match information dictionaries
         - unmatched_warnings: List of unmatched entries
     """
-    import pandas as pd
+    # Helper to safely convert to string
+    safe_str = lambda x: '' if pd.isna(x) else x
     
     # Create a copy to avoid modifying the original
     sanitized_df = events_df.copy()
@@ -142,12 +144,9 @@ def sanitize_jam_events(
         # Skip if song or artist is None or NaN
         if pd.isna(jam_song) or pd.isna(jam_artist):
             unmatched_warnings.append({
-                'song': jam_song if not pd.isna(jam_song) else '',
-                'artist': jam_artist if not pd.isna(jam_artist) else '',
-                'key': create_match_key(
-                    jam_song if not pd.isna(jam_song) else '',
-                    jam_artist if not pd.isna(jam_artist) else ''
-                )
+                'song': safe_str(jam_song),
+                'artist': safe_str(jam_artist),
+                'key': create_match_key(safe_str(jam_song), safe_str(jam_artist))
             })
             continue
         
