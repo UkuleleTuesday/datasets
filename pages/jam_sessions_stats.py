@@ -66,6 +66,7 @@ def load_song_sheets_data() -> Optional[List[Dict[str, Any]]]:
                         'id': song_data.get('id'),
                         'song': song_data.get('properties', {}).get('song'),
                         'artist': song_data.get('properties', {}).get('artist'),
+                        'specialbooks': song_data.get('properties', {}).get('specialbooks'),
                     })
                 except json.JSONDecodeError:
                     continue
@@ -136,6 +137,13 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
             # Replace with canonical names
             sanitized_df.at[idx, 'song'] = matched_data['song']
             sanitized_df.at[idx, 'artist'] = matched_data['artist']
+            
+            # Carry over specialbooks data
+            specialbooks = matched_data.get('specialbooks')
+            if isinstance(specialbooks, str):
+                sanitized_df.at[idx, 'specialbooks'] = specialbooks.split(',')
+            else:
+                sanitized_df.at[idx, 'specialbooks'] = specialbooks
         else:
             # Show warning and mark for removal for entries with actual content that don't match
             st.warning(f"Could not match: {jam_song_str} - {jam_artist_str}")
@@ -179,6 +187,8 @@ def main():
         # Filter dataframe based on date range
         df = df[(df["date"].dt.date >= start_date) & (df["date"].dt.date <= end_date)]
 
+        songbook_only = st.checkbox("Current songbook only")
+
         # Explode the 'events' column to get one row per event
         events_df = df.explode("events").reset_index(drop=True)
         # Normalize the 'events' column, which contains dicts
@@ -191,6 +201,14 @@ def main():
 
         # Filter for song events
         songs_df = events_df[events_df['type'] == 'song'].copy()
+
+        # Filter for current songbook if checkbox is selected
+        if songbook_only:
+            songs_df = songs_df[
+                songs_df["specialbooks"].apply(
+                    lambda x: isinstance(x, list) and "regular" in x
+                )
+            ]
 
         st.header("Overall Summary")
         col1, col2, col3 = st.columns(3)
