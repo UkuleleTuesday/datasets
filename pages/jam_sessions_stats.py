@@ -81,7 +81,7 @@ def load_song_sheets_data() -> Optional[List[Dict[str, Any]]]:
 def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.DataFrame:
     """
     Sanitize jam session events by matching to canonical song sheets using difflib.
-    Shows warnings for unmatched entries.
+    Shows warnings for unmatched entries and removes invalid entries from the dataset.
     """
     if not canonical_songs:
         return events_df
@@ -97,6 +97,9 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
         canonical_keys.append(normalize_for_matching(key))
         canonical_data.append(song_data)
     
+    # Track indices to remove
+    indices_to_remove = []
+    
     # Only process song events
     song_mask = sanitized_df['type'] == 'song'
     
@@ -104,16 +107,18 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
         jam_song = sanitized_df.at[idx, 'song']
         jam_artist = sanitized_df.at[idx, 'artist']
         
-        # Skip if song or artist is None, NaN, empty, or just whitespace/dashes
+        # Mark for removal if song or artist is None, NaN, empty, or just whitespace/dashes
         if pd.isna(jam_song) or pd.isna(jam_artist):
+            indices_to_remove.append(idx)
             continue
         
         # Convert to strings and strip whitespace
         jam_song_str = str(jam_song).strip()
         jam_artist_str = str(jam_artist).strip()
         
-        # Skip if either is empty or just a dash
+        # Mark for removal if either is empty or just a dash
         if not jam_song_str or not jam_artist_str or jam_song_str == '-' or jam_artist_str == '-':
+            indices_to_remove.append(idx)
             continue
         
         # Create search key
@@ -131,8 +136,13 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
             sanitized_df.at[idx, 'song'] = matched_data['song']
             sanitized_df.at[idx, 'artist'] = matched_data['artist']
         else:
-            # Show warning only for entries with actual content that don't match
+            # Show warning and mark for removal for entries with actual content that don't match
             st.warning(f"Could not match: {jam_song_str} - {jam_artist_str}")
+            indices_to_remove.append(idx)
+    
+    # Remove invalid entries
+    if indices_to_remove:
+        sanitized_df = sanitized_df.drop(indices_to_remove)
     
     return sanitized_df
 
