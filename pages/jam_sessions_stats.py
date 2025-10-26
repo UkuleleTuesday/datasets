@@ -91,6 +91,11 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
     # Create a copy to avoid modifying the original
     sanitized_df = events_df.copy()
 
+    # Ensure the 'specialbooks' column exists and can hold lists
+    if 'specialbooks' not in sanitized_df.columns:
+        sanitized_df['specialbooks'] = pd.Series(dtype='object')
+
+
     # Build canonical keys
     canonical_keys = []
     canonical_data = []
