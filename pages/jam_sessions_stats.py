@@ -104,12 +104,20 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
         jam_song = sanitized_df.at[idx, 'song']
         jam_artist = sanitized_df.at[idx, 'artist']
         
-        # Skip if song or artist is None or NaN
+        # Skip if song or artist is None, NaN, empty, or just whitespace/dashes
         if pd.isna(jam_song) or pd.isna(jam_artist):
             continue
         
+        # Convert to strings and strip whitespace
+        jam_song_str = str(jam_song).strip()
+        jam_artist_str = str(jam_artist).strip()
+        
+        # Skip if either is empty or just a dash
+        if not jam_song_str or not jam_artist_str or jam_song_str == '-' or jam_artist_str == '-':
+            continue
+        
         # Create search key
-        jam_key = normalize_for_matching(f"{jam_song} - {jam_artist}")
+        jam_key = normalize_for_matching(f"{jam_song_str} - {jam_artist_str}")
         
         # Use difflib to find close matches
         matches = difflib.get_close_matches(jam_key, canonical_keys, n=1, cutoff=0.8)
@@ -123,8 +131,8 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
             sanitized_df.at[idx, 'song'] = matched_data['song']
             sanitized_df.at[idx, 'artist'] = matched_data['artist']
         else:
-            # Show warning for unmatched entry
-            st.warning(f"Could not match: {jam_song} - {jam_artist}")
+            # Show warning only for entries with actual content that don't match
+            st.warning(f"Could not match: {jam_song_str} - {jam_artist_str}")
     
     return sanitized_df
 
