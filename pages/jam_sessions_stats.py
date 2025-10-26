@@ -177,20 +177,22 @@ def main():
     if df is not None:
         df["date"] = pd.to_datetime(df["date"])
 
-        # Date range slider
-        min_date = df["date"].min().date()
-        max_date = df["date"].max().date()
+        # Create a year-month column for filtering
+        df["year_month"] = df["date"].dt.to_period("M").astype(str)
+        year_months = sorted(df["year_month"].unique())
 
-        start_date, end_date = st.slider(
-            "Select date range",
-            min_value=min_date,
-            max_value=max_date,
-            value=(min_date, max_date),
-            format="YYYY-MM-DD"
+        # Year-month range slider
+        start_month, end_month = st.select_slider(
+            "Select date range (Year-Month)",
+            options=year_months,
+            value=(year_months[0], year_months[-1])
         )
+        
+        # Determine the full end date for trend calculations
+        end_date = pd.to_datetime(end_month).to_period('M').end_time.date()
 
         # Filter dataframe based on date range
-        df = df[(df["date"].dt.date >= start_date) & (df["date"].dt.date <= end_date)]
+        df = df[(df["year_month"] >= start_month) & (df["year_month"] <= end_month)]
 
         songbook_only = st.checkbox("Current songbook only")
 
