@@ -88,8 +88,7 @@ def find_canonical_match(
     best_match_normalized = matches[0]
     match_index = canonical_normalized_keys.index(best_match_normalized)
     
-    # Get the original (non-normalized) canonical key
-    matched_canonical_key = canonical_keys[match_index]
+    # Get the matched song data
     matched_song_data = canonical_songs[match_index]
     
     # Calculate the actual similarity score
@@ -139,6 +138,18 @@ def sanitize_jam_events(
     for idx in sanitized_df[song_mask].index:
         jam_song = sanitized_df.at[idx, 'song']
         jam_artist = sanitized_df.at[idx, 'artist']
+        
+        # Skip if song or artist is None or NaN
+        if pd.isna(jam_song) or pd.isna(jam_artist):
+            unmatched_warnings.append({
+                'song': jam_song if not pd.isna(jam_song) else '',
+                'artist': jam_artist if not pd.isna(jam_artist) else '',
+                'key': create_match_key(
+                    jam_song if not pd.isna(jam_song) else '',
+                    jam_artist if not pd.isna(jam_artist) else ''
+                )
+            })
+            continue
         
         # Try to find a canonical match
         match_result = find_canonical_match(
