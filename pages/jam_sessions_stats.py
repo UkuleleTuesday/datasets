@@ -4,6 +4,51 @@ import streamlit as st
 import urllib.request
 import altair as alt
 from typing import List, Dict, Any, Optional
+import sys
+from pathlib import Path
+
+# Add parent directory to path to import sanitization module
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from sanitization import sanitize_jam_events
+
+@st.cache_data(ttl=600)
+def load_song_sheets_data() -> Optional[List[Dict[str, Any]]]:
+    """Load the canonical song sheets dataset from a public URL."""
+    dataset_url = "https://ukulele-tuesday-datasets.storage.googleapis.com/song-sheets/aggregated/latest/data.jsonl"
+    all_data: List[Dict[str, Any]] = []
+
+    try:
+        with st.spinner("Loading song sheets dataset for sanitization..."):
+            with urllib.request.urlopen(dataset_url) as response:
+                if response.status != 200:
+                    st.error(f"Failed to fetch song sheets data: HTTP {response.status}")
+                    return None
+                for line in response:
+                    try:
+                        song_data = json.loads(line)
+                        # Extract the relevant fields for matching
+                        all_data.append({
+                            'id': song_data.get('id'),
+                            'song': song_data.get('properties', {}).get('song'),
+                            'artist': song_data.get('properties', {}).get('artist'),
+                        })
+                    except json.JSONDecodeError:
+                        st.warning(f"Skipping invalid JSON line in song sheets: {line.strip()}")
+                        continue
+
+        # Filter out any incomplete entries
+        all_data = [s for s in all_data if s.get('id') and s.get('song') and s.get('artist')]
+        
+        if not all_data:
+            st.error("No valid song sheets data found.")
+            return None
+
+        return all_data
+
+    except Exception as e:
+        st.error(f"Error loading song sheets data: {e}")
+        return None
+
 
 @st.cache_data(ttl=600)
 def load_data_from_public_url() -> Optional[pd.DataFrame]:
@@ -50,6 +95,9 @@ def main():
     df = load_data_from_public_url()
 
     if df is not None:
+        # Load canonical song sheets data for sanitization
+        canonical_songs = load_song_sheets_data()
+        
         df["date"] = pd.to_datetime(df["date"])
 
         # Date range slider
@@ -71,6 +119,40 @@ def main():
         events_df = df.explode("events").reset_index(drop=True)
         # Normalize the 'events' column, which contains dicts
         events_df = pd.concat([events_df.drop(['events'], axis=1), events_df['events'].apply(pd.Series)], axis=1)
+        
+        # Sanitize song and artist names using canonical data if available
+        if canonical_songs:
+            with st.spinner("Sanitizing song and artist names..."):
+                events_df, matches_log, unmatched = sanitize_jam_events(
+                    events_df, 
+                    canonical_songs, 
+                    threshold=0.8
+                )
+                
+                # Show sanitization statistics in an expander
+                if matches_log or unmatched:
+                    with st.expander("🔍 Sanitization Details", expanded=False):
+                        if matches_log:
+                            st.success(f"✅ Matched {len(matches_log)} song entries to canonical song sheets")
+                            
+                            # Show some example matches
+                            st.markdown("**Sample matches:**")
+                            for i, match in enumerate(matches_log[:5]):
+                                if match['original_song'] != match['canonical_song'] or match['original_artist'] != match['canonical_artist']:
+                                    st.write(f"- `{match['original_song']} - {match['original_artist']}` → `{match['canonical_song']} - {match['canonical_artist']}` (score: {match['match_score']:.2f}, ID: {match['matched_id']})")
+                            
+                            if len(matches_log) > 5:
+                                st.caption(f"... and {len(matches_log) - 5} more matches")
+                        
+                        if unmatched:
+                            st.warning(f"⚠️ {len(unmatched)} song entries could not be matched to canonical data")
+                            st.markdown("**Unmatched entries:**")
+                            for entry in unmatched[:10]:
+                                st.write(f"- `{entry['key']}`")
+                            if len(unmatched) > 10:
+                                st.caption(f"... and {len(unmatched) - 10} more unmatched entries")
+        else:
+            st.warning("⚠️ Could not load canonical song sheets data. Song and artist names will not be sanitized.")
         
         # Filter for song events
         songs_df = events_df[events_df['type'] == 'song'].copy()
