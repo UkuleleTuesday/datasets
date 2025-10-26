@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 import urllib.request
 import altair as alt
+import difflib
 from typing import List, Dict, Any, Optional
 
 @st.cache_data(ttl=600)
@@ -35,6 +36,116 @@ def load_data_from_public_url() -> Optional[pd.DataFrame]:
     except Exception as e:
         st.error(f"Error loading data from public URL: {e}")
         return None
+
+
+def normalize_for_matching(text: str) -> str:
+    """
+    Normalize a string for comparison by trimming whitespace and converting to lowercase.
+    
+    This function is intentionally kept minimal but structured to allow future extensions
+    (e.g., removing punctuation, handling 'feat.' artists, etc.).
+    """
+    return text.strip().lower()
+
+
+@st.cache_data(ttl=600)
+def load_song_sheets_data() -> Optional[List[Dict[str, Any]]]:
+    """Load the canonical song sheets dataset from a public URL."""
+    dataset_url = "https://ukulele-tuesday-datasets.storage.googleapis.com/song-sheets/aggregated/latest/data.jsonl"
+    all_data: List[Dict[str, Any]] = []
+
+    try:
+        with urllib.request.urlopen(dataset_url) as response:
+            if response.status != 200:
+                return None
+            for line in response:
+                try:
+                    song_data = json.loads(line)
+                    # Extract the relevant fields for matching
+                    all_data.append({
+                        'id': song_data.get('id'),
+                        'song': song_data.get('properties', {}).get('song'),
+                        'artist': song_data.get('properties', {}).get('artist'),
+                    })
+                except json.JSONDecodeError:
+                    continue
+
+        # Filter out any incomplete entries
+        all_data = [s for s in all_data if s.get('id') and s.get('song') and s.get('artist')]
+        return all_data if all_data else None
+
+    except Exception:
+        return None
+
+
+def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.DataFrame:
+    """
+    Sanitize jam session events by matching to canonical song sheets using difflib.
+    Shows warnings for unmatched entries and removes invalid entries from the dataset.
+    """
+    if not canonical_songs:
+        return events_df
+    
+    # Create a copy to avoid modifying the original
+    sanitized_df = events_df.copy()
+    
+    # Build canonical keys
+    canonical_keys = []
+    canonical_data = []
+    for song_data in canonical_songs:
+        key = f"{song_data['song']} - {song_data['artist']}"
+        canonical_keys.append(normalize_for_matching(key))
+        canonical_data.append(song_data)
+    
+    # Track indices to remove
+    indices_to_remove = []
+    
+    # Only process song events
+    song_mask = sanitized_df['type'] == 'song'
+    
+    for idx in sanitized_df[song_mask].index:
+        jam_song = sanitized_df.at[idx, 'song']
+        jam_artist = sanitized_df.at[idx, 'artist']
+        
+        # Mark for removal if song or artist is None, NaN, empty, or just whitespace/dashes
+        if pd.isna(jam_song) or pd.isna(jam_artist):
+            indices_to_remove.append(idx)
+            continue
+        
+        # Convert to strings and strip whitespace
+        jam_song_str = str(jam_song).strip()
+        jam_artist_str = str(jam_artist).strip()
+        
+        # Mark for removal if either is empty or just a dash
+        if not jam_song_str or not jam_artist_str or jam_song_str == '-' or jam_artist_str == '-':
+            indices_to_remove.append(idx)
+            continue
+        
+        # Create search key
+        jam_key = normalize_for_matching(f"{jam_song_str} - {jam_artist_str}")
+        
+        # Use difflib to find close matches
+        matches = difflib.get_close_matches(jam_key, canonical_keys, n=1, cutoff=0.8)
+        
+        if matches:
+            # Find the matched canonical data
+            match_index = canonical_keys.index(matches[0])
+            matched_data = canonical_data[match_index]
+            
+            # Replace with canonical names
+            sanitized_df.at[idx, 'song'] = matched_data['song']
+            sanitized_df.at[idx, 'artist'] = matched_data['artist']
+        else:
+            # Show warning and mark for removal for entries with actual content that don't match
+            st.warning(f"Could not match: {jam_song_str} - {jam_artist_str}")
+            indices_to_remove.append(idx)
+    
+    # Remove invalid entries
+    if indices_to_remove:
+        sanitized_df = sanitized_df.drop(indices_to_remove)
+    
+    return sanitized_df
+
 
 def main():
     st.set_page_config(page_title="Ukulele Tuesday Jam Session Stats", layout="wide")
@@ -71,6 +182,11 @@ def main():
         events_df = df.explode("events").reset_index(drop=True)
         # Normalize the 'events' column, which contains dicts
         events_df = pd.concat([events_df.drop(['events'], axis=1), events_df['events'].apply(pd.Series)], axis=1)
+        
+        # Sanitize song and artist names using canonical data
+        canonical_songs = load_song_sheets_data()
+        if canonical_songs:
+            events_df = sanitize_jam_events(events_df, canonical_songs)
         
         # Filter for song events
         songs_df = events_df[events_df['type'] == 'song'].copy()
