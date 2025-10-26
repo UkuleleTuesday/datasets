@@ -126,8 +126,9 @@ def sanitize_jam_events(
         - matches_log: List of match information dictionaries
         - unmatched_warnings: List of unmatched entries
     """
-    # Helper to safely convert to string
-    safe_str = lambda x: '' if pd.isna(x) else x
+    def safe_str(value):
+        """Convert value to string, returning empty string for NaN/None."""
+        return '' if pd.isna(value) else value
     
     # Create a copy to avoid modifying the original
     sanitized_df = events_df.copy()
