@@ -200,7 +200,7 @@ def main():
         # Filter dataframe based on date range
         df = df[(df["year_month"] >= start_month) & (df["year_month"] <= end_month)]
 
-        songbook_only = st.checkbox("Current songbook only")
+        songbook_only = st.checkbox("Current songbook only", value=True)
 
         # Explode the 'events' column to get one row per event
         events_df = df.explode("events").reset_index(drop=True)
