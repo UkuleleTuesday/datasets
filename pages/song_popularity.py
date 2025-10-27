@@ -255,6 +255,7 @@ def main():
         st.dataframe(
             song_counts,
             use_container_width=True,
+            height=(len(song_counts) + 1) * 35,
             column_config={
                 "Plays": st.column_config.ProgressColumn(
                     "Plays",
