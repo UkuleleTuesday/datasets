@@ -242,22 +242,20 @@ def main():
         song_counts = songs_df['song_artist'].value_counts().reset_index()
         song_counts.columns = ['song_artist', 'count']
         
-        # Add ranking
-        song_counts['Rank'] = song_counts.index + 1
-        
         # Rename columns for display
         song_counts.rename(columns={'song_artist': 'Song', 'count': 'Plays'}, inplace=True)
         
         # Reorder columns
-        song_counts = song_counts[['Rank', 'Song', 'Plays']]
+        song_counts = song_counts[['Song', 'Plays']]
+
+        # Set index to start at 1 for ranking
+        song_counts.index = song_counts.index + 1
 
         # Display as a dataframe with a progress bar for plays
         st.dataframe(
             song_counts,
             use_container_width=True,
-            hide_index=True,
             column_config={
-                "Rank": st.column_config.Column(width="small"),
                 "Plays": st.column_config.ProgressColumn(
                     "Plays",
                     format="%d",
