@@ -221,8 +221,13 @@ def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
     gc = gspread.authorize(creds)
     drive_service = build("drive", "v3", credentials=creds)
 
-    folder_id = "1TY4KCBrbHODyCKCtWXgtNlCHs2-8Svpd"
-    spreadsheets = get_spreadsheets(drive_service, folder_id)
+    folder_ids = ["1b_ZuZVOGgvkKVSUypkbRwBsXLVQGjl95", "1bvrIMQXjAxepzn4Vx8wEjhk3eQS5a9BM"]
+    all_spreadsheets = []
+    for folder_id in folder_ids:
+        all_spreadsheets.extend(get_spreadsheets(drive_service, folder_id))
+
+    all_sessions = []
+    for spreadsheet in all_spreadsheets:
 
     all_sessions = []
     for spreadsheet in spreadsheets:
@@ -287,16 +292,24 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
     all_drive_files = []
     for folder_id in folder_ids:
         query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.document'"
-        try:
-            response = drive_service.files().list(
-                q=query, 
-                fields="files(id, name, properties)"
-            ).execute()
-            all_drive_files.extend(response.get("files", []))
-        except Exception as e:
-            print(f"ERROR: Failed to list files from Google Drive folder '{folder_id}': {e}", file=sys.stderr)
-            # Decide if you want to raise or continue
-            continue
+        page_token = None
+        while True:
+            try:
+                response = drive_service.files().list(
+                    q=query,
+                    fields="nextPageToken, files(id, name, properties)",
+                    pageToken=page_token,
+                    supportsAllDrives=True,
+                    includeItemsFromAllDrives=True
+                ).execute()
+                all_drive_files.extend(response.get("files", []))
+                page_token = response.get("nextPageToken")
+                if not page_token:
+                    break
+            except Exception as e:
+                print(f"ERROR: Failed to list files from Google Drive folder '{folder_id}': {e}", file=sys.stderr)
+                # Decide if you want to raise or continue
+                break
         
     all_data = []
     for file_data in all_drive_files:
