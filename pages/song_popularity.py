@@ -183,28 +183,34 @@ def main():
     if df is not None:
         df["date"] = pd.to_datetime(df["date"])
 
-        # Create a year-month column for filtering
+        # Create year and year-month columns
+        df["year"] = df["date"].dt.year
         df["year_month"] = df["date"].dt.to_period("M").astype(str)
-        year_months = sorted(df["year_month"].unique())
 
-        # Default to the last 12 months if possible
-        default_start_index = max(0, len(year_months) - 12)
-        default_start_month = year_months[default_start_index]
-        default_end_month = year_months[-1]
-
-        # Year-month range slider
-        start_month, end_month = st.select_slider(
-            "Select date range (Year-Month)",
-            options=year_months,
-            value=(default_start_month, default_end_month),
+        # Generate dropdown options
+        years = sorted(df["year"].unique(), reverse=True)
+        date_range_options = ["Last 12 months"] + [str(y) for y in years] + ["All time"]
+        
+        # Date range dropdown
+        selected_range = st.selectbox(
+            "Select date range",
+            options=date_range_options,
+            index=0  # Default to "Last 12 months"
         )
         
-        # Determine the full end date for trend calculations
-        end_date = pd.to_datetime(end_month).to_period('M').end_time.date()
-
-        # Filter dataframe based on date range
-        df = df[(df["year_month"] >= start_month) & (df["year_month"] <= end_month)]
-
+        # Filter dataframe based on selection
+        end_date = df["date"].max().date()
+        
+        if selected_range == "Last 12 months":
+            start_date = end_date - pd.DateOffset(months=12)
+            df = df[df["date"] >= pd.to_datetime(start_date)]
+        elif selected_range == "All time":
+            pass  # No date filter needed
+        else:
+            # Filter by selected year
+            selected_year = int(selected_range)
+            df = df[df["year"] == selected_year]
+        
         songbook_only = st.checkbox("Current songbook only", value=True)
 
         # Explode the 'events' column to get one row per event
