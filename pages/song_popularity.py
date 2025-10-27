@@ -188,7 +188,7 @@ def main():
         year_months = sorted(df["year_month"].unique())
 
         # Default to the last 12 months if possible
-        default_start_index = max(0, len(year_months) - 12)
+        default_start_index = max(0, len(year_months) - 11)
         default_start_month = year_months[default_start_index]
         default_end_month = year_months[-1]
 
