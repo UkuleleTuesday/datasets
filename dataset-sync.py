@@ -280,31 +280,9 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
 
     drive_service = build("drive", "v3", credentials=creds)
 
-    # Fetch all Google Docs from the folder and create a name-to-ID map
-    folder_id = "1b3rJ6K9z6Y34213m1b0-k2y_6S-HYw1z"
-    query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.document'"
-    try:
-        response = drive_service.files().list(
-            q=query, 
-            fields="files(id, name)", 
-            supportsAllDrives=True, 
-            includeItemsFromAllDrives=True
-        ).execute()
-        drive_files = response.get("files", [])
-        name_to_id_map = {f["name"]: f["id"] for f in drive_files}
-    except Exception as e:
-        print(f"ERROR: Failed to list files from Google Drive folder '{folder_id}': {e}", file=sys.stderr)
-        raise
-
     all_data = []
     for path in pdf_files:
-        filename = pathlib.Path(path).stem
-        file_id = name_to_id_map.get(filename)
-
-        if not file_id:
-            print(f"WARNING: No Google Doc found for '{filename}'", file=sys.stderr)
-            continue
-
+        file_id = pathlib.Path(path).stem
         try:
             file_data = drive_service.files().get(
                 fileId=file_id,
@@ -318,7 +296,7 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
                 "properties": file_data.get("properties", {})
             })
         except Exception as e:
-            print(f"ERROR: Failed to process '{filename}' (ID: {file_id}): {e}", file=sys.stderr)
+            print(f"ERROR: Failed to process file with ID '{file_id}': {e}", file=sys.stderr)
 
     return all_data
 
