@@ -275,27 +275,36 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
         print(f"No .pdf files found under gs://{src_base}")
         return []
 
-    scopes = ["https://www.googleapis.com/auth/drive"]
+    scopes = ["https://www.googleapis.com/auth/drive.readonly"]
     creds = get_google_credentials(scopes)
 
     drive_service = build("drive", "v3", credentials=creds)
+    
+    pdf_file_ids = {pathlib.Path(p).stem for p in pdf_files}
 
+    # Fetch all Google Docs from the folder and filter by PDF file IDs
+    folder_id = "1b3rJ6K9z6Y34213m1b0-k2y_6S-HYw1z"
+    query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.document'"
+    try:
+        response = drive_service.files().list(
+            q=query, 
+            fields="files(id, name, properties)", 
+            supportsAllDrives=True, 
+            includeItemsFromAllDrives=True
+        ).execute()
+        drive_files = response.get("files", [])
+    except Exception as e:
+        print(f"ERROR: Failed to list files from Google Drive folder '{folder_id}': {e}", file=sys.stderr)
+        raise
+        
     all_data = []
-    for path in pdf_files:
-        file_id = pathlib.Path(path).stem
-        try:
-            file_data = drive_service.files().get(
-                fileId=file_id,
-                fields="id, name, properties"
-            ).execute()
-            
+    for file_data in drive_files:
+        if file_data['id'] in pdf_file_ids:
             all_data.append({
                 "id": file_data["id"],
                 "name": file_data["name"],
                 "properties": file_data.get("properties", {})
             })
-        except Exception as e:
-            print(f"ERROR: Failed to process file with ID '{file_id}': {e}", file=sys.stderr)
 
     return all_data
 
