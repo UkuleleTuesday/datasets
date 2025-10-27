@@ -283,7 +283,7 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
     pdf_file_ids = {pathlib.Path(p).stem for p in pdf_files}
 
     # Fetch all Google Docs from the folder and filter by PDF file IDs
-    folder_id = "1b3rJ6K9z6Y34213m1b0-k2y_6S-HYw1z"
+    folder_id = "1_XVZlKAIVRsGRbWzdzi0HtwTnWOjFLZF"
     query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.document'"
     try:
         response = drive_service.files().list(
