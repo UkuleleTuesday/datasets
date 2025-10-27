@@ -11,7 +11,7 @@ pg = st.navigation(
         st.Page(
             "pages/song_popularity.py",
             title="Song Popularity",
-            icon=":material/music_note:",
+            icon="⭐",
         ),
         st.Page(
             "pages/dataset_explorer.py",
