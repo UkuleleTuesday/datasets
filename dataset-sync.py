@@ -3,6 +3,7 @@
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
+#   "packaging",
 #   "gspread",
 #   "google-auth",
 #   "google-api-python-client", 
@@ -195,15 +196,9 @@ def get_worksheet_data(sh):
     return worksheets_to_process, value_ranges
 
 
-def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
-    """Fetch jam session data from Google Sheets."""
-    # Setup Google authentication
+def get_google_credentials(scopes: List[str]) -> google.auth.credentials.Credentials:
+    """Get Google credentials, impersonating if SERVICE_ACCOUNT_EMAIL is set."""
     target_principal = os.getenv("SERVICE_ACCOUNT_EMAIL")
-    scopes = [
-        "https://www.googleapis.com/auth/spreadsheets.readonly",
-        "https://www.googleapis.com/auth/drive.readonly",
-    ]
-
     creds, _ = google.auth.default(scopes=scopes)
 
     if target_principal:
@@ -213,6 +208,16 @@ def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
             target_principal=target_principal,
             target_scopes=scopes,
         )
+    return creds
+
+
+def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
+    """Fetch jam session data from Google Sheets."""
+    scopes = [
+        "https://www.googleapis.com/auth/spreadsheets.readonly",
+        "https://www.googleapis.com/auth/drive.readonly",
+    ]
+    creds = get_google_credentials(scopes)
 
     gc = gspread.authorize(creds)
     drive_service = build("drive", "v3", credentials=creds)
@@ -246,7 +251,7 @@ def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
 
 
 def fetch_song_sheets_data() -> List[Dict[str, Any]]:
-    """Fetch and aggregate song sheets data from GCS."""
+    """Fetch and aggregate song sheets data from GCS and Google Drive."""
     # Config via env vars (backwards compatibility)
     src_bucket = os.getenv("SRC_BUCKET", "songbook-generator-cache-europe-west1")
     src_prefix = os.getenv("SRC_PREFIX", "song-sheets/").lstrip("/")
@@ -258,7 +263,7 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
 
     fs = gcsfs.GCSFileSystem(**fs_kwargs)
 
-    # List all .json files from source
+    # List all .pdf files from source
     src_base = f"{src_bucket}/{src_prefix}".rstrip("/")
     try:
         paths = fs.ls(src_base)
@@ -266,37 +271,50 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
         print(f"ERROR: failed to list gs://{src_base}: {e}", file=sys.stderr)
         raise
 
-    json_files = sorted(p for p in paths if p.endswith(".json"))
-    if not json_files:
-        print(f"No .json files found under gs://{src_base}")
+    pdf_files = sorted(p for p in paths if p.endswith(".pdf"))
+    if not pdf_files:
+        print(f"No .pdf files found under gs://{src_base}")
         return []
 
-    # Load and aggregate all JSON data
-    all_data = []
-    
-    # Use fs.cat for parallel fetching
-    try:
-        # fs.cat returns a dictionary of path -> content (bytes)
-        file_contents = fs.cat(json_files)
-    except Exception as e:
-        print(f"ERROR: Failed to fetch files from GCS: {e}", file=sys.stderr)
-        raise
-    
-    for path, content in file_contents.items():
-        try:
-            data = json.loads(content)
-        except json.JSONDecodeError as exc:
-            print(f"WARNING: skipping gs://{path} (invalid JSON): {exc}", file=sys.stderr)
-            continue
+    scopes = ["https://www.googleapis.com/auth/drive.readonly"]
+    creds = get_google_credentials(scopes)
 
-        # Accept either dict or list-of-dicts
-        if isinstance(data, list):
-            all_data.extend(data)
-        elif isinstance(data, dict):
-            all_data.append(data)
-        else:
-            # Fallback: wrap primitive under 'value'
-            all_data.append({"value": data})
+    drive_service = build("drive", "v3", credentials=creds)
+    
+    pdf_file_ids = {pathlib.Path(p).stem for p in pdf_files}
+
+    # Fetch all Google Docs from the folder and filter by PDF file IDs
+    folder_ids = ["1b_ZuZVOGgvkKVSUypkbRwBsXLVQGjl95", "1bvrIMQXjAxepzn4Vx8wEjhk3eQS5a9BM"]
+    all_drive_files = []
+    for folder_id in folder_ids:
+        query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.document'"
+        page_token = None
+        while True:
+            try:
+                response = drive_service.files().list(
+                    q=query,
+                    fields="nextPageToken, files(id, name, properties)",
+                    pageToken=page_token,
+                    supportsAllDrives=True,
+                    includeItemsFromAllDrives=True
+                ).execute()
+                all_drive_files.extend(response.get("files", []))
+                page_token = response.get("nextPageToken")
+                if not page_token:
+                    break
+            except Exception as e:
+                print(f"ERROR: Failed to list files from Google Drive folder '{folder_id}': {e}", file=sys.stderr)
+                # Decide if you want to raise or continue
+                break
+        
+    all_data = []
+    for file_data in all_drive_files:
+        if file_data['id'] in pdf_file_ids:
+            all_data.append({
+                "id": file_data["id"],
+                "name": file_data["name"],
+                "properties": file_data.get("properties", {})
+            })
 
     return all_data
 
