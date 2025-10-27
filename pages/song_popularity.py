@@ -162,7 +162,7 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
 
 
 def main():
-    st.set_page_config(page_title="Ukulele Tuesday Song Popularity", layout="wide")
+    st.set_page_config(page_title="Ukulele Tuesday Song Popularity", layout="wide", page_icon="⭐")
     st.title("Ukulele Tuesday Song Popularity")
 
     st.markdown(
