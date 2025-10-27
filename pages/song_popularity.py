@@ -229,8 +229,7 @@ def main():
         col2.metric("Total Songs Played", len(songs_df))
         col3.metric("Unique Songs Played", songs_df['song'].nunique())
 
-        st.header("Analysis")
-        st.subheader("Most Played Songs")
+        st.header("Most Played Songs")
 
         # Create a unique song identifier (song + artist)
         songs_df['song_artist'] = songs_df['song'] + " - " + songs_df['artist']
