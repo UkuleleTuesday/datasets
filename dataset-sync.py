@@ -195,15 +195,9 @@ def get_worksheet_data(sh):
     return worksheets_to_process, value_ranges
 
 
-def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
-    """Fetch jam session data from Google Sheets."""
-    # Setup Google authentication
+def get_google_credentials(scopes: List[str]) -> google.auth.credentials.Credentials:
+    """Get Google credentials, impersonating if SERVICE_ACCOUNT_EMAIL is set."""
     target_principal = os.getenv("SERVICE_ACCOUNT_EMAIL")
-    scopes = [
-        "https://www.googleapis.com/auth/spreadsheets.readonly",
-        "https://www.googleapis.com/auth/drive.readonly",
-    ]
-
     creds, _ = google.auth.default(scopes=scopes)
 
     if target_principal:
@@ -213,6 +207,16 @@ def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
             target_principal=target_principal,
             target_scopes=scopes,
         )
+    return creds
+
+
+def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
+    """Fetch jam session data from Google Sheets."""
+    scopes = [
+        "https://www.googleapis.com/auth/spreadsheets.readonly",
+        "https://www.googleapis.com/auth/drive.readonly",
+    ]
+    creds = get_google_credentials(scopes)
 
     gc = gspread.authorize(creds)
     drive_service = build("drive", "v3", credentials=creds)
@@ -271,19 +275,8 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
         print(f"No .pdf files found under gs://{src_base}")
         return []
 
-    # Setup Google authentication
-    target_principal = os.getenv("SERVICE_ACCOUNT_EMAIL")
     scopes = ["https://www.googleapis.com/auth/drive.readonly"]
-
-    creds, _ = google.auth.default(scopes=scopes)
-
-    if target_principal:
-        print(f"Impersonating service account: {target_principal}")
-        creds = impersonated_credentials.Credentials(
-            source_credentials=creds,
-            target_principal=target_principal,
-            target_scopes=scopes,
-        )
+    creds = get_google_credentials(scopes)
 
     drive_service = build("drive", "v3", credentials=creds)
 
