@@ -20,11 +20,11 @@ jobs:
           - type: song-sheets
             file: song-sheets-data.jsonl
             prefix: song-sheets/aggregated
-            scopes: ''
+            access_token_scopes: ''
           - type: jam-sessions
             file: jam-sessions-data.jsonl
             prefix: jam-sessions
-            scopes: 'https://www.googleapis.com/auth/spreadsheets.readonly'
+            access_token_scopes: 'https://www.googleapis.com/auth/spreadsheets.readonly'
     
     steps:
       - uses: actions/checkout@v4
@@ -34,16 +34,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Debug WIF Provider
-        run: echo "WIF Provider is ${{ secrets.WIF_PROVIDER }}"
-
       - name: Auth to Google Cloud (WIF)
         uses: google-github-actions/auth@v2
         with:
           token_format: access_token
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: dataset-sync@ukulele-tuesday-datasets.iam.gserviceaccount.com
-          scopes: ${{ matrix.dataset.scopes }}
+          access_token_scopes: ${{ matrix.dataset.access_token_scopes }}
 
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
