@@ -241,14 +241,30 @@ def main():
 
         song_counts = songs_df['song_artist'].value_counts().reset_index()
         song_counts.columns = ['song_artist', 'count']
+        
+        # Add ranking
+        song_counts['Rank'] = song_counts.index + 1
+        
+        # Rename columns for display
+        song_counts.rename(columns={'song_artist': 'Song', 'count': 'Plays'}, inplace=True)
+        
+        # Reorder columns
+        song_counts = song_counts[['Rank', 'Song', 'Plays']]
 
-        chart = alt.Chart(song_counts).mark_bar().encode(
-            x=alt.X('count', title='Times Played'),
-            y=alt.Y('song_artist', sort='-x', title='Song'),
-            tooltip=['song_artist', 'count']
-        ).interactive()
-
-        st.altair_chart(chart, use_container_width=True)
+        # Display as a dataframe with a progress bar for plays
+        st.dataframe(
+            song_counts,
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "Plays": st.column_config.ProgressColumn(
+                    "Plays",
+                    format="%d",
+                    min_value=0,
+                    max_value=int(song_counts['Plays'].max()),
+                ),
+            },
+        )
 
         # --- Rising Stars and Falls from Grace ---
         st.subheader("Song Popularity Trends")
