@@ -104,8 +104,9 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
         canonical_keys.append(normalize_for_matching(key))
         canonical_data.append(song_data)
 
-    # Track indices to remove
+    # Track indices to remove and unmatched songs
     indices_to_remove = []
+    unmatched_songs = set()
 
     # Only process song events
     song_mask = sanitized_df['type'] == 'song'
@@ -150,20 +151,25 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
             else:
                 sanitized_df.at[idx, 'specialbooks'] = specialbooks
         else:
-            # Show warning and mark for removal for entries with actual content that don't match
-            st.warning(f"Could not match: {jam_song_str} - {jam_artist_str}")
+            # Mark for removal and record the unmatched entry
+            unmatched_songs.add(f"{jam_song_str} - {jam_artist_str}")
             indices_to_remove.append(idx)
 
     # Remove invalid entries
     if indices_to_remove:
         sanitized_df = sanitized_df.drop(indices_to_remove)
 
+    # Display a single warning for all unmatched songs
+    if unmatched_songs:
+        unmatched_list = "\n".join(f"- {song}" for song in sorted(list(unmatched_songs)))
+        st.warning(f"Could not match the following songs, and they have been excluded:\n{unmatched_list}")
+
     return sanitized_df
 
 
 def main():
-    st.set_page_config(page_title="Ukulele Tuesday Jam Session Stats", layout="wide")
-    st.title("Ukulele Tuesday Jam Sessions Dashboard")
+    st.set_page_config(page_title="Ukulele Tuesday Song Popularity", layout="wide", page_icon="⭐")
+    st.title("Ukulele Tuesday Song Popularity")
 
     st.markdown(
         """
@@ -181,11 +187,16 @@ def main():
         df["year_month"] = df["date"].dt.to_period("M").astype(str)
         year_months = sorted(df["year_month"].unique())
 
+        # Default to the last 12 months if possible
+        default_start_index = max(0, len(year_months) - 12)
+        default_start_month = year_months[default_start_index]
+        default_end_month = year_months[-1]
+
         # Year-month range slider
         start_month, end_month = st.select_slider(
             "Select date range (Year-Month)",
             options=year_months,
-            value=(year_months[0], year_months[-1])
+            value=(default_start_month, default_end_month),
         )
         
         # Determine the full end date for trend calculations
@@ -194,7 +205,7 @@ def main():
         # Filter dataframe based on date range
         df = df[(df["year_month"] >= start_month) & (df["year_month"] <= end_month)]
 
-        songbook_only = st.checkbox("Current songbook only")
+        songbook_only = st.checkbox("Current songbook only", value=True)
 
         # Explode the 'events' column to get one row per event
         events_df = df.explode("events").reset_index(drop=True)
@@ -223,22 +234,37 @@ def main():
         col2.metric("Total Songs Played", len(songs_df))
         col3.metric("Unique Songs Played", songs_df['song'].nunique())
 
-        st.header("Analysis")
-        st.subheader("Most Played Songs")
+        st.header("Most Played Songs")
 
         # Create a unique song identifier (song + artist)
         songs_df['song_artist'] = songs_df['song'] + " - " + songs_df['artist']
 
         song_counts = songs_df['song_artist'].value_counts().reset_index()
         song_counts.columns = ['song_artist', 'count']
+        
+        # Rename columns for display
+        song_counts.rename(columns={'song_artist': 'Song', 'count': 'Plays'}, inplace=True)
+        
+        # Reorder columns
+        song_counts = song_counts[['Song', 'Plays']]
 
-        chart = alt.Chart(song_counts).mark_bar().encode(
-            x=alt.X('count', title='Times Played'),
-            y=alt.Y('song_artist', sort='-x', title='Song'),
-            tooltip=['song_artist', 'count']
-        ).interactive()
+        # Set index to start at 1 for ranking
+        song_counts.index = song_counts.index + 1
 
-        st.altair_chart(chart, use_container_width=True)
+        # Display as a dataframe with a progress bar for plays
+        st.dataframe(
+            song_counts,
+            use_container_width=True,
+            height=(len(song_counts) + 1) * 35,
+            column_config={
+                "Plays": st.column_config.ProgressColumn(
+                    "Plays",
+                    format="%d",
+                    min_value=0,
+                    max_value=int(song_counts['Plays'].max()),
+                ),
+            },
+        )
 
         # --- Rising Stars and Falls from Grace ---
         st.subheader("Song Popularity Trends")
