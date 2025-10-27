@@ -187,11 +187,16 @@ def main():
         df["year_month"] = df["date"].dt.to_period("M").astype(str)
         year_months = sorted(df["year_month"].unique())
 
+        # Default to the last 12 months if possible
+        default_start_index = max(0, len(year_months) - 12)
+        default_start_month = year_months[default_start_index]
+        default_end_month = year_months[-1]
+
         # Year-month range slider
         start_month, end_month = st.select_slider(
             "Select date range (Year-Month)",
             options=year_months,
-            value=(year_months[0], year_months[-1])
+            value=(default_start_month, default_end_month),
         )
         
         # Determine the full end date for trend calculations
