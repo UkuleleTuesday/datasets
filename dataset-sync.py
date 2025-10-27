@@ -246,7 +246,7 @@ def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
 
 
 def fetch_song_sheets_data() -> List[Dict[str, Any]]:
-    """Fetch and aggregate song sheets data from GCS."""
+    """Fetch and aggregate song sheets data from GCS and Google Drive."""
     # Config via env vars (backwards compatibility)
     src_bucket = os.getenv("SRC_BUCKET", "songbook-generator-cache-europe-west1")
     src_prefix = os.getenv("SRC_PREFIX", "song-sheets/").lstrip("/")
@@ -258,7 +258,7 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
 
     fs = gcsfs.GCSFileSystem(**fs_kwargs)
 
-    # List all .json files from source
+    # List all .pdf files from source
     src_base = f"{src_bucket}/{src_prefix}".rstrip("/")
     try:
         paths = fs.ls(src_base)
@@ -266,37 +266,55 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
         print(f"ERROR: failed to list gs://{src_base}: {e}", file=sys.stderr)
         raise
 
-    json_files = sorted(p for p in paths if p.endswith(".json"))
-    if not json_files:
-        print(f"No .json files found under gs://{src_base}")
+    pdf_files = sorted(p for p in paths if p.endswith(".pdf"))
+    if not pdf_files:
+        print(f"No .pdf files found under gs://{src_base}")
         return []
 
-    # Load and aggregate all JSON data
-    all_data = []
-    
-    # Use fs.cat for parallel fetching
-    try:
-        # fs.cat returns a dictionary of path -> content (bytes)
-        file_contents = fs.cat(json_files)
-    except Exception as e:
-        print(f"ERROR: Failed to fetch files from GCS: {e}", file=sys.stderr)
-        raise
-    
-    for path, content in file_contents.items():
-        try:
-            data = json.loads(content)
-        except json.JSONDecodeError as exc:
-            print(f"WARNING: skipping gs://{path} (invalid JSON): {exc}", file=sys.stderr)
-            continue
+    # Setup Google authentication
+    target_principal = os.getenv("SERVICE_ACCOUNT_EMAIL")
+    scopes = ["https://www.googleapis.com/auth/drive.readonly"]
 
-        # Accept either dict or list-of-dicts
-        if isinstance(data, list):
-            all_data.extend(data)
-        elif isinstance(data, dict):
-            all_data.append(data)
-        else:
-            # Fallback: wrap primitive under 'value'
-            all_data.append({"value": data})
+    creds, _ = google.auth.default(scopes=scopes)
+
+    if target_principal:
+        print(f"Impersonating service account: {target_principal}")
+        creds = impersonated_credentials.Credentials(
+            source_credentials=creds,
+            target_principal=target_principal,
+            target_scopes=scopes,
+        )
+
+    drive_service = build("drive", "v3", credentials=creds)
+
+    all_data = []
+    for path in pdf_files:
+        filename = pathlib.Path(path).stem
+        try:
+            # Search for the file by name
+            response = drive_service.files().list(
+                q=f"name='{filename}' and mimeType='application/vnd.google-apps.document'",
+                fields="files(id, name, properties)",
+                supportsAllDrives=True,
+                includeItemsFromAllDrives=True
+            ).execute()
+            
+            files = response.get("files", [])
+            if not files:
+                print(f"WARNING: No Google Doc found for '{filename}'", file=sys.stderr)
+                continue
+            
+            if len(files) > 1:
+                print(f"WARNING: Multiple Google Docs found for '{filename}', using the first one.", file=sys.stderr)
+
+            file_data = files[0]
+            all_data.append({
+                "id": file_data["id"],
+                "name": file_data["name"],
+                "properties": file_data.get("properties", {})
+            })
+        except Exception as e:
+            print(f"ERROR: Failed to process '{filename}': {e}", file=sys.stderr)
 
     return all_data
 
