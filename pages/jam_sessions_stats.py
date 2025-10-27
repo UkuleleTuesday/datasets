@@ -41,7 +41,7 @@ def load_data_from_public_url() -> Optional[pd.DataFrame]:
 def normalize_for_matching(text: str) -> str:
     """
     Normalize a string for comparison by trimming whitespace and converting to lowercase.
-    
+
     This function is intentionally kept minimal but structured to allow future extensions
     (e.g., removing punctuation, handling 'feat.' artists, etc.).
     """
@@ -66,6 +66,7 @@ def load_song_sheets_data() -> Optional[List[Dict[str, Any]]]:
                         'id': song_data.get('id'),
                         'song': song_data.get('properties', {}).get('song'),
                         'artist': song_data.get('properties', {}).get('artist'),
+                        'specialbooks': song_data.get('properties', {}).get('specialbooks'),
                     })
                 except json.JSONDecodeError:
                     continue
@@ -74,7 +75,8 @@ def load_song_sheets_data() -> Optional[List[Dict[str, Any]]]:
         all_data = [s for s in all_data if s.get('id') and s.get('song') and s.get('artist')]
         return all_data if all_data else None
 
-    except Exception:
+    except Exception as e:
+        st.error(f"Error loading data from public URL: {e}")
         return None
 
 
@@ -85,10 +87,15 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
     """
     if not canonical_songs:
         return events_df
-    
+
     # Create a copy to avoid modifying the original
     sanitized_df = events_df.copy()
-    
+
+    # Ensure the 'specialbooks' column exists and can hold lists
+    if 'specialbooks' not in sanitized_df.columns:
+        sanitized_df['specialbooks'] = pd.Series(dtype='object')
+
+
     # Build canonical keys
     canonical_keys = []
     canonical_data = []
@@ -96,61 +103,68 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
         key = f"{song_data['song']} - {song_data['artist']}"
         canonical_keys.append(normalize_for_matching(key))
         canonical_data.append(song_data)
-    
+
     # Track indices to remove
     indices_to_remove = []
-    
+
     # Only process song events
     song_mask = sanitized_df['type'] == 'song'
-    
+
     for idx in sanitized_df[song_mask].index:
         jam_song = sanitized_df.at[idx, 'song']
         jam_artist = sanitized_df.at[idx, 'artist']
-        
+
         # Mark for removal if song or artist is None, NaN, empty, or just whitespace/dashes
         if pd.isna(jam_song) or pd.isna(jam_artist):
             indices_to_remove.append(idx)
             continue
-        
+
         # Convert to strings and strip whitespace
         jam_song_str = str(jam_song).strip()
         jam_artist_str = str(jam_artist).strip()
-        
+
         # Mark for removal if either is empty or just a dash
         if not jam_song_str or not jam_artist_str or jam_song_str == '-' or jam_artist_str == '-':
             indices_to_remove.append(idx)
             continue
-        
+
         # Create search key
         jam_key = normalize_for_matching(f"{jam_song_str} - {jam_artist_str}")
-        
+
         # Use difflib to find close matches
         matches = difflib.get_close_matches(jam_key, canonical_keys, n=1, cutoff=0.8)
-        
+
         if matches:
             # Find the matched canonical data
             match_index = canonical_keys.index(matches[0])
             matched_data = canonical_data[match_index]
-            
+
             # Replace with canonical names
             sanitized_df.at[idx, 'song'] = matched_data['song']
             sanitized_df.at[idx, 'artist'] = matched_data['artist']
+            
+            # Carry over specialbooks data
+            specialbooks = matched_data.get('specialbooks')
+            if isinstance(specialbooks, str):
+                sanitized_df.at[idx, 'specialbooks'] = specialbooks.split(',')
+            else:
+                sanitized_df.at[idx, 'specialbooks'] = specialbooks
         else:
             # Show warning and mark for removal for entries with actual content that don't match
             st.warning(f"Could not match: {jam_song_str} - {jam_artist_str}")
             indices_to_remove.append(idx)
-    
+
     # Remove invalid entries
     if indices_to_remove:
         sanitized_df = sanitized_df.drop(indices_to_remove)
-    
+
     return sanitized_df
 
 
 def main():
     st.set_page_config(page_title="Ukulele Tuesday Jam Session Stats", layout="wide")
     st.title("Ukulele Tuesday Jam Sessions Dashboard")
-    
+
     st.markdown(
         """
         This dashboard provides an interactive exploration of historical jam session data from [Ukulele Tuesday](https://www.ukuleletuesday.ie/).
@@ -163,46 +177,58 @@ def main():
     if df is not None:
         df["date"] = pd.to_datetime(df["date"])
 
-        # Date range slider
-        min_date = df["date"].min().date()
-        max_date = df["date"].max().date()
-        
-        start_date, end_date = st.slider(
-            "Select date range",
-            min_value=min_date,
-            max_value=max_date,
-            value=(min_date, max_date),
-            format="YYYY-MM-DD"
+        # Create a year-month column for filtering
+        df["year_month"] = df["date"].dt.to_period("M").astype(str)
+        year_months = sorted(df["year_month"].unique())
+
+        # Year-month range slider
+        start_month, end_month = st.select_slider(
+            "Select date range (Year-Month)",
+            options=year_months,
+            value=(year_months[0], year_months[-1])
         )
         
+        # Determine the full end date for trend calculations
+        end_date = pd.to_datetime(end_month).to_period('M').end_time.date()
+
         # Filter dataframe based on date range
-        df = df[(df["date"].dt.date >= start_date) & (df["date"].dt.date <= end_date)]
+        df = df[(df["year_month"] >= start_month) & (df["year_month"] <= end_month)]
+
+        songbook_only = st.checkbox("Current songbook only")
 
         # Explode the 'events' column to get one row per event
         events_df = df.explode("events").reset_index(drop=True)
         # Normalize the 'events' column, which contains dicts
         events_df = pd.concat([events_df.drop(['events'], axis=1), events_df['events'].apply(pd.Series)], axis=1)
-        
+
         # Sanitize song and artist names using canonical data
         canonical_songs = load_song_sheets_data()
         if canonical_songs:
             events_df = sanitize_jam_events(events_df, canonical_songs)
-        
+
         # Filter for song events
         songs_df = events_df[events_df['type'] == 'song'].copy()
-        
+
+        # Filter for current songbook if checkbox is selected
+        if songbook_only:
+            songs_df = songs_df[
+                songs_df["specialbooks"].apply(
+                    lambda x: isinstance(x, list) and "regular" in x
+                )
+            ]
+
         st.header("Overall Summary")
         col1, col2, col3 = st.columns(3)
         col1.metric("Total Jam Sessions", df['session_id'].nunique())
         col2.metric("Total Songs Played", len(songs_df))
         col3.metric("Unique Songs Played", songs_df['song'].nunique())
-        
+
         st.header("Analysis")
         st.subheader("Most Played Songs")
 
         # Create a unique song identifier (song + artist)
         songs_df['song_artist'] = songs_df['song'] + " - " + songs_df['artist']
-        
+
         song_counts = songs_df['song_artist'].value_counts().reset_index()
         song_counts.columns = ['song_artist', 'count']
 
@@ -211,9 +237,9 @@ def main():
             y=alt.Y('song_artist', sort='-x', title='Song'),
             tooltip=['song_artist', 'count']
         ).interactive()
-        
+
         st.altair_chart(chart, use_container_width=True)
-        
+
         # --- Rising Stars and Falls from Grace ---
         st.subheader("Song Popularity Trends")
 
@@ -225,7 +251,7 @@ def main():
         # Filter songs and sessions for each period
         recent_songs = songs_df[songs_df['date'] > period_midpoint]
         past_songs = songs_df[(songs_df['date'] > period_start) & (songs_df['date'] <= period_midpoint)]
-        
+
         sessions_recent_count = df[df['date'] > period_midpoint]['session_id'].nunique()
         sessions_past_count = df[(df['date'] > period_start) & (df['date'] <= period_midpoint)]['session_id'].nunique()
 
@@ -233,14 +259,14 @@ def main():
             # Calculate frequencies
             freq_recent = (recent_songs['song_artist'].value_counts() / sessions_recent_count).reset_index()
             freq_recent.columns = ['song_artist', 'recent_freq']
-            
+
             freq_past = (past_songs['song_artist'].value_counts() / sessions_past_count).reset_index()
             freq_past.columns = ['song_artist', 'past_freq']
 
             # Merge and calculate change
             trends_df = pd.merge(freq_recent, freq_past, on='song_artist', how='outer').fillna(0)
             trends_df['change'] = trends_df['recent_freq'] - trends_df['past_freq']
-            
+
             # Rising Stars
             rising_stars = trends_df.nlargest(10, 'change')
             st.markdown("##### Biggest Rising Stars")
@@ -252,7 +278,7 @@ def main():
                 tooltip=['song_artist', 'change']
             ).interactive()
             st.altair_chart(rising_chart, use_container_width=True)
-            
+
             # Falls from Grace
             falling_stars = trends_df.nsmallest(10, 'change')
             st.markdown("##### Biggest Falls from Grace")
