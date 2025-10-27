@@ -3,6 +3,7 @@
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
+#   "packaging",
 #   "gspread",
 #   "google-auth",
 #   "google-api-python-client", 
