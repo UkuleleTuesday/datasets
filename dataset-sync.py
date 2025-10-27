@@ -228,9 +228,6 @@ def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
 
     all_sessions = []
     for spreadsheet in all_spreadsheets:
-
-    all_sessions = []
-    for spreadsheet in spreadsheets:
         sh = gc.open_by_key(spreadsheet["id"])
 
         # Process all worksheets except the first one (index 0)
