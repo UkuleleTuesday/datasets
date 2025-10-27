@@ -280,34 +280,45 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
 
     drive_service = build("drive", "v3", credentials=creds)
 
+    # Fetch all Google Docs from the folder and create a name-to-ID map
+    folder_id = "1b3rJ6K9z6Y34213m1b0-k2y_6S-HYw1z"
+    query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.document'"
+    try:
+        response = drive_service.files().list(
+            q=query, 
+            fields="files(id, name)", 
+            supportsAllDrives=True, 
+            includeItemsFromAllDrives=True
+        ).execute()
+        drive_files = response.get("files", [])
+        name_to_id_map = {f["name"]: f["id"] for f in drive_files}
+    except Exception as e:
+        print(f"ERROR: Failed to list files from Google Drive folder '{folder_id}': {e}", file=sys.stderr)
+        raise
+
     all_data = []
     for path in pdf_files:
         filename = pathlib.Path(path).stem
+        file_id = name_to_id_map.get(filename)
+
+        if not file_id:
+            print(f"WARNING: No Google Doc found for '{filename}'", file=sys.stderr)
+            continue
+
         try:
-            # Search for the file by name
-            response = drive_service.files().list(
-                q=f"name='{filename}' and mimeType='application/vnd.google-apps.document'",
-                fields="files(id, name, properties)",
-                supportsAllDrives=True,
-                includeItemsFromAllDrives=True
+            file_data = drive_service.files().get(
+                fileId=file_id,
+                fields="id, name, properties",
+                supportsAllDrives=True
             ).execute()
             
-            files = response.get("files", [])
-            if not files:
-                print(f"WARNING: No Google Doc found for '{filename}'", file=sys.stderr)
-                continue
-            
-            if len(files) > 1:
-                print(f"WARNING: Multiple Google Docs found for '{filename}', using the first one.", file=sys.stderr)
-
-            file_data = files[0]
             all_data.append({
                 "id": file_data["id"],
                 "name": file_data["name"],
                 "properties": file_data.get("properties", {})
             })
         except Exception as e:
-            print(f"ERROR: Failed to process '{filename}': {e}", file=sys.stderr)
+            print(f"ERROR: Failed to process '{filename}' (ID: {file_id}): {e}", file=sys.stderr)
 
     return all_data
 
