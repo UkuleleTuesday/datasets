@@ -9,8 +9,8 @@ pg = st.navigation(
             default=True,
         ),
         st.Page(
-            "pages/jam_sessions_stats.py",
-            title="Jam Sessions Stats",
+            "pages/song_popularity.py",
+            title="Song Popularity",
             icon=":material/music_note:",
         ),
         st.Page(
