@@ -288,9 +288,7 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
     try:
         response = drive_service.files().list(
             q=query, 
-            fields="files(id, name, properties)", 
-            supportsAllDrives=True, 
-            includeItemsFromAllDrives=True
+            fields="files(id, name, properties)"
         ).execute()
         drive_files = response.get("files", [])
     except Exception as e:
