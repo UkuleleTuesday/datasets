@@ -221,13 +221,11 @@ def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
     gc = gspread.authorize(creds)
     drive_service = build("drive", "v3", credentials=creds)
 
-    folder_ids = ["1b_ZuZVOGgvkKVSUypkbRwBsXLVQGjl95", "1bvrIMQXjAxepzn4Vx8wEjhk3eQS5a9BM"]
-    all_spreadsheets = []
-    for folder_id in folder_ids:
-        all_spreadsheets.extend(get_spreadsheets(drive_service, folder_id))
+    folder_id = "1TY4KCBrbHODyCKCtWXgtNlCHs2-8Svpd"
+    spreadsheets = get_spreadsheets(drive_service, folder_id)
 
     all_sessions = []
-    for spreadsheet in all_spreadsheets:
+    for spreadsheet in spreadsheets:
         sh = gc.open_by_key(spreadsheet["id"])
 
         # Process all worksheets except the first one (index 0)
