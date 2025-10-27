@@ -275,7 +275,7 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
         print(f"No .pdf files found under gs://{src_base}")
         return []
 
-    scopes = ["https://www.googleapis.com/auth/drive.readonly"]
+    scopes = ["https://www.googleapis.com/auth/drive"]
     creds = get_google_credentials(scopes)
 
     drive_service = build("drive", "v3", credentials=creds)
@@ -286,8 +286,7 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
         try:
             file_data = drive_service.files().get(
                 fileId=file_id,
-                fields="id, name, properties",
-                supportsAllDrives=True
+                fields="id, name, properties"
             ).execute()
             
             all_data.append({
