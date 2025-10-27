@@ -283,20 +283,23 @@ def fetch_song_sheets_data() -> List[Dict[str, Any]]:
     pdf_file_ids = {pathlib.Path(p).stem for p in pdf_files}
 
     # Fetch all Google Docs from the folder and filter by PDF file IDs
-    folder_id = "1_XVZlKAIVRsGRbWzdzi0HtwTnWOjFLZF"
-    query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.document'"
-    try:
-        response = drive_service.files().list(
-            q=query, 
-            fields="files(id, name, properties)"
-        ).execute()
-        drive_files = response.get("files", [])
-    except Exception as e:
-        print(f"ERROR: Failed to list files from Google Drive folder '{folder_id}': {e}", file=sys.stderr)
-        raise
+    folder_ids = ["1b_ZuZVOGgvkKVSUypkbRwBsXLVQGjl95", "1bvrIMQXjAxepzn4Vx8wEjhk3eQS5a9BM"]
+    all_drive_files = []
+    for folder_id in folder_ids:
+        query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.document'"
+        try:
+            response = drive_service.files().list(
+                q=query, 
+                fields="files(id, name, properties)"
+            ).execute()
+            all_drive_files.extend(response.get("files", []))
+        except Exception as e:
+            print(f"ERROR: Failed to list files from Google Drive folder '{folder_id}': {e}", file=sys.stderr)
+            # Decide if you want to raise or continue
+            continue
         
     all_data = []
-    for file_data in drive_files:
+    for file_data in all_drive_files:
         if file_data['id'] in pdf_file_ids:
             all_data.append({
                 "id": file_data["id"],
