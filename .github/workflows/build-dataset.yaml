@@ -34,6 +34,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Debug WIF Provider
+        run: echo "WIF Provider is ${{ secrets.WIF_PROVIDER }}"
+
       - name: Auth to Google Cloud (WIF)
         uses: google-github-actions/auth@v2
         with:
