@@ -257,6 +257,7 @@ def main():
             use_container_width=True,
             hide_index=True,
             column_config={
+                "Rank": st.column_config.Column(width="small"),
                 "Plays": st.column_config.ProgressColumn(
                     "Plays",
                     format="%d",
