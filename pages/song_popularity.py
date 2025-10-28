@@ -255,12 +255,12 @@ def main():
         # Set index to start at 1 for ranking
         song_counts.index = song_counts.index + 1
 
-        def highlight_not_in_songbook(row):
-            return ['background-color: #f0f0f0'] * len(row) if not row.in_current_songbook else [''] * len(row)
+        def highlight_in_songbook(row):
+            return ['background-color: #e6ffed'] * len(row) if row.in_current_songbook else [''] * len(row)
 
         # Display as a styled dataframe with a progress bar for plays
         st.dataframe(
-            song_counts.style.apply(highlight_not_in_songbook, axis=1),
+            song_counts.style.apply(highlight_in_songbook, axis=1),
             use_container_width=True,
             height=(len(song_counts) + 1) * 35,
             column_config={
