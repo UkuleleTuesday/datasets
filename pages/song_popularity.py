@@ -258,6 +258,8 @@ def main():
         def highlight_in_songbook(row):
             return ['background-color: #e6ffed'] * len(row) if row.in_current_songbook else [''] * len(row)
 
+        st.caption("Songs currently included in the songbook are highlighted in green.")
+
         # Display as a styled dataframe with a progress bar for plays
         st.dataframe(
             song_counts.style.apply(highlight_in_songbook, axis=1),
