@@ -30,7 +30,6 @@ def load_data_from_public_url() -> Optional[pd.DataFrame]:
             return None
 
         df = pd.DataFrame(all_data)
-        st.success(f"Successfully loaded {len(all_data)} jam sessions")
         return df
 
     except Exception as e:
