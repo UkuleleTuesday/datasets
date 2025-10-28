@@ -171,13 +171,6 @@ def main():
     st.set_page_config(page_title="Ukulele Tuesday Song Popularity", layout="wide", page_icon="⭐")
     st.title("Ukulele Tuesday Song Popularity")
 
-    st.markdown(
-        """
-        This dashboard provides an interactive exploration of historical jam session data from [Ukulele Tuesday](https://www.ukuleletuesday.ie/).
-        It analyzes setlists from past events to show which songs are played most frequently.
-        """
-    )
-
     df = load_data_from_public_url()
 
     if df is not None:
