@@ -210,8 +210,6 @@ def main():
             # Filter by selected year
             selected_year = int(selected_range)
             df = df[df["year"] == selected_year]
-        
-        songbook_only = st.checkbox("Current songbook only", value=True)
 
         # Explode the 'events' column to get one row per event
         events_df = df.explode("events").reset_index(drop=True)
@@ -226,13 +224,10 @@ def main():
         # Filter for song events
         songs_df = events_df[events_df['type'] == 'song'].copy()
 
-        # Filter for current songbook if checkbox is selected
-        if songbook_only:
-            songs_df = songs_df[
-                songs_df["specialbooks"].apply(
-                    lambda x: isinstance(x, list) and "regular" in x
-                )
-            ]
+        # Add a column to indicate if a song is in the current songbook
+        songs_df['in_current_songbook'] = songs_df["specialbooks"].apply(
+            lambda x: isinstance(x, list) and "regular" in x
+        )
 
         st.header("Overall Summary")
         col1, col2, col3 = st.columns(3)
@@ -245,24 +240,31 @@ def main():
         # Create a unique song identifier (song + artist)
         songs_df['song_artist'] = songs_df['song'] + " - " + songs_df['artist']
 
-        song_counts = songs_df['song_artist'].value_counts().reset_index()
-        song_counts.columns = ['song_artist', 'count']
+        # Group by song and get play count and songbook status
+        song_counts = songs_df.groupby('song_artist').agg(
+            Plays=('song_artist', 'size'),
+            in_current_songbook=('in_current_songbook', 'first')
+        ).sort_values(by='Plays', ascending=False).reset_index()
         
-        # Rename columns for display
-        song_counts.rename(columns={'song_artist': 'Song', 'count': 'Plays'}, inplace=True)
+        # Rename column for display
+        song_counts.rename(columns={'song_artist': 'Song'}, inplace=True)
         
         # Reorder columns
-        song_counts = song_counts[['Song', 'Plays']]
+        song_counts = song_counts[['Song', 'Plays', 'in_current_songbook']]
 
         # Set index to start at 1 for ranking
         song_counts.index = song_counts.index + 1
 
-        # Display as a dataframe with a progress bar for plays
+        def highlight_not_in_songbook(row):
+            return ['background-color: #f0f0f0'] * len(row) if not row.in_current_songbook else [''] * len(row)
+
+        # Display as a styled dataframe with a progress bar for plays
         st.dataframe(
-            song_counts,
+            song_counts.style.apply(highlight_not_in_songbook, axis=1),
             use_container_width=True,
             height=(len(song_counts) + 1) * 35,
             column_config={
+                "in_current_songbook": None,  # Hide the helper column
                 "Plays": st.column_config.ProgressColumn(
                     "Plays",
                     format="%d",
