@@ -264,6 +264,9 @@ def main():
                     min_value=0,
                     max_value=int(song_counts['Plays'].max()),
                 ),
+                "In Rotation": st.column_config.TextColumn(
+                    width="small",
+                ),
             },
         )
 
