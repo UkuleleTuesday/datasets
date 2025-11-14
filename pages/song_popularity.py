@@ -250,7 +250,7 @@ def main():
         # Set index to start at 1 for ranking
         song_counts.index = song_counts.index + 1
         
-        st.caption("In rotation: 🟢⠀⠀Not in: ⚪")
+        st.caption("In current sonbgook rotation: 🟢⠀⠀Not in: ⚪")
 
         # Display as a styled dataframe with a progress bar for plays
         st.dataframe(
