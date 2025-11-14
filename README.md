@@ -6,7 +6,7 @@ This repository contains a comprehensive data platform for [Ukulele Tuesday](htt
 
 The dashboard is deployed and can be viewed live at:
 
-**https://ukuleletuesday-stats.streamlit.app/**
+**https://ukuleletuesday.streamlit.app/**
 
 ## Project Structure
 
