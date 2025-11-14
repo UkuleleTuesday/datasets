@@ -1,56 +1,18 @@
 # Ukulele Tuesday Statistics
 
-This repository contains a comprehensive data platform for [Ukulele Tuesday](https://www.ukuleletuesday.ie/), including a Streamlit dashboard for data visualization and tools for dataset synchronization and validation. The platform handles both song sheets metadata and jam session data.
+Datasets and streamlit dashboards for [Ukulele Tuesday](https://www.ukuleletuesday.ie/).
 
 ## Live Application
 
 The dashboard is deployed and can be viewed live at:
 
 **https://ukuleletuesday.streamlit.app/**
-
-## Project Structure
-
-```
-├── main.py                    # Streamlit application entry point
-├── pages/
-│   └── song_sheets_stats.py   # Main dashboard implementation
-├── dataset-sync.py            # Dataset synchronization script
-├── validate_datasets.py       # Dataset validation script
-├── test_validation.py         # Validation system tests
-├── schemas/                   # JSON schemas for data validation
-│   ├── README.md             # Schema documentation
-│   ├── song-sheets.json      # Song sheets schema
-│   └── sessions.json         # Jam sessions schema
-├── .github/workflows/         # CI/CD automation
-│   └── build-dataset.yaml    # Daily dataset sync workflow
-├── .devcontainer/            # Development container configuration
-├── pyproject.toml           # Python project configuration
-└── uv.lock                  # Dependency lock file
-```
-
 ## Datasets
 
 The platform currently provides two main datasets, both stored in the `ukulele-tuesday-datasets` GCS bucket:
 
 * **Song Sheets**: Comprehensive dataset of Ukulele Tuesday song sheets with metadata including artist, chords, difficulty, and contributor information
 * **Jam Sessions**: Historical jam session data with setlists, venue information, and song requests from live Ukulele Tuesday events
-
-## Dashboards
-
-**UT Song Sheets Dashboard**
-
-The Streamlit application provides comprehensive statistics and visualizations about the songs, including:
-- Dataset overview (total songs, unique artists, number of tabbers)
-- Distribution of songs by tabber contribution
-- Cumulative growth of the songbook over time
-- Song distribution by decade of release
-- Difficulty level distribution
-- Most common chords analysis
-- Gender distribution of original artists
-- Data quality checks and missing field analysis
-- Filtering to view stats for all songs or just the "Current edition" (songs in regular rotation)
-
-The dashboard loads data from the public datasets and provides interactive visualizations using Plotly, Altair, and Streamlit's built-in charting.
 
 ## Development
 
