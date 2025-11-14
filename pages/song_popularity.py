@@ -241,24 +241,23 @@ def main():
         # Rename column for display
         song_counts.rename(columns={'song_artist': 'Song'}, inplace=True)
         
-        # Reorder columns
-        song_counts = song_counts[['Song', 'Plays', 'in_current_songbook']]
+        # Create a new column with icons based on 'in_current_songbook'
+        song_counts['In Rotation'] = song_counts['in_current_songbook'].apply(lambda x: '🟢' if x else '⚪')
+        
+        # Reorder columns for display
+        song_counts = song_counts[['Song', 'Plays', 'In Rotation']]
 
         # Set index to start at 1 for ranking
         song_counts.index = song_counts.index + 1
-
-        def highlight_in_songbook(row):
-            return ['background-color: #e6ffed'] * len(row) if row.in_current_songbook else [''] * len(row)
-
-        st.caption("Songs currently included in the songbook are highlighted in green.")
+        
+        st.caption("In rotation: 🟢⠀⠀Not in: ⚪")
 
         # Display as a styled dataframe with a progress bar for plays
         st.dataframe(
-            song_counts.style.apply(highlight_in_songbook, axis=1),
+            song_counts,
             use_container_width=True,
             height=(len(song_counts) + 1) * 35,
             column_config={
-                "in_current_songbook": None,  # Hide the helper column
                 "Plays": st.column_config.ProgressColumn(
                     "Plays",
                     format="%d",
