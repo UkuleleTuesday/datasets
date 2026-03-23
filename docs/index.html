@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ukulele Tuesday – Song Sheets</title>
+  <script src="https://unpkg.com/lunr@2.3.9/lunr.js"></script>
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-light: #4caf50;
+      --bg: #f5f5f5;
+      --card-bg: #ffffff;
+      --text: #212121;
+      --text-muted: #757575;
+      --border: #e0e0e0;
+      --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+      --shadow-hover: 0 4px 12px rgba(0,0,0,0.15);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    header h1 { font-size: 1.4rem; font-weight: 600; letter-spacing: -0.3px; }
+
+    header .header-count {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* ── Controls ── */
+    .controls {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .search-wrapper {
+      flex: 1 1 260px;
+      position: relative;
+    }
+
+    .search-wrapper svg {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    #search {
+      width: 100%;
+      padding: 10px 12px 10px 36px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    #search:focus { border-color: var(--primary-light); }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 130px;
+    }
+
+    .filter-group label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-group select {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.88rem;
+      background: white;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .filter-group select:focus { border-color: var(--primary-light); }
+
+    .btn-clear {
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: all 0.15s;
+      align-self: flex-end;
+    }
+
+    .btn-clear:hover { background: var(--bg); color: var(--text); border-color: #bbb; }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .stats-bar .count { font-size: 0.9rem; color: var(--text-muted); }
+    .stats-bar .count strong { color: var(--text); }
+
+    .view-toggle { display: flex; gap: 4px; }
+
+    .view-toggle button {
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      background: white;
+      cursor: pointer;
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      transition: all 0.15s;
+    }
+
+    .view-toggle button.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* ── Loading / Error ── */
+    #loading, #error {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    #error { color: #c62828; }
+
+    .spinner {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 12px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Grid / List containers ── */
+    #results.grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    #results.list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ── Song Card (shared) ── */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Grid card */
+    .card-accent { height: 3px; }
+    .accent-APPROVED     { background: #4caf50; }
+    .accent-READY_TO_PLAY { background: #1976d2; }
+    .accent-DRAFT        { background: #ffa000; }
+    .accent-REJECTED     { background: #e53935; }
+    .accent-default      { background: #bdbdbd; }
+
+    .card-body { padding: 14px 16px; }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .card-artist {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .card-chords {
+      font-size: 0.78rem;
+      color: #555;
+      margin-bottom: 8px;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    /* List card */
+    #results.list .card-accent { display: none; }
+
+    #results.list .card-body {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 16px;
+    }
+
+    #results.list .card-left { flex: 1; min-width: 0; }
+
+    #results.list .card-title { font-size: 0.9rem; margin-bottom: 2px; }
+    #results.list .card-artist { margin-bottom: 0; }
+    #results.list .card-chords { display: none; }
+
+    #results.list .card-chips {
+      flex-shrink: 0;
+      flex-wrap: nowrap;
+    }
+
+    /* ── Chips ── */
+    .chip {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    .chip-status-APPROVED      { background: #e8f5e9; color: #2e7d32; }
+    .chip-status-READY_TO_PLAY { background: #e3f2fd; color: #1565c0; }
+    .chip-status-DRAFT         { background: #fff8e1; color: #f57f17; }
+    .chip-status-REJECTED      { background: #ffebee; color: #c62828; }
+
+    .chip-diff-easy   { background: #e8f5e9; color: #1b5e20; }
+    .chip-diff-medium { background: #fff8e1; color: #e65100; }
+    .chip-diff-hard   { background: #ffebee; color: #b71c1c; }
+
+    .chip-neutral { background: #f5f5f5; color: #555; }
+
+    /* ── No results ── */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    footer a { color: var(--primary); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      header { flex-wrap: wrap; }
+      header .header-count { margin-left: 0; width: 100%; }
+      #results.grid { grid-template-columns: 1fr; }
+      #results.list .chip-neutral { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <!-- Ukulele icon -->
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="9" cy="15" r="4"/>
+    <path d="M13 11l6-6"/>
+    <path d="M17 5l2 2"/>
+  </svg>
+  <h1>Ukulele Tuesday – Song Sheets</h1>
+  <span class="header-count" id="header-count"></span>
+</header>
+
+<div class="container">
+
+  <div class="controls">
+    <!-- Search -->
+    <div class="search-wrapper">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59
+                 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5
+                 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      </svg>
+      <input id="search" type="search" placeholder="Search songs, artists, chords…" autocomplete="off"
+             aria-label="Search song sheets" />
+    </div>
+
+    <!-- Status filter -->
+    <div class="filter-group">
+      <label for="filter-status">Status</label>
+      <select id="filter-status" aria-label="Filter by status">
+        <option value="">All statuses</option>
+        <option value="APPROVED">Approved</option>
+        <option value="READY_TO_PLAY">Ready to play</option>
+        <option value="DRAFT">Draft</option>
+        <option value="REJECTED">Rejected</option>
+      </select>
+    </div>
+
+    <!-- Difficulty filter (calibrated to actual range: 0.81–5.03) -->
+    <div class="filter-group">
+      <label for="filter-difficulty">Difficulty</label>
+      <select id="filter-difficulty" aria-label="Filter by difficulty">
+        <option value="">All difficulties</option>
+        <option value="easy">Easy (≤ 2.0)</option>
+        <option value="medium">Medium (2.0–3.5)</option>
+        <option value="hard">Hard (&gt; 3.5)</option>
+      </select>
+    </div>
+
+    <!-- Artist type filter -->
+    <div class="filter-group">
+      <label for="filter-gender">Artist type</label>
+      <select id="filter-gender" aria-label="Filter by artist type">
+        <option value="">All types</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="duet">Duet</option>
+        <option value="ensemble">Ensemble</option>
+        <option value="instrumental">Instrumental</option>
+      </select>
+    </div>
+
+    <!-- Songbook filter -->
+    <div class="filter-group">
+      <label for="filter-book">Songbook</label>
+      <select id="filter-book" aria-label="Filter by songbook">
+        <option value="">All songbooks</option>
+        <option value="regular">Regular</option>
+        <option value="usa">USA</option>
+        <option value="uk">UK</option>
+        <option value="ireland">Ireland</option>
+        <option value="pride">Pride</option>
+        <option value="valentines">Valentine's</option>
+        <option value="womens">Women's</option>
+        <option value="halloween">Halloween</option>
+        <option value="xmas">Christmas</option>
+        <option value="hooley-2025">Hooley 2025</option>
+      </select>
+    </div>
+
+    <button class="btn-clear" id="btn-clear" aria-label="Clear all filters">✕ Clear</button>
+  </div>
+
+  <div class="stats-bar">
+    <span class="count" id="result-count"></span>
+    <div class="view-toggle" role="group" aria-label="View mode">
+      <button id="view-grid" class="active" aria-pressed="true" title="Grid view">⊞ Grid</button>
+      <button id="view-list" aria-pressed="false" title="List view">☰ List</button>
+    </div>
+  </div>
+
+  <div id="loading">
+    <div class="spinner" role="status" aria-label="Loading"></div>
+    <p>Loading song sheets…</p>
+  </div>
+
+  <div id="error" hidden role="alert"></div>
+
+  <div id="results" class="grid" role="list" aria-label="Song sheets"></div>
+
+</div>
+
+<footer>
+  Data sourced from <a href="https://www.ukuleletuesday.ie/" target="_blank" rel="noopener">Ukulele Tuesday</a>.
+  Search powered by <a href="https://lunrjs.com/" target="_blank" rel="noopener">lunr.js</a>.
+</footer>
+
+<script>
+  const DATA_URL =
+    "https://ukulele-tuesday-datasets.storage.googleapis.com/song-sheets/aggregated/latest/data.jsonl";
+
+  let allSongs  = [];
+  let lunrIndex = null;
+  let currentView = "grid";
+
+  // ── Helpers ──────────────────────────────────────────────────────────────────
+
+  /**
+   * Classify difficulty into easy / medium / hard based on the actual data range
+   * (0.81 – 5.03, median ≈ 2.5, 75th pct ≈ 3.2, 90th pct ≈ 3.7).
+   */
+  function difficultyBand(val) {
+    if (val == null || val === "") return null;
+    const n = parseFloat(val);
+    if (isNaN(n)) return null;
+    if (n <= 2.0) return "easy";
+    if (n <= 3.5) return "medium";
+    return "hard";
+  }
+
+  const STATUS_LABELS = {
+    APPROVED:      "Approved",
+    READY_TO_PLAY: "Ready to play",
+    DRAFT:         "Draft",
+    REJECTED:      "Rejected",
+  };
+
+  /** Public PDF URL for a song sheet stored in the songbook-generator GCS cache. */
+  function songUrl(id) {
+    return `https://storage.googleapis.com/songbook-generator-cache-europe-west1/song-sheets/${encodeURIComponent(id)}.pdf`;
+  }
+
+  function escHtml(str) {
+    return String(str ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  // ── Data loading ─────────────────────────────────────────────────────────────
+
+  async function fetchSongs() {
+    const res = await fetch(DATA_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status} – could not fetch dataset`);
+    const text = await res.text();
+    return text.trim().split("\n")
+      .filter(Boolean)
+      .map(line => JSON.parse(line));
+  }
+
+  // ── Lunr index ───────────────────────────────────────────────────────────────
+
+  function buildIndex(songs) {
+    return lunr(function () {
+      this.ref("id");
+      this.field("song",         { boost: 10 });
+      this.field("artist",       { boost: 8  });
+      this.field("chords",       { boost: 3  });
+      this.field("tabber",       { boost: 2  });
+      this.field("specialbooks", { boost: 2  });
+      this.field("language");
+      this.field("features");
+
+      songs.forEach(s => {
+        const p = s.properties || {};
+        this.add({
+          id:           s.id,
+          song:         p.song         || "",
+          artist:       p.artist       || "",
+          chords:       (p.chords || "").replace(/,/g, " "),
+          tabber:       p.tabber       || "",
+          specialbooks: (p.specialbooks || "").replace(/,/g, " "),
+          language:     p.language     || "",
+          features:     p.features     || "",
+        });
+      });
+    });
+  }
+
+  // ── Filtering ────────────────────────────────────────────────────────────────
+
+  function getFilters() {
+    return {
+      query:      document.getElementById("search").value.trim(),
+      status:     document.getElementById("filter-status").value,
+      difficulty: document.getElementById("filter-difficulty").value,
+      gender:     document.getElementById("filter-gender").value,
+      book:       document.getElementById("filter-book").value,
+    };
+  }
+
+  function lunrSearch(query) {
+    // Try exact lunr query first; fall back to wildcard on each term
+    try {
+      const hits = lunrIndex.search(query);
+      if (hits.length > 0) return new Set(hits.map(h => h.ref));
+    } catch (_) { /* fall through */ }
+
+    try {
+      const wildcardQuery = query.trim().split(/\s+/).map(t => `${t}*`).join(" ");
+      const hits = lunrIndex.search(wildcardQuery);
+      return new Set(hits.map(h => h.ref));
+    } catch (_) { /* fall through */ }
+
+    // Last resort: plain substring match
+    const q = query.toLowerCase();
+    return new Set(
+      allSongs
+        .filter(s => {
+          const p = s.properties || {};
+          return (
+            (p.song   || "").toLowerCase().includes(q) ||
+            (p.artist || "").toLowerCase().includes(q) ||
+            (p.chords || "").toLowerCase().includes(q)
+          );
+        })
+        .map(s => s.id)
+    );
+  }
+
+  function applyFilters(songs, filters) {
+    let result = songs;
+
+    if (filters.query && lunrIndex) {
+      const hitIds = lunrSearch(filters.query);
+      result = result.filter(s => hitIds.has(s.id));
+    }
+
+    if (filters.status) {
+      result = result.filter(s => (s.properties || {}).status === filters.status);
+    }
+
+    if (filters.difficulty) {
+      result = result.filter(s => {
+        const band = difficultyBand((s.properties || {}).difficulty);
+        return band === filters.difficulty;
+      });
+    }
+
+    if (filters.gender) {
+      result = result.filter(s => (s.properties || {}).gender === filters.gender);
+    }
+
+    if (filters.book) {
+      result = result.filter(s => {
+        const books = ((s.properties || {}).specialbooks || "")
+          .split(",").map(b => b.trim());
+        return books.includes(filters.book);
+      });
+    }
+
+    return result;
+  }
+
+  // ── Rendering ────────────────────────────────────────────────────────────────
+
+  function renderCard(song, isGrid) {
+    const p      = song.properties || {};
+    const band   = difficultyBand(p.difficulty);
+    const url    = songUrl(song.id);
+    const title  = escHtml(p.song   || song.name || "Unknown title");
+    const artist = escHtml(p.artist || "Unknown artist");
+
+    const statusChip = p.status
+      ? `<span class="chip chip-status-${escHtml(p.status)}">${escHtml(STATUS_LABELS[p.status] || p.status)}</span>`
+      : "";
+
+    const diffChip = band
+      ? `<span class="chip chip-diff-${band}">${escHtml(p.difficulty)}</span>`
+      : "";
+
+    const yearChip = p.year
+      ? `<span class="chip chip-neutral">${escHtml(p.year)}</span>`
+      : "";
+
+    const chips = statusChip + diffChip + yearChip;
+
+    // Chord list – truncated visually via CSS ellipsis
+    const chordsHtml = p.chords
+      ? `<div class="card-chords" title="${escHtml(p.chords)}">${escHtml(p.chords)}</div>`
+      : "";
+
+    if (isGrid) {
+      return `
+        <a class="card" href="${url}" target="_blank" rel="noopener noreferrer"
+           role="listitem" aria-label="Open song sheet: ${title} by ${artist}">
+          <div class="card-accent accent-${p.status || "default"}"></div>
+          <div class="card-body">
+            <div class="card-title">${title}</div>
+            <div class="card-artist">${artist}</div>
+            ${chordsHtml}
+            <div class="card-chips">${chips}</div>
+          </div>
+        </a>`;
+    }
+
+    return `
+      <a class="card" href="${url}" target="_blank" rel="noopener noreferrer"
+         role="listitem" aria-label="Open song sheet: ${title} by ${artist}">
+        <div class="card-body">
+          <div class="card-left">
+            <div class="card-title">${title}</div>
+            <div class="card-artist">${artist}</div>
+          </div>
+          <div class="card-chips">${chips}</div>
+        </div>
+      </a>`;
+  }
+
+  function render() {
+    const filters  = getFilters();
+    const filtered = applyFilters(allSongs, filters);
+    const isGrid   = currentView === "grid";
+
+    document.getElementById("result-count").innerHTML =
+      `Showing <strong>${filtered.length.toLocaleString()}</strong> of
+       <strong>${allSongs.length.toLocaleString()}</strong> songs`;
+
+    const container = document.getElementById("results");
+    if (filtered.length === 0) {
+      container.innerHTML = '<div class="no-results">No songs match your search. Try different terms or clear the filters.</div>';
+    } else {
+      container.innerHTML = filtered.map(s => renderCard(s, isGrid)).join("");
+    }
+  }
+
+  // ── Bootstrap ────────────────────────────────────────────────────────────────
+
+  async function init() {
+    try {
+      allSongs = await fetchSongs();
+
+      // Sort alphabetically by song title
+      allSongs.sort((a, b) => {
+        const sa = ((a.properties || {}).song || a.name || "").toLowerCase();
+        const sb = ((b.properties || {}).song || b.name || "").toLowerCase();
+        return sa < sb ? -1 : sa > sb ? 1 : 0;
+      });
+
+      lunrIndex = buildIndex(allSongs);
+
+      document.getElementById("loading").hidden = true;
+      document.getElementById("header-count").textContent =
+        `${allSongs.length.toLocaleString()} songs`;
+
+      render();
+
+    } catch (err) {
+      document.getElementById("loading").hidden = true;
+      const errEl = document.getElementById("error");
+      errEl.hidden = false;
+      errEl.innerHTML =
+        `<p>⚠️ Failed to load song sheets.</p>` +
+        `<p style="font-size:0.85rem;margin-top:8px;">${escHtml(String(err))}</p>`;
+    }
+  }
+
+  // ── Event listeners ──────────────────────────────────────────────────────────
+
+  document.getElementById("search").addEventListener("input", render);
+  document.getElementById("filter-status").addEventListener("change", render);
+  document.getElementById("filter-difficulty").addEventListener("change", render);
+  document.getElementById("filter-gender").addEventListener("change", render);
+  document.getElementById("filter-book").addEventListener("change", render);
+
+  document.getElementById("btn-clear").addEventListener("click", () => {
+    document.getElementById("search").value          = "";
+    document.getElementById("filter-status").value   = "";
+    document.getElementById("filter-difficulty").value = "";
+    document.getElementById("filter-gender").value   = "";
+    document.getElementById("filter-book").value     = "";
+    render();
+  });
+
+  function setView(mode) {
+    currentView = mode;
+    const isGrid = mode === "grid";
+    document.getElementById("results").className    = mode;
+    document.getElementById("view-grid").classList.toggle("active", isGrid);
+    document.getElementById("view-list").classList.toggle("active", !isGrid);
+    document.getElementById("view-grid").setAttribute("aria-pressed", String(isGrid));
+    document.getElementById("view-list").setAttribute("aria-pressed", String(!isGrid));
+  }
+
+  document.getElementById("view-grid").addEventListener("click", () => setView("grid"));
+  document.getElementById("view-list").addEventListener("click", () => setView("list"));
+
+  init();
+</script>
+</body>
+</html>
