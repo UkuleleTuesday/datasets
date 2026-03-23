@@ -6,6 +6,13 @@ on:
       - main
     paths:
       - "docs/**"
+  workflow_run:
+    workflows:
+      - "Synchronize Datasets"
+    types:
+      - completed
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -26,6 +33,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Download song-sheets dataset
+        run: curl -fsSL "https://ukulele-tuesday-datasets.storage.googleapis.com/song-sheets/aggregated/latest/data.jsonl" -o docs/data.jsonl
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
