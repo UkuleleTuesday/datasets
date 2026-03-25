@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Dict, Any
 import click
 import pandas as pd
-from jsonschema import validate, ValidationError
+from jsonschema import Draft202012Validator, ValidationError
 
 
 def load_schema(dataset_type: str) -> Dict[str, Any]:
@@ -79,46 +79,49 @@ def load_dataset(dataset_path: Path) -> Any:
         sys.exit(1)
 
 
+def format_error(e: ValidationError, data: Any) -> None:
+    """Print a single validation error with context."""
+    print(f"   Validation error: {e.message}")
+    if e.absolute_path:
+        path_str = ' -> '.join(str(p) for p in e.absolute_path)
+        print(f"   Path: {path_str}")
+        if data and isinstance(data, list) and isinstance(e.absolute_path[0], int):
+            item_index = e.absolute_path[0]
+            if item_index < len(data):
+                print(f"   Failing item: {json.dumps(data[item_index], indent=2)}")
+    else:
+        if e.instance is not None:
+            instance_str = str(e.instance)
+            if len(instance_str) > 200:
+                instance_str = instance_str[:200] + "..."
+            print(f"   Instance: {instance_str}")
+
+
 def validate_dataset_content(data: Any, schema: Dict[str, Any], dataset_type: str) -> bool:
     """Validate a dataset against its schema."""
     try:
+        validator = Draft202012Validator(schema)
+        errors = []
+
         if dataset_type == "jam-sessions":
-            # Jam sessions data is an array of session objects
-            if isinstance(data, list):
-                for i, session in enumerate(data):
-                    validate(instance=session, schema=schema)
-                print(f"✅ {dataset_type}: Dataset validation passed ({len(data)} sessions)")
-            else:
+            if not isinstance(data, list):
                 print("❌ jam-sessions: Expected array of sessions, got single object")
                 return False
+            for session in data:
+                errors.extend(validator.iter_errors(session))
         else:
-            # Song sheets - validate the entire dataset
-            validate(instance=data, schema=schema)
-            count = len(data) if isinstance(data, list) else 1
-            print(f"✅ {dataset_type}: Dataset validation passed ({count} records)")
-        
-        return True
-    except ValidationError as e:
-        print(f"❌ {dataset_type}: Dataset validation failed")
-        print(f"   Validation error: {e.message}")
-        if e.absolute_path:
-            path_str = ' -> '.join(str(p) for p in e.absolute_path)
-            print(f"   Path: {path_str}")
+            errors.extend(validator.iter_errors(data))
 
-            # If the path contains an index, print the full failing item
-            if data and isinstance(data, list) and e.absolute_path and isinstance(e.absolute_path[0], int):
-                item_index = e.absolute_path[0]
-                if item_index < len(data):
-                    failing_item = data[item_index]
-                    print(f"   Failing item: {json.dumps(failing_item, indent=2)}")
-        else:
-            if e.instance is not None:
-                # Show a snippet of the failing instance for context
-                instance_str = str(e.instance)
-                if len(instance_str) > 200:
-                    instance_str = instance_str[:200] + "..."
-                print(f"   Instance: {instance_str}")
-        return False
+        if errors:
+            print(f"❌ {dataset_type}: Dataset validation failed ({len(errors)} error(s))")
+            for e in errors:
+                format_error(e, data)
+            return False
+
+        count = len(data) if isinstance(data, list) else 1
+        label = "sessions" if dataset_type == "jam-sessions" else "records"
+        print(f"✅ {dataset_type}: Dataset validation passed ({count} {label})")
+        return True
     except Exception as e:
         print(f"❌ {dataset_type}: Unexpected error during validation: {e}")
         return False
