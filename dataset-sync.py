@@ -6,7 +6,8 @@
 #   "packaging",
 #   "gspread",
 #   "google-auth",
-#   "google-api-python-client", 
+#   "google-api-python-client",
+#   "google-cloud-firestore",
 #   "tenacity",
 #   "gcsfs",
 #   "click"
@@ -39,6 +40,7 @@ from google.auth import impersonated_credentials
 from googleapiclient.discovery import build
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception
 import gcsfs
+from google.cloud import firestore
 
 from gspread.exceptions import APIError
 
@@ -251,72 +253,21 @@ def fetch_jam_sessions_data() -> List[Dict[str, Any]]:
 
 
 def fetch_song_sheets_data() -> List[Dict[str, Any]]:
-    """Fetch and aggregate song sheets data from GCS and Google Drive."""
-    # Config via env vars (backwards compatibility)
-    src_bucket = os.getenv("SRC_BUCKET", "songbook-generator-cache-europe-west1")
-    src_prefix = os.getenv("SRC_PREFIX", "song-sheets/").lstrip("/")
-
-    requester_pays_project = os.getenv("GCSFS_REQUESTER_PAYS")
-    fs_kwargs = {}
-    if requester_pays_project:
-        fs_kwargs = {"requester_pays": True, "project": requester_pays_project}
-
-    fs = gcsfs.GCSFileSystem(**fs_kwargs)
-
-    # List all .pdf files from source
-    src_base = f"{src_bucket}/{src_prefix}".rstrip("/")
-    try:
-        paths = fs.ls(src_base)
-    except Exception as e:
-        print(f"ERROR: failed to list gs://{src_base}: {e}", file=sys.stderr)
-        raise
-
-    pdf_files = sorted(p for p in paths if p.endswith(".pdf"))
-    if not pdf_files:
-        print(f"No .pdf files found under gs://{src_base}")
-        return []
-
-    scopes = ["https://www.googleapis.com/auth/drive.readonly"]
+    """Fetch song sheets metadata from Firestore."""
+    scopes = ["https://www.googleapis.com/auth/datastore"]
     creds = get_google_credentials(scopes)
 
-    drive_service = build("drive", "v3", credentials=creds)
-    
-    pdf_file_ids = {pathlib.Path(p).stem for p in pdf_files}
+    db = firestore.Client(project="songbook-generator", credentials=creds)
+    docs = db.collection("song-metadata").stream()
 
-    # Fetch all Google Docs from the folder and filter by PDF file IDs
-    folder_ids = ["1b_ZuZVOGgvkKVSUypkbRwBsXLVQGjl95", "1bvrIMQXjAxepzn4Vx8wEjhk3eQS5a9BM"]
-    all_drive_files = []
-    for folder_id in folder_ids:
-        query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.document'"
-        page_token = None
-        while True:
-            try:
-                response = drive_service.files().list(
-                    q=query,
-                    fields="nextPageToken, files(id, name, properties)",
-                    pageToken=page_token,
-                    supportsAllDrives=True,
-                    includeItemsFromAllDrives=True
-                ).execute()
-                all_drive_files.extend(response.get("files", []))
-                page_token = response.get("nextPageToken")
-                if not page_token:
-                    break
-            except Exception as e:
-                print(f"ERROR: Failed to list files from Google Drive folder '{folder_id}': {e}", file=sys.stderr)
-                # Decide if you want to raise or continue
-                break
-        
-    all_data = []
-    for file_data in all_drive_files:
-        if file_data['id'] in pdf_file_ids:
-            all_data.append({
-                "id": file_data["id"],
-                "name": file_data["name"],
-                "properties": file_data.get("properties", {})
-            })
-
-    return all_data
+    return [
+        {
+            "id": doc.id,
+            "name": doc.get("gdrive_file_name"),
+            "properties": doc.get("properties") or {},
+        }
+        for doc in docs
+    ]
 
 
 def generate_jsonl_content(data: List[Dict[str, Any]]) -> str:
