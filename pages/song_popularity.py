@@ -1,5 +1,6 @@
 import json
 import pandas as pd
+import numpy as np
 import streamlit as st
 import urllib.request
 import altair as alt
@@ -61,11 +62,14 @@ def load_song_sheets_data() -> Optional[List[Dict[str, Any]]]:
                 try:
                     song_data = json.loads(line)
                     # Extract the relevant fields for matching
+                    props = song_data.get('properties', {})
                     all_data.append({
                         'id': song_data.get('id'),
-                        'song': song_data.get('properties', {}).get('song'),
-                        'artist': song_data.get('properties', {}).get('artist'),
-                        'specialbooks': song_data.get('properties', {}).get('specialbooks'),
+                        'song': props.get('song'),
+                        'artist': props.get('artist'),
+                        'specialbooks': props.get('specialbooks'),
+                        'ready_to_play_date': props.get('ready_to_play_date'),
+                        'approved_date': props.get('approved_date'),
                     })
                 except json.JSONDecodeError:
                     continue
@@ -166,6 +170,155 @@ def sanitize_jam_events(events_df, canonical_songs: List[Dict[str, Any]]) -> pd.
     return sanitized_df
 
 
+def parse_eligibility_date(song_data: Dict[str, Any]) -> Optional[pd.Timestamp]:
+    """
+    Determine when a song first became playable.
+
+    Prefers ``ready_to_play_date`` (when it entered rotation), falling back to
+    ``approved_date``. Returns a timezone-naive Timestamp (to compare against the
+    timezone-naive session dates), or None if neither date is present/parseable.
+    """
+    for field in ("ready_to_play_date", "approved_date"):
+        raw = song_data.get(field)
+        if not raw:
+            continue
+        ts = pd.to_datetime(raw, errors="coerce", utc=True)
+        if pd.notna(ts):
+            return ts.tz_localize(None).normalize()
+    return None
+
+
+def wilson_interval(successes: pd.Series, totals: pd.Series, z: float = 1.96):
+    """
+    Wilson score interval for a binomial proportion.
+
+    Used so windows backed by few sessions render with a wide (uncertain) band
+    rather than spiking to a misleading 0% or 100%. Returns (low, high) Series.
+    """
+    n = totals.replace(0, np.nan)
+    p = successes / n
+    denom = 1 + z**2 / n
+    center = (p + z**2 / (2 * n)) / denom
+    margin = (z / denom) * np.sqrt(p * (1 - p) / n + z**2 / (4 * n**2))
+    return (center - margin).clip(lower=0), (center + margin).clip(upper=1)
+
+
+def compute_reach_timeseries(
+    song_artist: str,
+    full_songs_df: pd.DataFrame,
+    all_sessions: pd.DataFrame,
+    eligibility_date: Optional[pd.Timestamp],
+    window: int,
+) -> pd.DataFrame:
+    """
+    Build a smoothed "reach" time series for a single song.
+
+    Reach = fraction of sessions (in a trailing window of ``window`` sessions)
+    that included the song. The denominator is restricted to *eligible* sessions
+    — those on or after the song became playable — so newly added songs are not
+    unfairly flattened by counting sessions from before they existed.
+    """
+    sessions = all_sessions.drop_duplicates("session_id").sort_values("date")
+    if eligibility_date is not None:
+        sessions = sessions[sessions["date"] >= eligibility_date]
+
+    if sessions.empty:
+        return pd.DataFrame(columns=["date", "reach", "low", "high", "n", "played"])
+
+    played_session_ids = set(
+        full_songs_df.loc[full_songs_df["song_artist"] == song_artist, "session_id"]
+    )
+    sessions = sessions.copy()
+    sessions["played"] = sessions["session_id"].isin(played_session_ids).astype(int)
+
+    # Trailing window over sessions (not calendar time) so skipped Tuesdays /
+    # holiday gaps don't distort the curve. min_periods lets the line start
+    # before a full window has accumulated.
+    min_periods = max(3, window // 2)
+    successes = sessions["played"].rolling(window, min_periods=min_periods).sum()
+    totals = sessions["played"].rolling(window, min_periods=min_periods).count()
+
+    sessions["reach"] = successes / totals
+    sessions["n"] = totals
+    sessions["low"], sessions["high"] = wilson_interval(successes, totals)
+    return sessions.dropna(subset=["reach"])[
+        ["date", "reach", "low", "high", "n", "played"]
+    ]
+
+
+def render_song_popularity_graph(
+    full_songs_df: pd.DataFrame,
+    all_sessions: pd.DataFrame,
+    eligibility_lookup: Dict[str, pd.Timestamp],
+) -> None:
+    """Render the per-song popularity-over-time section."""
+    st.header("Single Song Popularity Over Time")
+    st.caption(
+        "Reach = the share of eligible sessions (those after the song entered "
+        "rotation) that included this song — i.e. how likely you were to hear it "
+        "on a given night. The shaded band is a 95% confidence interval; it widens "
+        "when fewer sessions back the estimate."
+    )
+
+    # Order the song picker by total plays so popular songs surface first.
+    play_order = (
+        full_songs_df["song_artist"].value_counts().index.tolist()
+    )
+    if not play_order:
+        st.info("No songs available to chart.")
+        return
+
+    col_sel, col_win = st.columns([3, 1])
+    selected_song = col_sel.selectbox("Select a song", options=play_order)
+    window = col_win.slider(
+        "Smoothing window (sessions)", min_value=4, max_value=30, value=13
+    )
+
+    eligibility_date = eligibility_lookup.get(selected_song)
+    ts = compute_reach_timeseries(
+        selected_song, full_songs_df, all_sessions, eligibility_date, window
+    )
+
+    total_plays = int((full_songs_df["song_artist"] == selected_song).sum())
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Total Plays", total_plays)
+    c2.metric(
+        "Peak Reach",
+        f"{ts['reach'].max() * 100:.0f}%" if not ts.empty else "—",
+    )
+    c3.metric(
+        "First Eligible",
+        eligibility_date.date().isoformat() if eligibility_date is not None else "—",
+    )
+
+    if ts.empty:
+        st.info("Not enough eligible sessions to chart a trend for this song yet.")
+        return
+
+    base = alt.Chart(ts).encode(
+        x=alt.X("date:T", title="Date")
+    )
+    band = base.mark_area(opacity=0.2, color="#4c78a8").encode(
+        y=alt.Y("low:Q", title="Reach (% of sessions)", axis=alt.Axis(format="%")),
+        y2="high:Q",
+    )
+    line = base.mark_line(color="#4c78a8").encode(
+        y=alt.Y("reach:Q"),
+        tooltip=[
+            alt.Tooltip("date:T", title="Date"),
+            alt.Tooltip("reach:Q", title="Reach", format=".0%"),
+            alt.Tooltip("n:Q", title="Sessions in window"),
+        ],
+    )
+    # Tick marks along the bottom for the nights the song was actually played.
+    plays = ts[ts["played"] == 1]
+    ticks = alt.Chart(plays).mark_tick(color="#e45756", thickness=2, size=10).encode(
+        x="date:T",
+        tooltip=[alt.Tooltip("date:T", title="Played on")],
+    )
+    st.altair_chart((band + line + ticks).interactive(), use_container_width=True)
+
+
 def main():
     st.set_page_config(page_title="Ukulele Tuesday Song Popularity", layout="wide", page_icon="⭐")
     st.title("Ukulele Tuesday Song Popularity")
@@ -178,6 +331,36 @@ def main():
         # Create year and year-month columns
         df["year"] = df["date"].dt.year
         df["year_month"] = df["date"].dt.to_period("M").astype(str)
+
+        # --- Build the full, sanitized song-play table once ---
+        # Done over the entire history (before any date filtering) so the
+        # per-song popularity trend has the full record to work with, and so the
+        # expensive fuzzy matching only runs a single time.
+        canonical_songs = load_song_sheets_data()
+
+        all_events_df = df.explode("events").reset_index(drop=True)
+        all_events_df = pd.concat(
+            [all_events_df.drop(['events'], axis=1), all_events_df['events'].apply(pd.Series)],
+            axis=1,
+        )
+        if canonical_songs:
+            all_events_df = sanitize_jam_events(all_events_df, canonical_songs)
+
+        full_songs_df = all_events_df[all_events_df['type'] == 'song'].copy()
+        full_songs_df['song_artist'] = full_songs_df['song'] + " - " + full_songs_df['artist']
+        full_songs_df['in_current_songbook'] = full_songs_df["specialbooks"].apply(
+            lambda x: isinstance(x, list) and "regular" in x
+        )
+
+        # Session list (one row per session) for reach denominators.
+        all_sessions = df[['session_id', 'date']].copy()
+
+        # Map each canonical song to when it first became playable.
+        eligibility_lookup: Dict[str, pd.Timestamp] = {}
+        for song_data in (canonical_songs or []):
+            elig = parse_eligibility_date(song_data)
+            if elig is not None:
+                eligibility_lookup[f"{song_data['song']} - {song_data['artist']}"] = elig
 
         # Generate dropdown options
         years = sorted(df["year"].unique(), reverse=True)
@@ -203,23 +386,10 @@ def main():
             selected_year = int(selected_range)
             df = df[df["year"] == selected_year]
 
-        # Explode the 'events' column to get one row per event
-        events_df = df.explode("events").reset_index(drop=True)
-        # Normalize the 'events' column, which contains dicts
-        events_df = pd.concat([events_df.drop(['events'], axis=1), events_df['events'].apply(pd.Series)], axis=1)
-
-        # Sanitize song and artist names using canonical data
-        canonical_songs = load_song_sheets_data()
-        if canonical_songs:
-            events_df = sanitize_jam_events(events_df, canonical_songs)
-
-        # Filter for song events
-        songs_df = events_df[events_df['type'] == 'song'].copy()
-
-        # Add a column to indicate if a song is in the current songbook
-        songs_df['in_current_songbook'] = songs_df["specialbooks"].apply(
-            lambda x: isinstance(x, list) and "regular" in x
-        )
+        # Derive the date-filtered view from the already-sanitized full table.
+        songs_df = full_songs_df[
+            full_songs_df['session_id'].isin(df['session_id'])
+        ].copy()
 
         st.header("Overall Summary")
         col1, col2, col3 = st.columns(3)
@@ -322,5 +492,9 @@ def main():
             st.altair_chart(falling_chart, use_container_width=True)
         else:
             st.info("Not enough data in the selected time range to calculate popularity trends (requires at least 24 months of data).")
+
+        # Per-song popularity over time always uses the full history (it is not
+        # affected by the date-range selector above).
+        render_song_popularity_graph(full_songs_df, all_sessions, eligibility_lookup)
 
 main()
