@@ -58,6 +58,20 @@ def process_dataframe(df):
     df["difficulty"] = pd.to_numeric(df["difficulty"], errors="coerce")
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
     df["date"] = pd.to_datetime(df["date"], format="%Y%m%d", errors="coerce")
+
+    # `ready_to_play_date` and `approved_date` are ISO 8601 timestamps (with some
+    # literal "unknown" values that coerce to NaT). `ready_to_play_date` replaced
+    # the older `date` field and is kept up to date, so prefer it, falling back to
+    # `date` only where it is missing. Drop the timezone so these match the
+    # tz-naive `date` column.
+    ready_to_play_date = pd.to_datetime(
+        df.get("ready_to_play_date"), errors="coerce", utc=True
+    ).dt.tz_localize(None)
+    df["ready_to_play_date"] = ready_to_play_date.fillna(df["date"])
+    df["approved_date"] = pd.to_datetime(
+        df.get("approved_date"), errors="coerce", utc=True
+    ).dt.tz_localize(None)
+
     df["specialbooks"] = df["specialbooks"].str.split(",")
     df["chords"] = df["chords"].str.split(",")
 
@@ -136,10 +150,38 @@ def main():
 
         # Total songs over time
         st.subheader("Total Songs Over Time")
-        df_by_date = df.dropna(subset=["date"]).sort_values("date")
-        # Create a column for cumulative song count
-        df_by_date["cumulative_songs"] = range(1, len(df_by_date) + 1)
-        st.line_chart(df_by_date.set_index("date")["cumulative_songs"])
+
+        def cumulative_over_time(date_col, label):
+            """Build a cumulative song-count series over the given date column."""
+            s = df.dropna(subset=[date_col]).sort_values(date_col)
+            return pd.DataFrame(
+                {
+                    "date": s[date_col].values,
+                    "cumulative_songs": range(1, len(s) + 1),
+                    "series": label,
+                }
+            )
+
+        cumulative_df = pd.concat(
+            [
+                cumulative_over_time("ready_to_play_date", "Ready to play"),
+                cumulative_over_time("approved_date", "Approved"),
+            ],
+            ignore_index=True,
+        )
+
+        cumulative_chart = (
+            alt.Chart(cumulative_df)
+            .mark_line()
+            .encode(
+                x=alt.X("date:T", title="Date"),
+                y=alt.Y("cumulative_songs:Q", title="Total Songs"),
+                color=alt.Color("series:N", title=None),
+                tooltip=["date:T", "cumulative_songs:Q", "series:N"],
+            )
+            .interactive()
+        )
+        st.altair_chart(cumulative_chart, use_container_width=True)
 
         # Songs by decade of release
         st.subheader("Song Distribution by Decade of Release")
